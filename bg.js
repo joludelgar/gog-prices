@@ -31,6 +31,11 @@ function getProductId() {
     if (htmlElement) {
         var productId = htmlElement.getAttribute("card-product");
         getEndpoints(productId);
+        var checkPricesIntervalId = setInterval(() => {
+            if(checkPrices()) {
+                window.clearInterval(checkPricesIntervalId);
+            }
+        }, 100);
     }
 }
 
@@ -75,10 +80,13 @@ function getEndpoints(id) {
             var priceTotalFormated = (Number(jsonResult._embedded.items[0]._embedded.prices[0].finalPrice.split(" ")[0]) / 100).toFixed(2);
             var priceBaseFormated = (Number(jsonResult._embedded.items[0]._embedded.prices[0].basePrice.split(" ")[0]) / 100).toFixed(2);
             prices.push({country: country.name, code: country.code, priceBase: priceBaseFormated, priceTotal: priceTotalFormated, status: country.status});
-
-            if(i + 1 === countries.length) {
-                addCard();
-            }
         })
     });
 };
+
+function checkPrices() {
+    if(prices.length === countries.length) {
+        addCard();
+        return true;
+    }
+}
