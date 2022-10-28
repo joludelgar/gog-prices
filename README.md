@@ -6,7 +6,7 @@
 
 > Recuerda: Esto es una extensión para el navegador Google Chrome
 
-- Debemos dirigirnos a la url chrome://extensions/ desde el navegador Chrome.
+- Debemos dirigirnos a la url ![chrome://extensions/](chrome://extensions/) desde el navegador Chrome.
 - Activar el "Modo Desarrollador" indicado arriba a la derecha.
 - Seleccionar la opción "Cargar descompromida"
 - Seleccionar el archivo "gog-prices.crx"
