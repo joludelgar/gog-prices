@@ -1,0 +1,68 @@
+.gog-prices-body {
+    background: #d9d9d9;
+    border: 1px solid #ccc;
+    border-left: 0;
+    border-right: 0;
+    height: auto;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.gog-prices-body p {
+    margin: 0;
+}
+
+.gog-prices-container {
+    max-width: 600px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.gog-prices-data {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 1px solid #808080;
+    padding: 8px 0;
+}
+
+.gog-prices-country {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.gog-prices-price {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.gog-prices-img {
+    width: 20px;
+    border-radius: 4px;
+    object-fit: cover;
+    margin-right: 4px;
+}
+
+.gog-prices-text {
+    font-weight: bold;
+}
+
+.gog-prices-text.original {
+    font-size: 12px;
+    text-decoration: line-through;
+    color: #8a8a8a;
+}
+
+.gog-prices-unavailable {
+    font-size: 12px;
+    background: #be3434;
+    color: #fff;
+    border-radius: 4px;
+    margin-left: 8px;
+    padding: 2px 4px;
+}

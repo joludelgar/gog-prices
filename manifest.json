@@ -1,0 +1,24 @@
+{
+    "manifest_version": 3,
+    "name": "GOG Prices",
+    "description": "Prices region based",
+    "version": "0.0.1",
+    "action": {
+        "default_popup": "index.html",
+        "default_icon": "gog-prices.png"
+    },
+    "host_permissions": [
+        "https://www.gog.com/*"
+    ],
+    "content_scripts": [
+        {
+            "js": ["bg.js"],
+            "css": ["styles.css"],
+            "matches": ["<all_urls>"]
+        }
+    ],
+    "web_accessible_resources": [{
+        "resources": ["flags/*.png"],
+        "matches": ["<all_urls>"]
+    }]
+  }
