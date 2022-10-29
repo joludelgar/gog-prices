@@ -51,7 +51,7 @@ function addCard() {
         cardsHtml += `
         <div class="gog-prices-data">
             <div class="gog-prices-country">
-              <img class="gog-prices-img" title=${price.country} alt=${price.country} src=${"chrome-extension://pkcpchkghljidggkhjdhmioeklodnmai/assets/flags/"+price.code+".png"}><img>
+              <img class="gog-prices-img" title=${price.country} alt=${price.country} src=${"https://flagpedia.net/data/flags/w580/"+price.code.toLowerCase()+".png"}><img>
               <p class="gog-prices-text">${price.country}</p>
               ${unavailable ? `
                 <span class="gog-prices-unavailable">${literals.notAvailable}</span>

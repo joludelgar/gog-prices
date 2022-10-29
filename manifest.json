@@ -16,9 +16,5 @@
             "css": ["styles/styles.css"],
             "matches": ["https://www.gog.com/*"]
         }
-    ],
-    "web_accessible_resources": [{
-        "resources": ["assets/flags/*.png"],
-        "matches": ["https://www.gog.com/*"]
-    }]
+    ]
   }
