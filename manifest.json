@@ -1,24 +1,24 @@
 {
     "manifest_version": 3,
     "name": "GOG Prices",
-    "description": "Prices region based",
-    "version": "0.0.2",
+    "description": "Prices on GOG according to region.",
+    "version": "0.0.3",
     "action": {
         "default_popup": "index.html",
-        "default_icon": "gog-prices.png"
+        "default_icon": "assets/gog-prices.png"
     },
     "host_permissions": [
         "https://www.gog.com/*"
     ],
     "content_scripts": [
         {
-            "js": ["bg.js"],
-            "css": ["styles.css"],
-            "matches": ["<all_urls>"]
+            "js": ["scripts/bg.js"],
+            "css": ["styles/styles.css"],
+            "matches": ["https://www.gog.com/*"]
         }
     ],
     "web_accessible_resources": [{
-        "resources": ["flags/*.png"],
-        "matches": ["<all_urls>"]
+        "resources": ["assets/flags/*.png"],
+        "matches": ["https://www.gog.com/*"]
     }]
   }
