@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "GOG Prices",
     "description": "Prices on GOG according to region.",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "action": {
         "default_popup": "index.html",
         "default_icon": "assets/gog-prices.png"
