@@ -1,10 +1,10 @@
 {
-    "manifest_version": 3,
+    "manifest_version": 2,
     "name": "__MSG_appName__",
     "description": "__MSG_appDesc__",
     "default_locale": "en",
     "version": "0.0.10",
-    "action": {
+    "browser_action": {
         "default_icon": "assets/gog-prices-icon48.png"
     },
     "icons": { 
@@ -12,7 +12,7 @@
         "48": "assets/gog-prices-icon48.png",
         "128": "assets/gog-prices-icon128.png" 
     },
-    "host_permissions": [
+    "permissions": [
         "*://*.gog.com/*"
     ],
     "content_scripts": [
@@ -21,5 +21,10 @@
             "css": ["styles/styles.css"],
             "matches": ["*://*.gog.com/*"]
         }
-    ]
-  }
+    ],
+    "browser_specific_settings": {
+        "gecko": {
+          "id": "gogprices@joludelgar.com"
+        }
+    }
+}

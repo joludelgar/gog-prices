@@ -13,8 +13,9 @@
 }
 
 .gog-prices-container {
-    max-width: 600px;
+    max-width: 620px;
     margin: 20px auto;
+    padding: 0 16px;
     display: flex;
     flex-direction: column;
 }
@@ -25,14 +26,18 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    border-bottom: 1px solid #808080;
-    padding: 8px 0;
+    border-bottom: 1px solid #bfbfbf;
+    padding: 0;
 }
 
 .gog-prices-country {
     display: flex;
     flex-direction: row;
     align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid #212121;
+    margin-bottom: -1px;
+    position: relative;
 }
 
 .gog-prices-price {
@@ -43,26 +48,167 @@
 
 .gog-prices-img {
     width: 20px;
+    height: 13px;
     border-radius: 4px;
     object-fit: cover;
-    margin-right: 4px;
+    margin-right: 8px;
 }
 
 .gog-prices-text {
     font-weight: bold;
+    height: 16px;
+}
+
+.gog-prices-text.sale {
+    font-size: 18px;
 }
 
 .gog-prices-text.original {
     font-size: 12px;
     text-decoration: line-through;
     color: #8a8a8a;
+    height: 12px;
+    margin-bottom: 2px;
 }
 
 .gog-prices-unavailable {
+    position: absolute;
+    left: 100%;
+    width: max-content;
     font-size: 12px;
     background: #be3434;
     color: #fff;
     border-radius: 4px;
     margin-left: 8px;
     padding: 2px 4px;
+}
+
+.gog-prices-loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gog-prices-functions {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    margin-bottom: 8px;
+}
+
+.gog-prices-settings {
+    position: relative;
+}
+
+.gog-prices-settings-modal {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    padding: 16px;
+    top: 28px;
+    right: 0;
+    z-index: 100;
+    min-width: 285px;
+}
+
+.gog-prices-settings-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.gog-prices-settings-check:not(:last-of-type) {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.gog-prices-settings-modal-footer {
+    display: flex;
+    margin-top: 8px;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.gog-prices-settings-button.--cancel {
+    background-color: #da4747;
+    color: #fff;
+    margin-right: 8px;
+}
+
+.gog-prices-settings-button.--cancel:hover {
+    background-color: #c23f3f;
+    color: #fff;
+}
+
+.gog-prices-settings-button.--confirm {
+    background-color: #96bd27;
+    color: #fff;
+}
+
+.gog-prices-settings-button.--confirm:hover {
+    background-color: #85a823;
+    color: #fff;
+}
+
+.gog-prices-show-more {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.gog-prices-show-more {
+    margin-bottom: 20px;
+}
+
+.hide {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+/* Loading */
+
+.gog-prices-loading {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+.gog-prices-loading div {
+display: inline-block;
+position: absolute;
+left: 8px;
+width: 16px;
+background: #808080;
+animation: gog-prices-loading 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+.gog-prices-loading div:nth-child(1) {
+left: 8px;
+animation-delay: -0.24s;
+}
+.gog-prices-loading div:nth-child(2) {
+left: 32px;
+animation-delay: -0.12s;
+}
+.gog-prices-loading div:nth-child(3) {
+left: 56px;
+animation-delay: 0;
+}
+@keyframes gog-prices-loading {
+0% {
+    top: 8px;
+    height: 64px;
+}
+50%, 100% {
+    top: 24px;
+    height: 32px;
+}
+}
+
+.gog-prices-whislist {
+    float: right;
+    margin-left: 10px;
+    display: flex;
 }
