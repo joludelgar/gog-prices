@@ -57,7 +57,7 @@ main {
 .download {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .download-extension {
@@ -99,6 +99,12 @@ main {
     text-align: center;
 }
 
+.support {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
 .support-link {
     display: flex;
     background: linear-gradient(145deg, rgba(255,0,71,1) 0%, rgba(113,0,255,1) 100%);
@@ -117,6 +123,7 @@ main {
     font-weight: 600;
     text-align: center;
     margin: 0;
+    padding: 0 4px;
 }
 
 .description {
