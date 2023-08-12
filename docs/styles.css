@@ -9,6 +9,14 @@
     padding: 20px 0;
 }
 
+a {
+    color: rgba(113,0,255,1);
+}
+
+a:visited {
+    color: rgba(255,0,71,1);
+}
+
 .header-title {
     position: relative;
     display: flex;
