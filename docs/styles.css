@@ -145,3 +145,73 @@ main {
     color: #000;
     text-align: center;
 }
+
+@media only screen and (max-width: 1200px) {
+    main {
+      width: 100%;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .gog-prices {
+        height: auto;
+    }
+
+    main {
+        width: 80%;
+    }
+
+    .download {
+        flex-direction: column;
+    }
+
+    .download-extension {
+        width: auto;
+        justify-content: center;
+    }
+
+    .header-title .logo {
+        height: 80px;
+        width: 80px;
+    }
+
+    .header-title h1 {
+        font-size: 80px;
+        line-height: 80px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    main {
+      width: 100%;
+    }
+
+    .header-title .logo {
+        height: 40px;
+        width: 40px;
+    }
+
+    .header-title h1 {
+        font-size: 40px;
+        line-height: 40px;
+    }
+
+    .title-hidden {
+        margin-left: 16px;
+    }
+
+    .support {
+        flex-direction: column;
+    }
+
+    .support-link {
+        width: auto;
+        margin: 20px;
+    }
+
+    .header-title p {
+        font-size: 12px;
+        width: 60%;
+        text-align: center;
+    }
+}
