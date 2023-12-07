@@ -1,0 +1,35 @@
+{
+    "appName": {
+      "message": "GOG Prices"
+    },
+    "appDesc": {
+      "message": "Gog'daki bölgesel fiyatları gösterir."
+    },
+    "loading": {
+      "message": "GOG fiyatları güncelleniyor..."
+    },
+    "notAvailable": {
+      "message": "Kullanılabilir değil"
+    },
+    "tooltipNotAvailable": {
+      "message": "Bu bölgeden satın alımlara şu anda izin verilmiyor."
+    },
+    "btnShowAll": {
+      "message": "Tümünü göster"
+    },
+    "comingSoon": {
+      "message": "Çok yakında"
+    },
+    "regionRU": {
+      "message": "Rusya"
+    },
+    "regionUA": {
+      "message": "Ukrayna"
+    },
+    "regionBR": {
+      "message": "Brezilya"
+    },
+    "regionCN": {
+      "message": "Çin"
+    }
+  }

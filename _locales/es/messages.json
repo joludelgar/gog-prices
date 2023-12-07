@@ -31,5 +31,59 @@
     },
     "regionCN": {
       "message": "China"
+    },
+    "options": {
+      "message": "Configuración"
+    },
+    "optionCountriesList": {
+      "message": "Lista de paises"
+    },
+    "optionGeneral": {
+      "message": "Configuración"
+    },
+    "optionInfo": {
+      "message": "Información"
+    },
+    "countryListCustom": {
+      "message": "Puedes personalizar los países que quieres que se muestren añadiendolos en esta lista. Al hacer cambios en la lista los países que se muestran por defecto serán sustituidos. Si quieres volver a ver los países por defecto puedes 'Resetear países por defecto'. También puedes consultar los códigos de países pulsando en 'Mostrar códigos de países'."
+    },
+    "titleListCustom": {
+      "message": "Lista personalizada de países"
+    },
+    "tableCountryName": {
+      "message": "Nombre del país"
+    },
+    "tableCountryCode": {
+      "message": "Código del país"
+    },
+    "tableCountryCodeInfo": {
+      "message": "Es importante indicar correctamente el código del país. Este código es responsable de indicar el país correspondiente y el precio."
+    },
+    "inputCountry": {
+      "message": "País"
+    },
+    "inputCode": {
+      "message": "Código"
+    },
+    "btnShowCountryCodes": {
+      "message": "Mostrar códigos de países"
+    },
+    "btnResetDefault": {
+      "message": "Resetear países por defecto"
+    },
+    "btnAddRow": {
+      "message": "Añadir fila"
+    },
+    "contact": {
+      "message": "Para cualquier sugerencia, problema o información, contáctame a través de"
+    },
+    "btnSave": {
+      "message": "Guardar cambios"
+    },
+    "modalTitle": {
+      "message": "Códigos ISO de países Alfa-2"
+    },
+    "modalDesc": {
+      "message": "Selecciona el código del país y Ctrl+C / ⌘+C para copiar el valor"
     }
   }

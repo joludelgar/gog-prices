@@ -1,0 +1,35 @@
+{
+    "appName": {
+      "message": "GOG Prices"
+    },
+    "appDesc": {
+      "message": "显示 GOG 上的区域定价。"
+    },
+    "loading": {
+      "message": "正在加载 GOG 价格..."
+    },
+    "notAvailable": {
+      "message": "不可用"
+    },
+    "tooltipNotAvailable": {
+      "message": "当前不允许从该区域购买。"
+    },
+    "btnShowAll": {
+      "message": "显示所有"
+    },
+    "comingSoon": {
+      "message": "即将呈现"
+    },
+    "regionRU": {
+      "message": "俄罗斯"
+    },
+    "regionUA": {
+      "message": "乌克兰"
+    },
+    "regionBR": {
+      "message": "巴西"
+    },
+    "regionCN": {
+      "message": "中国"
+    }
+  }

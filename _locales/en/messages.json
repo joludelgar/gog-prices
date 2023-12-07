@@ -31,5 +31,59 @@
     },
     "regionCN": {
       "message": "China"
+    },
+    "options": {
+      "message": "Settings"
+    },
+    "optionCountriesList": {
+      "message": "Country list"
+    },
+    "optionGeneral": {
+      "message": "Settings"
+    },
+    "optionInfo": {
+      "message": "Information"
+    },
+    "countryListCustom": {
+      "message": "You can customize the countries you want to be displayed by adding them to this list. When you make changes to the list the default countries will be replaced. If you want to return to the default countries you can 'Reset default countries'. You can also view the country codes by clicking on 'Show country codes'."
+    },
+    "titleListCustom": {
+      "message": "Custom country list"
+    },
+    "tableCountryName": {
+      "message": "Country Name"
+    },
+    "tableCountryCode": {
+      "message": "Country Code"
+    },
+    "tableCountryCodeInfo": {
+      "message": "It is important to indicate correctly the country code. This code is responsible for indicating the corresponding country and price."
+    },
+    "inputCountry": {
+      "message": "Country"
+    },
+    "inputCode": {
+      "message": "Code"
+    },
+    "btnShowCountryCodes": {
+      "message": "Show Country Codes"
+    },
+    "btnResetDefault": {
+      "message": "Reset default countries"
+    },
+    "btnAddRow": {
+      "message": "Add row"
+    },
+    "contact": {
+      "message": "For any suggestions, problems or information, please contact me at"
+    },
+    "btnSave": {
+      "message": "Save changes"
+    },
+    "modalTitle": {
+      "message": "Countries ISO Code Alpha-2"
+    },
+    "modalDesc": {
+      "message": "Select the country code and Ctrl+C / ⌘+C to copy value"
     }
   }

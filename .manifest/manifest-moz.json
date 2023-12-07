@@ -3,7 +3,7 @@
     "name": "__MSG_appName__",
     "description": "__MSG_appDesc__",
     "default_locale": "en",
-    "version": "0.0.10",
+    "version": "0.1.0",
     "browser_action": {
         "default_icon": "assets/gog-prices-icon48.png"
     },
@@ -13,7 +13,15 @@
         "128": "assets/gog-prices-icon128.png" 
     },
     "permissions": [
-        "*://*.gog.com/*"
+        "*://*.gog.com/*",
+        "storage"
+    ],
+    "options_ui": {
+        "page": "options/options.html",
+        "open_in_tab": true
+    },
+    "web_accessible_resources": [
+        "options/*"
     ],
     "content_scripts": [
         {

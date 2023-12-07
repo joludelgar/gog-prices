@@ -1,0 +1,35 @@
+{
+    "appName": {
+      "message": "GOG Prices"
+    },
+    "appDesc": {
+      "message": "Отображает региональные цены в GOG."
+    },
+    "loading": {
+      "message": "Загрузка цен GOG..."
+    },
+    "notAvailable": {
+      "message": "Недоступно"
+    },
+    "tooltipNotAvailable": {
+      "message": "В настоящее время покупки из этого региона запрещены."
+    },
+    "btnShowAll": {
+      "message": "Показать все"
+    },
+    "comingSoon": {
+      "message": "Скоро"
+    },
+    "regionRU": {
+      "message": "Россия"
+    },
+    "regionUA": {
+      "message": "Украина"
+    },
+    "regionBR": {
+      "message": "Бразилия"
+    },
+    "regionCN": {
+      "message": "Китай"
+    }
+  }

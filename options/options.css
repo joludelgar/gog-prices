@@ -1,0 +1,476 @@
+:root {
+  --primary: #9d5dd8;
+  --secondary: #613986;
+}
+
+.gog-prices-options {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 80%;
+  min-width: 620px;
+  max-width: 1200px;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 20px 0;
+}
+.header-title {
+  font-family: "Saira", sans-serif;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.header-title .logo {
+  height: 100px;
+  width: 100px;
+}
+.logo img {
+  width: 100%;
+  height: 100%;
+}
+.header-title h1 {
+  position: absolute;
+  font-size: 100px;
+  font-weight: 900;
+  font-style: italic;
+  margin: 0;
+  line-height: 100px;
+  top: 15px;
+}
+.title-hidden {
+  color: rgba(255, 255, 255, 0);
+  margin-left: 30px;
+}
+p {
+  color: black;
+  font-size: 16px;
+  margin: 4px;
+  font-weight: 600;
+}
+#countries {
+  width: 400px;
+}
+.gog-prices-options__main {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 40px 0;
+  justify-content: flex-start;
+}
+#lt-main-options-title {
+  font-family: "Saira", sans-serif;
+}
+.gog-prices-options__custom-countries {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+.gog-prices-options__custom-countries h3 {
+  margin: 16px 0;
+}
+
+.gog-prices-options__main-options {
+  display: flex;
+  flex-direction: row;
+  padding: 0 20px 40px;
+}
+
+.gog-prices-options__box {
+  display: flex;
+  flex-direction: row;
+  padding: 40px 20px;
+}
+
+.gog-prices-options__actions {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 80px;
+}
+
+.gog-prices-options__custom-countries-opt {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+
+.gog-prices-options__option-countries {
+  display: flex;
+  flex-direction: column;
+}
+
+.gog-prices-options__countries-main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+
+  background: transparent;
+
+  /* inherit font & color from ancestor */
+  color: inherit;
+  font: inherit;
+
+  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+  line-height: normal;
+
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+
+  /* Corrects inability to style clickable `input` types in iOS */
+  -webkit-appearance: none;
+}
+
+/* Remove excess padding and border in Firefox 4+ */
+button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+button {
+  color: white;
+  background-color: var(--primary);
+  cursor: pointer;
+  padding: 10px 8px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+button:hover {
+  background-color: var(--secondary);
+}
+
+button svg {
+  fill: #fff;
+  width: 20px;
+}
+
+.btn-icon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px 8px;
+}
+
+#status {
+  color: #009879;
+  margin-top: 10px;
+}
+
+#lt-country-list-custom {
+  margin: 0;
+  font-size: 14px;
+  font-weight: normal;
+  margin-bottom: 8px;
+}
+
+.table-actions {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/* TABLE */
+
+.hide {
+  display: none;
+}
+.table-editable {
+  width: 100%;
+  position: relative;
+}
+.table-remove svg {
+  width: 24px;
+  fill: #700;
+  cursor: pointer;
+}
+.table-remove:hover svg {
+  fill: #f00;
+}
+.table {
+  border-collapse: collapse;
+  margin: 0 0 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  width: inherit;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.table .thead {
+  background-color: var(--secondary);
+  color: #ffffff;
+  text-align: left;
+}
+
+.table th,
+.table td input {
+  font-size: 14px;
+  padding: 12px 15px;
+}
+
+.table td input {
+  border: none;
+}
+
+.table .tbody td {
+  height: 10px;
+}
+
+.table .tbody {
+  border-bottom: 1px solid #dddddd;
+}
+
+.table .tbody:last-of-type {
+  border-bottom: 2px solid var(--primary);
+}
+
+.table .tbody:first-of-type {
+  background-color: #123321;
+}
+
+.table .tbody.active-row {
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.table-add:disabled {
+  background-color: #b9b9b9;
+}
+
+.icon-hide-warning {
+  display: none;
+}
+
+.icon-warning {
+  position: absolute;
+  right: 10px;
+}
+.icon-warning svg {
+  fill: #ff8800;
+  width: 24px;
+}
+
+.table td.country-actions {
+  position: relative;
+  padding-right: 40px;
+}
+.info-icon {
+  height: 16px;
+  margin-left: 5px;
+}
+.info-icon svg {
+  fill: #fff;
+  height: 16px;
+  width: 16px;
+}
+
+.cell-icon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  height: 70%;
+}
+
+.modal-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+/* TABS */
+
+/**
+ * Tabs
+ */
+ .tabs {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+}
+
+.tabs label {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1rem 2rem;
+	margin-right: 0.0625rem;
+	cursor: pointer;
+	background-color: #000;
+	color: #fff;
+	font-family: Roboto, sans-serif;
+	font-size: 1.2rem;
+	font-weight: 700;
+	transition: background-color ease 0.3s;
+}
+
+.tabs label .material-icons {
+	margin-right: 0.3rem;
+}
+
+.tabs .tab {
+	flex-grow: 1;
+	width: 100%;
+	height: 100%;
+	display: none;
+	padding: 1rem 2rem;
+	color: #000;
+	background-color: #fff;
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.4);
+}
+
+.tabs .tab > *:not(:last-child) {
+	margin-bottom: 0.8rem;
+}
+
+.tabs [type=radio] {
+	display: none;
+}
+
+.tabs [type=radio]:checked + label {
+	background-color: #fff;
+	color: var(--secondary);
+	border-top: 4px solid var(--primary);
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.4);
+}
+
+.tabs [type=radio]:checked + label + .tab {
+	display: block;
+}
+
+
+
+@media (min-width: 768px) {
+
+	body {
+		font-size: 1.125rem;
+	}
+
+	.tabs-container {
+		padding: 4rem 4rem;
+	}
+
+	.tabs label {
+		order: 1;
+		width: auto;
+	}
+
+	.tabs .tab {
+		order: 9;
+	}
+
+	.tabs [type=radio]:checked + label {
+		border-bottom: none;
+	}
+}
+
+/* Media Query */
+
+@media only screen and (max-width: 1600px) {
+  .gog-prices-options {
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 1300px) {
+  .gog-prices-options {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1120px) {
+  .gog-prices-options {
+    width: 100%;
+  }
+  .gog-prices-options__main {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .gog-prices-options {
+    width: 95%;
+  }
+
+  .gog-prices-options__main-options {
+    justify-content: center;
+  }
+
+  .gog-prices-options__option-countries {
+    align-items: center;
+  }
+
+  .gog-prices-options__countries-main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .gog-prices-options__custom-countries-opt {
+    width: 100%;
+    max-width: 469px;
+  }
+
+  .gog-prices-options__custom-countries {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+  }
+}

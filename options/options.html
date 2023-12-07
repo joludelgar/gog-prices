@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GOG Prices - Options</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100;0,700;0,800;0,900;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="options.css">
+    <script src="library.js"></script>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  </head>
+  <body class="gog-prices-options">
+    <header>
+      <div class="header-title">
+          <figure class="logo">
+              <img src="/assets/gog-prices-icon128.png" alt="GOG Prices logo" />
+          </figure>
+          <h1>GOG <span class="title-hidden">P</span>rices</h1>
+          <p>Extension for Chrome, Chromium-based browsers and Mozilla Firefox.</p>
+      </div>
+    </header>
+    <main class="gog-prices-options__main">
+      <div class="tabs">
+        <input type="radio" name="tabs" id="tab1" checked="checked" />
+        <label for="tab1"><span data-locale="optionCountriesList"></span></label>
+        <div class="tab">
+          <div class="gog-prices-options__main-options">
+            <div class="gog-prices-options__option-countries">
+              <h3 data-locale="titleListCustom"></h3>
+              <div class="gog-prices-options__countries-main">
+                <div class="gog-prices-options__custom-countries-opt">
+                  <p data-locale="countryListCustom" id="lt-country-list-custom"></p>
+                  <div class="table-actions">
+                    <button data-locale="btnShowCountryCodes" id="myBtn">Show Country Codes</button>
+                    <button data-locale="btnResetDefault" id="default-countries">Reset default countries</button>
+                  </div>
+                </div>
+                <div class="gog-prices-options__custom-countries">
+                  <div id="table" class="table-editable">
+                    <table id="contentTable" class="table">
+                      <tr class="thead">
+                        <th data-locale="tableCountryName">Country Name</th>
+                        <th id="lt-table-head-country-code">Country Code</th>
+                        <th></th>
+                      </tr>
+                      <tr class="tbody hide">
+                        <td><input class="input country-name" type="text" minlength="2" maxlength="16" placeholder="Country*" required/></td>
+                        <td><input class="input country-code" type="text" minlength="2" maxlength="2" placeholder="Code*" required pattern="[A-Za-z]+"/></td>
+                        <td class="country-actions">
+                          <span class="icon-hide-warning icon-warning" title="Purchases from this region are currently not allowed">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="m40-120 440-760 440 760H40Zm138-80h604L480-720 178-200Zm302-40q17 0 28.5-11.5T520-280q0-17-11.5-28.5T480-320q-17 0-28.5 11.5T440-280q0 17 11.5 28.5T480-240Zm-40-120h80v-200h-80v200Zm40-100Z"/></svg>
+                          </span>
+                          <span class="table-remove">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+                          </span>
+                        </td>
+                      </tr>
+                      <tr class="tbody">
+                        <td><input class="input country-name" type="text" minlength="2" maxlength="16" placeholder="Country*" required/></td>
+                        <td><input class="input country-code" type="text" minlength="2" maxlength="2" placeholder="Code*" required pattern="[A-Za-z]+"/></td>
+                        <td class="country-actions">
+                          <span class="icon-hide-warning icon-warning" title="Purchases from this region are currently not allowed">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="m40-120 440-760 440 760H40Zm138-80h604L480-720 178-200Zm302-40q17 0 28.5-11.5T520-280q0-17-11.5-28.5T480-320q-17 0-28.5 11.5T440-280q0 17 11.5 28.5T480-240Zm-40-120h80v-200h-80v200Zm40-100Z"/></svg>
+                          </span>
+                          <span id="firstRowRemove" class="table-remove">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+                          </span>
+                        </td>
+                      </tr>
+                    </table>
+                    <button class="table-add btn-icon" disabled>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
+                      <span data-locale="btnAddRow" id="add-row">Add Row</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <input type="radio" name="tabs" id="tab2" />
+        <label for="tab2"><span data-locale="optionGeneral"></label>
+        <div class="tab">
+          <div class="gog-prices-options__box">
+            Coming soon...
+          </div>
+        </div>
+
+        <input type="radio" name="tabs" id="tab3" />
+        <label for="tab3"><span data-locale="optionInfo"></span></label>
+        <div class="tab">
+          <div class="gog-prices-options__box">
+            <p><span data-locale="contact"></span> <a href="mailto:gogprices@gmail.com">gogprices@gmail.com</a></p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- The Modal -->
+      <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <div class="modal-title">
+            <div>
+              <p data-locale="modalTitle">Countries ISO Code Alpha-2</p>
+              <p data-locale="modalDesc">Select the country code and Ctrl+C to copy value</p>
+            </div>
+            <span class="close">&times;</span>
+          </div>
+          <iframe src="https://datahub.io/core/country-list/r/0.html" width="100%" height="100%" frameborder="0"></iframe>
+        </div>
+
+      </div>
+    </main>
+    <div class="gog-prices-options__actions">
+      <button data-locale="btnSave" id="save">Save changes</button>
+      <div id="status"></div>
+    </div>
+    <script src="options.js"></script>
+  </body>
+</html>

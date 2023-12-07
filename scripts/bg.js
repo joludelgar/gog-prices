@@ -3,7 +3,7 @@ const literals = {
     tooltipNotAvailable: chrome.i18n.getMessage("tooltipNotAvailable")
 };
 const currency = {code: "USD", symbol: "$"};
-const countries = [
+let countries = [
     {
         name: chrome.i18n.getMessage("regionBR"),
         code: "BR",
@@ -27,50 +27,12 @@ const countries = [
         code: "CN",
         status: "ok",
         currency: "USD"
-    },
-    // {
-    //     name: "Moldavia",
-    //     code: "MD",
-    //     status: "ok",
-    //     currency: "USD"
-    // },
-    // {
-    //     name: "Canada",
-    //     code: "CA",
-    //     status: "ok",
-    //     currency: "USD"
-    // },
-    // {
-    //     name: "Argentina",
-    //     code: "AR",
-    //     status: "ok",
-    //     currency: "USD"
-    // },
-    // {
-    //     name: "Costa Rica",
-    //     code: "CR",
-    //     status: "ok",
-    //     currency: "USD"
-    // },
-    // {
-    //     name: "India",
-    //     code: "IN",
-    //     status: "ok",
-    //     currency: "USD"
-    // },
-    // {
-    //     name: "South Africa",
-    //     code: "ZA",
-    //     status: "ok",
-    //     currency: "USD"
-    // },
-    // {
-    //     name: "Turquia",
-    //     code: "TR",
-    //     status: "ok",
-    //     currency: "USD"
-    // },
+    }
 ];
+var statusPriority = {
+    "ok": 1,
+    "ko": 2
+}
 const buttonSettingLiterals = {show : "Show settings", hide: "Hide settings"};
 const buttonCartLiterals = {show : "Virtual cart", hide: "Hide virtual cart"};
 
@@ -84,7 +46,7 @@ window.onpageshow = function() {
     init();
 };
 
-function init() {
+async function init() {
     const htmlContainer = document.getElementById("gog-prices_container");
     // var getLang = navigator.language;
     
@@ -93,12 +55,23 @@ function init() {
     //     console.log(userSettings)
     // });
 
+    await getOptionsSaved();
+
     if (!htmlContainer) {
         addContainer();
     }
 
     getProductId();
     // getWhislistId();
+}
+
+async function getOptionsSaved() {
+    await chrome.storage.sync.get(["countriesCustom"]).then((result) => {
+        console.log(result)
+        if (result && !!result.countriesCustom && result.countriesCustom.length > 0) {
+            countries = result.countriesCustom;
+        }
+    });
 }
 
 function getProductId() {
@@ -137,6 +110,13 @@ function addContainer() {
     if(htmlProductElement) {
         htmlProductElement.parentElement.parentNode.insertBefore(productComponent(), htmlProductElement.parentElement.nextSibling);
         document.getElementById("gog-prices_btn-show-more").addEventListener("click", showMore);
+        document.getElementById("gog-prices_btn-options").addEventListener("click", () => {
+            if (chrome.runtime.openOptionsPage) {
+                chrome.runtime.openOptionsPage();
+            } else {
+                window.open(chrome.runtime.getURL('/options/options.html'));
+            }
+        });
     }
 
     // if (htmlWhishListElement) {
@@ -163,7 +143,11 @@ function productComponent() {
             ${loadingHtml}
         </div>
         <div>
-            <div id="gog-prices_setting"></div>
+            <div id="gog-prices_setting" class="hide">
+                <button title="${chrome.i18n.getMessage("options")}" id="gog-prices_btn-options" class="review__was-helpful-button gog-prices-options gog-prices-settings-button">
+                    <img src="https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/settings/wght200/24px.svg" />
+                </button>
+            </div>
             <div id="gog-prices_container"></div>
         </div>
       </div>
@@ -196,17 +180,28 @@ function addCard() {
     var cardsHtml = "";
 
     prices.sort(function(a, b) {
-        return parseFloat(a.priceTotal) - parseFloat(b.priceTotal);
+        return parseFloat(a.priceTotal) - parseFloat(b.priceTotal) || statusPriority[a.status] - statusPriority[b.status];
     }).map((price, index) => {
-        var unavailable = price.status === "ko";
         cardsHtml += `
         <div class="gog-prices-data ${index > 2 ? "hide" : ""}">
-            <div class="gog-prices-country">
-                <img class="gog-prices-img" title=${price.country} alt=${price.country} src=${"https://flagpedia.net/data/flags/w580/"+price.code.toLowerCase()+".png"}><img>
-                <p class="gog-prices-text">${price.country}</p>
-                ${unavailable ? `
-                <span class="gog-prices-unavailable" title="${literals.tooltipNotAvailable}">${literals.notAvailable}</span>
-                ` : ""}
+            <div class="gog-prices-countries">
+                <div class="gog-prices-country">
+                    <img class="gog-prices-img" title=${price.country} alt=${price.country} src=${"https://flagpedia.net/data/flags/w580/"+price.code.toLowerCase()+".png"}><img>
+                    <p class="gog-prices-text">${price.country}</p>
+                    ${price.status === "ko" ? `
+                    <span class="gog-prices-unavailable" title="${literals.tooltipNotAvailable}">${literals.notAvailable}</span>
+                    ` : ""}
+                </div>
+                ${ price.samePrices?.map((sPrice) => (
+                    `<div class="gog-prices-country --extra">
+                        <img class="gog-prices-img" title=${sPrice.country} alt=${sPrice.country} src=${"https://flagpedia.net/data/flags/w580/"+sPrice.code.toLowerCase()+".png"}><img>
+                        <p class="gog-prices-text">${sPrice.country}</p>
+                        ${sPrice.status === "ko" ? `
+                        <span class="gog-prices-unavailable" title="${literals.tooltipNotAvailable}">${literals.notAvailable}</span>
+                        ` : ""}
+                    </div>`
+                    )).join('') || ""
+                }
             </div>
             <div class="gog-prices-price">
                 ${price.priceBase && price.priceBase !== price.priceTotal ? `<p class="gog-prices-text original">${price.available ? currency.symbol : ""} ${price.priceBase}</p>` : '<p class="gog-prices-text original hide"></p>'}
@@ -220,7 +215,7 @@ function addCard() {
 }
 
 function getEndpoints(id) {
-    countries.filter(country => userSettings?.options?.unavailable ? country.status !== "ko" : country).map((country, i) => {
+    countries.filter(country => userSettings?.options?.unavailable ? country.status !== "ko" : country).filter(country => !country.hasOwnProperty('alt')).map((country, i) => {
         var endpoint = ('https://api.gog.com/products/prices?ids=' + id + '&countryCode=' + country.code + '&currency=' + currency.code)
         fetch(endpoint).then(r => {
             if (r.ok) {
@@ -246,22 +241,48 @@ function getEndpoints(id) {
 };
 
 function checkPrices() {
-    if(prices.length === countries.filter(country => userSettings?.options?.unavailable ? country.status !== "ko" : country).length) {
+    if(prices.length === countries.filter(country => userSettings?.options?.unavailable ? country.status !== "ko" : country).filter(country => !country.hasOwnProperty('alt')).length) {
+        mapPrices();
         addCard();
         return true;
     }
+}
+
+function mapPrices() {
+    prices.map((price) => {
+        if (price.status == "ok") {
+            var samePrices = prices.filter(p => !isNaN(p.priceTotal) && p.priceTotal == price.priceTotal && p.code != price.code && p.status == "ok");
+            var offlineSamePrices = countries.filter(country => country.hasOwnProperty('alt')).filter(country => country.alt == price.code);
+            if (samePrices.length > 0) {
+                samePrices.map(sPrice => {
+                    prices.splice(prices.findIndex(p => p.code == sPrice.code), 1)
+                })
+                price.samePrices = samePrices;
+            }
+            if (offlineSamePrices.length > 0) {
+                price.samePrices = [...samePrices, ...offlineSamePrices.map(country => ({
+                    country: country.name,
+                    code: country.code,
+                    status: country.status
+                }))]
+            }
+        }
+    });
 }
  
 function addLoading(active) {
     const loadingHtml = document.getElementById("gog-prices_loading");
     const showMoreHtml = document.getElementById("gog-prices_show-more");
+    const settingsHtml = document.getElementById("gog-prices_setting");
 
     if (active) {
         loadingHtml.classList.remove("hide");
         showMoreHtml.classList.add("hide");
+        settingsHtml.classList.add("hide");
     } else {
         loadingHtml.classList.add("hide");
         showMoreHtml.classList.remove("hide");
+        settingsHtml.classList.remove("hide");
     }
 }
 
