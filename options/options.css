@@ -394,7 +394,15 @@ button svg {
 	display: block;
 }
 
+.modal-table {
+  width: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
+}
 
+.modal-table td {
+  padding: 4px 15px;
+}
 
 @media (min-width: 768px) {
 

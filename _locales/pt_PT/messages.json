@@ -1,0 +1,35 @@
+{
+    "appName": {
+      "message": "GOG Prices"
+    },
+    "appDesc": {
+      "message": "Exibir os preços regionais no GOG."
+    },
+    "loading": {
+      "message": "Carregando preços do GOG..."
+    },
+    "notAvailable": {
+      "message": "Indisponível"
+    },
+    "tooltipNotAvailable": {
+      "message": "Compras indisponíveis nessa região."
+    },
+    "btnShowAll": {
+      "message": "Mostrar todos"
+    },
+    "comingSoon": {
+      "message": "Em breve"
+    },
+    "regionRU": {
+      "message": "Rússia"
+    },
+    "regionUA": {
+      "message": "Ucrânia"
+    },
+    "regionBR": {
+      "message": "Brasil"
+    },
+    "regionCN": {
+      "message": "China"
+    }
+  }

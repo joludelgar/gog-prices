@@ -1,5 +1,5 @@
 const defaultCountries = [];
-const unavailableCountries = ["RU"];
+const unavailableCountries = ["RU", "BY"];
 
 const setDefaultCountries = () => {
   // document.getElementById('countries').value = defaultCountries;
@@ -91,7 +91,7 @@ const parseTableData = () => {
   let oTable = document.getElementById('contentTable');
   let data = [...oTable.rows].filter(r => r.classList.contains("tbody") && !r.classList.contains("hide")).map(t => [...t.children].map(u => [...u.children].map(i => i.value).toString()).filter((u, i) => i < 2));
 
-  return data.map(country => {
+  return data.filter(c => (c[0].length > 1 && c[1].length > 1)).map(country => {
     return {
       name: country[0].trim(), 
       code: country[1].toUpperCase(),
@@ -118,13 +118,13 @@ const setTableData = (data) => {
 const saveOptions = (e, restore) => {
     // const countries = document.getElementById('countries').value;
     const countryJSON = restore ? [] : parseTableData();
-  
+    
     chrome.storage.sync.set(
       { countriesCustom: countryJSON },
       () => {
         // Update status to let user know options were saved.
         const status = document.getElementById('status');
-        status.textContent = 'Options saved. Reload the page to see changes.';
+        status.textContent = chrome.i18n.getMessage("saveChangesMessage");
         setTimeout(() => {
           status.textContent = '';
         }, 5000);

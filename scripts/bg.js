@@ -67,7 +67,6 @@ async function init() {
 
 async function getOptionsSaved() {
     await chrome.storage.sync.get(["countriesCustom"]).then((result) => {
-        console.log(result)
         if (result && !!result.countriesCustom && result.countriesCustom.length > 0) {
             countries = result.countriesCustom;
         }
@@ -281,8 +280,13 @@ function addLoading(active) {
         settingsHtml.classList.add("hide");
     } else {
         loadingHtml.classList.add("hide");
-        showMoreHtml.classList.remove("hide");
         settingsHtml.classList.remove("hide");
+
+        if (countries.length < 4) {
+            showMoreHtml.classList.add("hide");
+        } else {
+            showMoreHtml.classList.remove("hide");
+        }
     }
 }
 

@@ -77,6 +77,9 @@
     "contact": {
       "message": "For any suggestions, problems or information, please contact me at"
     },
+    "website": {
+      "message": "Extension website:"
+    },
     "btnSave": {
       "message": "Save changes"
     },
@@ -85,5 +88,8 @@
     },
     "modalDesc": {
       "message": "Select the country code and Ctrl+C / ⌘+C to copy value"
+    },
+    "saveChangesMessage": {
+      "message": "Options saved. Reload the page to see changes."
     }
   }

@@ -154,11 +154,23 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 40px;
 }
 
 .description p {
     color: #000;
     text-align: center;
+}
+
+.support-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.support-img img {
+    width: 200px;
+    object-fit: cover;
 }
 
 @media only screen and (max-width: 1200px) {

@@ -77,6 +77,9 @@
     "contact": {
       "message": "Para cualquier sugerencia, problema o información, contáctame a través de"
     },
+    "website": {
+      "message": "Web de la extensión:"
+    },
     "btnSave": {
       "message": "Guardar cambios"
     },
@@ -85,5 +88,8 @@
     },
     "modalDesc": {
       "message": "Selecciona el código del país y Ctrl+C / ⌘+C para copiar el valor"
+    },
+    "saveChangesMessage": {
+      "message": "Opciones guardadas. Recarga la página para ver los cambios."
     }
   }
