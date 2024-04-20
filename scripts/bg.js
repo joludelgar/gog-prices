@@ -82,7 +82,7 @@ function getProductId() {
         var productId = htmlElement.getAttribute("card-product");
         currentStore = [...document.getElementsByTagName("body")[0].classList].find(o => o.includes("_prices-in-")).split("_prices-in-")[1].toUpperCase().trim();
         currentSymbolStore = currencySymbol[currentStore].symbol ?? currencySymbol[currentStore];
-        showLocalPrice = userSettings.exchangeShow && currentStore != currencyDefault.code;
+        showLocalPrice = userSettings ? userSettings.exchangeShow && currentStore != currencyDefault.code : true;
         getEndpoints(productId);
         var checkPricesIntervalId = setInterval(() => {
             if(checkPrices()) {
@@ -185,18 +185,18 @@ function whislistComponent() {
 function setListCurrency() {
     var store;
     const containerHtml = document.getElementById("gog-prices_currency");
-    if (userSettings.exchangeLocal) {
+    if (userSettings?.exchangeLocal) {
         store = currentStore;
-    } else if (userSettings.exchangeCustom) {
+    } else if (userSettings?.exchangeCustom) {
         store = userSettings.exchangeCustomCurrency;
     } else {
-        store = "";
+        store = currentStore;
     }
 
     containerHtml.innerHTML = `
         <div class="gog-prices-currency-header">
             <p class="gog-prices-currency-cell">${currencyDefault.code}</p>
-            ${showLocalPrice ? `<p style="width:${document.getElementsByClassName('gog-prices-price --second')[0].offsetWidth}px" title="${chrome.i18n.getMessage("exchangeTooltip")}" class="gog-prices-currency-cell --second">${store}<span class="--tooltip">?</span></p>` : ""}
+            ${showLocalPrice && exchangeData ? `<p style="width:${document.getElementsByClassName('gog-prices-price --second')[0].offsetWidth}px" title="${chrome.i18n.getMessage("exchangeTooltip")}" class="gog-prices-currency-cell --second">${store}<span class="--tooltip">?</span></p>` : ""}
         </div>
     `;
 }
@@ -205,12 +205,12 @@ function addCard() {
     const containerHtml = document.getElementById("gog-prices_container");
     var cardsHtml = "";
     var symbol;
-    if (userSettings.exchangeLocal) {
+    if (userSettings?.exchangeLocal) {
         symbol = currentSymbolStore;
-    } else if (userSettings.exchangeCustom) {
+    } else if (userSettings?.exchangeCustom) {
         symbol = currencySymbol[userSettings.exchangeCustomCurrency].symbol ?? currencySymbol[userSettings.exchangeCustomCurrency];
     } else {
-        symbol = "";
+        symbol = currentSymbolStore;
     }
 
     prices.sort(function(a, b) {
@@ -242,7 +242,7 @@ function addCard() {
                     ${price.priceBase && price.priceBase !== price.priceTotal ? `<p class="gog-prices-text original">${price.available ? currencyDefault.symbol : ""} ${price.priceBase}</p>` : '<p class="gog-prices-text original hide"></p>'}
                     <p class="gog-prices-text sale">${price.available ? currencyDefault.symbol : ""} ${price.priceTotal}</p>
                 </div>
-                ${showLocalPrice ? (`<div class="gog-prices-price --second">
+                ${showLocalPrice && exchangeData ? (`<div class="gog-prices-price --second">
                     ${price.priceExchange.priceBase && price.priceExchange.priceBase !== price.priceExchange.priceTotal ? `<p class="gog-prices-text original">${price.available ? symbol : ""} ${price.priceExchange.priceBase}</p>` : '<p class="gog-prices-text original hide"></p>'}
                     <p class="gog-prices-text sale">${price.available ? symbol : ""} ${price.priceExchange.priceTotal}</p>
                 </div>`) : ""}
@@ -278,8 +278,8 @@ async function getEndpoints(id) {
                 priceBase: priceBaseFormated, 
                 priceTotal: priceTotalFormated, 
                 priceExchange: {
-                    priceBase: (priceBaseFormated * exchangeData.usd[userSettings.exchangeShow && userSettings.exchangeCustom ? userSettings.exchangeCustomCurrency.toLowerCase() : currentStore.toLowerCase()]).toFixed(2), 
-                    priceTotal: (priceTotalFormated * exchangeData.usd[userSettings.exchangeShow && userSettings.exchangeCustom ? userSettings.exchangeCustomCurrency.toLowerCase() : currentStore.toLowerCase()]).toFixed(2),
+                    priceBase: (priceBaseFormated * exchangeData.usd[userSettings?.exchangeShow && userSettings?.exchangeCustom ? userSettings.exchangeCustomCurrency.toLowerCase() : currentStore.toLowerCase()]).toFixed(2), 
+                    priceTotal: (priceTotalFormated * exchangeData.usd[userSettings?.exchangeShow && userSettings?.exchangeCustom ? userSettings.exchangeCustomCurrency.toLowerCase() : currentStore.toLowerCase()]).toFixed(2),
                 },
                 // priceLocal: {
                 //     symbol: currencySymbol[country.currency], 
