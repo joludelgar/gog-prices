@@ -2,7 +2,8 @@ const literals = {
     notAvailable: chrome.i18n.getMessage("notAvailable"),
     tooltipNotAvailable: chrome.i18n.getMessage("tooltipNotAvailable")
 };
-const currency = {code: "USD", symbol: "$"};
+const currencyDefault = {code: "USD", symbol: "$"};
+var currencySymbol = {USD: "$", AUD: "A$", BRL: "R$", CAD: "C$", CHF: "Fr.", CNY: "¥", DKK: "kr", EUR: "€", GBP: "£", NOK: "kr", PLN: "zł", SEK: "kr", RUB: "₽"};
 let countries = [
     {
         name: chrome.i18n.getMessage("regionBR"),
@@ -26,7 +27,7 @@ let countries = [
         name: chrome.i18n.getMessage("regionCN"),
         code: "CN",
         status: "ok",
-        currency: "USD"
+        currency: "CNY"
     }
 ];
 var statusPriority = {
@@ -37,7 +38,7 @@ const buttonSettingLiterals = {show : "Show settings", hide: "Hide settings"};
 const buttonCartLiterals = {show : "Virtual cart", hide: "Hide virtual cart"};
 
 var prices = [];
-var userSettings;
+var userSettings, currentStore, currentSymbolStore, exchangeData, showLocalPrice;
 
 addContainer();
 
@@ -48,7 +49,6 @@ window.onpageshow = function() {
 
 async function init() {
     const htmlContainer = document.getElementById("gog-prices_container");
-    // var getLang = navigator.language;
     
     // await chrome.storage.local.get("options").then(data => {
     //     userSettings = data
@@ -66,9 +66,12 @@ async function init() {
 }
 
 async function getOptionsSaved() {
-    await chrome.storage.sync.get(["countriesCustom"]).then((result) => {
+    await chrome.storage.sync.get(["countriesCustom", "gogPricesOptions"]).then((result) => {
         if (result && !!result.countriesCustom && result.countriesCustom.length > 0) {
             countries = result.countriesCustom;
+        }
+        if (result && !!result.gogPricesOptions) {
+            userSettings = result.gogPricesOptions;
         }
     });
 }
@@ -77,9 +80,13 @@ function getProductId() {
     var htmlElement = document.querySelector("body.productcard > div.layout");
     if (htmlElement) {
         var productId = htmlElement.getAttribute("card-product");
+        currentStore = [...document.getElementsByTagName("body")[0].classList].find(o => o.includes("_prices-in-")).split("_prices-in-")[1].toUpperCase().trim();
+        currentSymbolStore = currencySymbol[currentStore].symbol ?? currencySymbol[currentStore];
+        showLocalPrice = userSettings.exchangeShow && currentStore != currencyDefault.code;
         getEndpoints(productId);
         var checkPricesIntervalId = setInterval(() => {
             if(checkPrices()) {
+                setListCurrency();
                 window.clearInterval(checkPricesIntervalId);
             }
         }, 100);
@@ -147,6 +154,7 @@ function productComponent() {
                     <img src="https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/settings/wght200/24px.svg" />
                 </button>
             </div>
+            <div id="gog-prices_currency" class="hide"></div>
             <div id="gog-prices_container"></div>
         </div>
       </div>
@@ -174,9 +182,36 @@ function whislistComponent() {
     return card;
 }
 
+function setListCurrency() {
+    var store;
+    const containerHtml = document.getElementById("gog-prices_currency");
+    if (userSettings.exchangeLocal) {
+        store = currentStore;
+    } else if (userSettings.exchangeCustom) {
+        store = userSettings.exchangeCustomCurrency;
+    } else {
+        store = "";
+    }
+
+    containerHtml.innerHTML = `
+        <div class="gog-prices-currency-header">
+            <p class="gog-prices-currency-cell">${currencyDefault.code}</p>
+            ${showLocalPrice ? `<p style="width:${document.getElementsByClassName('gog-prices-price --second')[0].offsetWidth}px" title="${chrome.i18n.getMessage("exchangeTooltip")}" class="gog-prices-currency-cell --second">${store}<span class="--tooltip">?</span></p>` : ""}
+        </div>
+    `;
+}
+
 function addCard() {
     const containerHtml = document.getElementById("gog-prices_container");
     var cardsHtml = "";
+    var symbol;
+    if (userSettings.exchangeLocal) {
+        symbol = currentSymbolStore;
+    } else if (userSettings.exchangeCustom) {
+        symbol = currencySymbol[userSettings.exchangeCustomCurrency].symbol ?? currencySymbol[userSettings.exchangeCustomCurrency];
+    } else {
+        symbol = "";
+    }
 
     prices.sort(function(a, b) {
         return parseFloat(a.priceTotal) - parseFloat(b.priceTotal) || statusPriority[a.status] - statusPriority[b.status];
@@ -202,9 +237,15 @@ function addCard() {
                     )).join('') || ""
                 }
             </div>
-            <div class="gog-prices-price">
-                ${price.priceBase && price.priceBase !== price.priceTotal ? `<p class="gog-prices-text original">${price.available ? currency.symbol : ""} ${price.priceBase}</p>` : '<p class="gog-prices-text original hide"></p>'}
-                <p class="gog-prices-text sale">${price.available ? currency.symbol : ""} ${price.priceTotal}</p>
+            <div class="gog-prices-prices-column">
+                <div class="gog-prices-price">
+                    ${price.priceBase && price.priceBase !== price.priceTotal ? `<p class="gog-prices-text original">${price.available ? currencyDefault.symbol : ""} ${price.priceBase}</p>` : '<p class="gog-prices-text original hide"></p>'}
+                    <p class="gog-prices-text sale">${price.available ? currencyDefault.symbol : ""} ${price.priceTotal}</p>
+                </div>
+                ${showLocalPrice ? (`<div class="gog-prices-price --second">
+                    ${price.priceExchange.priceBase && price.priceExchange.priceBase !== price.priceExchange.priceTotal ? `<p class="gog-prices-text original">${price.available ? symbol : ""} ${price.priceExchange.priceBase}</p>` : '<p class="gog-prices-text original hide"></p>'}
+                    <p class="gog-prices-text sale">${price.available ? symbol : ""} ${price.priceExchange.priceTotal}</p>
+                </div>`) : ""}
             </div>
         </div>`});
 
@@ -213,19 +254,40 @@ function addCard() {
     containerHtml.innerHTML = cardsHtml;
 }
 
-function getEndpoints(id) {
-    countries.filter(country => userSettings?.options?.unavailable ? country.status !== "ko" : country).filter(country => !country.hasOwnProperty('alt')).map((country, i) => {
-        var endpoint = ('https://api.gog.com/products/prices?ids=' + id + '&countryCode=' + country.code + '&currency=' + currency.code)
+async function getEndpoints(id) {
+    await getExchangeCurrency();
+    await countries.filter(country => userSettings?.options?.unavailable ? country.status !== "ko" : country).filter(country => !country.hasOwnProperty('alt')).map((country, i) => {
+        var endpoint = ('https://api.gog.com/products/prices?ids=' + id + '&countryCode=' + country.code)
         fetch(endpoint).then(r => {
             if (r.ok) {
                 return r.text();
             }
             throw new Error(r.status);
         }).then(result => {
+            var priceLocalTotalFormated, priceLocalBaseFormated;
             var jsonResult = JSON.parse(result);
-            var priceTotalFormated = (Number(jsonResult._embedded.items[0]._embedded.prices[0].finalPrice.split(" ")[0]) / 100).toFixed(2);
-            var priceBaseFormated = (Number(jsonResult._embedded.items[0]._embedded.prices[0].basePrice.split(" ")[0]) / 100).toFixed(2);
-            prices.push({country: country.name, code: country.code, priceBase: priceBaseFormated, priceTotal: priceTotalFormated, status: country.status, available: true});
+            var priceTotalFormated = (Number(jsonResult._embedded.items[0]._embedded.prices.find((price) => price.currency.code == currencyDefault.code).finalPrice.split(" ")[0]) / 100).toFixed(2);
+            var priceBaseFormated = (Number(jsonResult._embedded.items[0]._embedded.prices.find((price) => price.currency.code == currencyDefault.code).basePrice.split(" ")[0]) / 100).toFixed(2);
+            // if (jsonResult._embedded.items[0]._embedded.prices.length > 1 && Object.keys(currencySymbol).includes(country.currency)) {
+            //     priceLocalTotalFormated = (Number(jsonResult._embedded.items[0]._embedded.prices.find((price) => price.currency.code == country.currency).finalPrice.split(" ")[0]) / 100).toFixed(2);
+            //     priceLocalBaseFormated = (Number(jsonResult._embedded.items[0]._embedded.prices.find((price) => price.currency.code == country.currency).basePrice.split(" ")[0]) / 100).toFixed(2);
+            // }
+            prices.push({
+                country: country.name, 
+                code: country.code, 
+                priceBase: priceBaseFormated, 
+                priceTotal: priceTotalFormated, 
+                priceExchange: {
+                    priceBase: (priceBaseFormated * exchangeData.usd[userSettings.exchangeShow && userSettings.exchangeCustom ? userSettings.exchangeCustomCurrency.toLowerCase() : currentStore.toLowerCase()]).toFixed(2), 
+                    priceTotal: (priceTotalFormated * exchangeData.usd[userSettings.exchangeShow && userSettings.exchangeCustom ? userSettings.exchangeCustomCurrency.toLowerCase() : currentStore.toLowerCase()]).toFixed(2),
+                },
+                // priceLocal: {
+                //     symbol: currencySymbol[country.currency], 
+                //     priceBase: priceLocalBaseFormated, 
+                //     priceTotal: priceLocalTotalFormated
+                // }, 
+                status: country.status, 
+                available: true});
         }).catch((error) => {
             switch (error.message) {
                 case "400":
@@ -238,6 +300,41 @@ function getEndpoints(id) {
         });
     });
 };
+
+async function getExchangeCurrency() {
+    var commonCurrencies =
+		"https://raw.githubusercontent.com/fawazahmed0/exchange-api/main/other/Common-Currency.json";
+    var exchangeApi = ["https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.min.json", "https://latest.currency-api.pages.dev/v1/currencies/usd.min.json",
+    "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json", "https://latest.currency-api.pages.dev/v1/currencies/usd.json"]
+    for (let index = 0; index < exchangeApi.length; index++) {
+        if (!exchangeData || new Date(exchangeData?.date).setHours(0, 0, 0, 0) != new Date().setHours(0, 0, 0, 0)) {
+            await fetch(exchangeApi[index]).then(r => {
+                if (r.ok) {
+                    return r.text();
+                }
+                throw new Error(r.status);
+            }).then(result => {
+                exchangeData = JSON.parse(result);
+            }).catch((error) => {
+                console.log(error)
+            });
+        }
+    }
+
+    await fetch(commonCurrencies)
+		.then((r) => {
+			if (r.ok) {
+				return r.text();
+			}
+			throw new Error(r.status);
+		})
+		.then((result) => {
+			currencySymbol = JSON.parse(result);
+		})
+		.catch((error) => {
+			console.log(error);
+		});
+}
 
 function checkPrices() {
     if(prices.length === countries.filter(country => userSettings?.options?.unavailable ? country.status !== "ko" : country).filter(country => !country.hasOwnProperty('alt')).length) {
@@ -273,14 +370,17 @@ function addLoading(active) {
     const loadingHtml = document.getElementById("gog-prices_loading");
     const showMoreHtml = document.getElementById("gog-prices_show-more");
     const settingsHtml = document.getElementById("gog-prices_setting");
+    const currencyHtml = document.getElementById("gog-prices_currency");
 
     if (active) {
         loadingHtml.classList.remove("hide");
         showMoreHtml.classList.add("hide");
         settingsHtml.classList.add("hide");
+        currencyHtml.classList.add("hide");
     } else {
         loadingHtml.classList.add("hide");
         settingsHtml.classList.remove("hide");
+        currencyHtml.classList.remove("hide");
 
         if (countries.length < 4) {
             showMoreHtml.classList.add("hide");

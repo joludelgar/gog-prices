@@ -1,35 +1,44 @@
 {
     "appName": {
-      "message": "GOG Prices"
+        "message": "GOG Prices"
     },
     "appDesc": {
-      "message": "Отображает региональные цены в GOG."
+        "message": "Отображает региональные цены в GOG."
     },
     "loading": {
-      "message": "Загрузка цен GOG..."
+        "message": "Загрузка цен GOG..."
     },
     "notAvailable": {
-      "message": "Недоступно"
+        "message": "Недоступно"
     },
     "tooltipNotAvailable": {
-      "message": "В настоящее время покупки из этого региона запрещены."
+        "message": "В настоящее время покупки из этого региона запрещены."
     },
     "btnShowAll": {
-      "message": "Показать все"
+        "message": "Показать все"
     },
     "comingSoon": {
-      "message": "Скоро"
+        "message": "Скоро"
     },
     "regionRU": {
-      "message": "Россия"
+        "message": "Россия"
     },
     "regionUA": {
-      "message": "Украина"
+        "message": "Украина"
     },
     "regionBR": {
-      "message": "Бразилия"
+        "message": "Бразилия"
     },
     "regionCN": {
-      "message": "Китай"
+        "message": "Китай"
+    },
+    "options": {
+        "message": "Настройки"
+    },
+    "optionGeneral": {
+        "message": "Настройки"
+    },
+    "optionInfo": {
+        "message": "Информация"
     }
-  }
+}

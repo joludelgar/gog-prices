@@ -79,7 +79,7 @@ p {
 
 .gog-prices-options__box {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding: 40px 20px;
 }
 
@@ -299,6 +299,7 @@ button svg {
 }
 
 /* Modal Content */
+
 .modal-content {
   display: flex;
   flex-direction: column;
@@ -317,7 +318,8 @@ button svg {
   align-items: center;
 }
 
-/* The Close Button */
+/* Close Button */
+
 .close {
   color: #aaaaaa;
   float: right;
@@ -344,7 +346,7 @@ button svg {
 	width: 100%;
 }
 
-.tabs label {
+.tabs > label {
 	width: 100%;
 	display: flex;
 	align-items: center;
@@ -379,18 +381,18 @@ button svg {
 	margin-bottom: 0.8rem;
 }
 
-.tabs [type=radio] {
+.tabs > [type=radio] {
 	display: none;
 }
 
-.tabs [type=radio]:checked + label {
+.tabs > [type=radio]:checked + label {
 	background-color: #fff;
 	color: var(--secondary);
 	border-top: 4px solid var(--primary);
 	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.4);
 }
 
-.tabs [type=radio]:checked + label + .tab {
+.tabs > [type=radio]:checked + label + .tab {
 	display: block;
 }
 
@@ -403,6 +405,164 @@ button svg {
 .modal-table td {
   padding: 4px 15px;
 }
+
+/* Options general */
+
+.gog-prices-options__option {
+  width: 100%;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #888;
+}
+
+/* Select dropbox with search */
+
+.gog-prices-options__secondary {
+  margin: 20px;
+}
+
+.gog-prices-options__secondary > div {
+  margin-bottom: 10px;
+}
+
+.dropInputButton {
+	display: flex;
+	align-items: center;
+	position: relative;
+	max-width: 100%;
+  cursor: pointer;
+}
+
+.dropInputButton_input {
+	font-size: 12px;
+	padding: 5px 10px;
+	width: 100%;
+	padding-right: 10px;
+	outline: none;
+	background: #FFFFFF;
+	color: #000000;
+	border: 2px solid var(--primary);
+	border-radius: 5px;
+	box-shadow: 3px 3px 2px 0px #E2E2E2;
+	transition: .3s ease;
+  padding-right: 35px;
+  cursor: pointer;
+}
+
+.dropInputButton_input:focus {
+	background: #F2F2F2;
+	border: 2px solid var(--primary);
+  border-radius: 0;
+}
+
+.svg_icon {
+	position: absolute;
+	right: 10px;
+	fill: var(--primary);
+	width: 12px;
+	height: 12px;
+}
+
+.svg_icon_down {
+  display: block;
+}
+
+.svg_icon_up {
+  display: none;
+}
+
+#searchInput {
+  box-sizing: border-box;
+  font-size: 16px;
+  padding: 8px 20px 8px 20px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+}
+
+#searchInput:focus {outline: 3px solid #ddd;}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f6f6f6;
+  min-width: 230px;
+  overflow: auto;
+  border: 2px solid var(--primary);
+  z-index: 1;
+  top: calc(100% - 2px);
+}
+
+.dropdown.disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.dropdown.disabled div svg {
+  cursor: not-allowed;
+  pointer-events: none;
+  fill: #000;
+  opacity: 0.3;
+}
+
+.dropdown.disabled div input {
+  cursor: not-allowed;
+  pointer-events: none;
+  background-color: dimgrey;
+  color: linen;
+  opacity: 0.3;
+  border: 2px solid dimgrey;
+}
+
+#exchange-list {
+  max-height: 200px;
+  overflow-y: scroll;
+}
+
+.dropdown-content p {
+  font-size: 14px;
+  color: black;
+  padding: 8px 16px;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+}
+
+.dropdown p:hover {background-color: #ddd;}
+
+.dropdown-content p.selected {
+  background-color: var(--primary);
+  color: white;
+}
+
+.exchange-disclamer {
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.show {display: block;}
+.hide {display: none;}
+
+.support {
+  display: flex;
+  justify-content: space-around;
+}
+
+.support-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.support-img img {
+  width: 200px;
+  object-fit: cover;
+}
+
+/* Media Query */
 
 @media (min-width: 768px) {
 
@@ -427,8 +587,6 @@ button svg {
 		border-bottom: none;
 	}
 }
-
-/* Media Query */
 
 @media only screen and (max-width: 1600px) {
   .gog-prices-options {

@@ -1,32 +1,32 @@
 {
     "appName": {
-      "message": "GOG Prices"
+        "message": "GOG Prices"
     },
     "appDesc": {
-      "message": "Affiche les prix régionaux sur GOG."
+        "message": "Affiche les prix régionaux sur GOG."
     },
     "loading": {
-      "message": "Chargement GOG prices..."
+        "message": "Chargement GOG prices..."
     },
     "notAvailable": {
-      "message": "Non disponible"
+        "message": "Non disponible"
     },
     "tooltipNotAvailable": {
-      "message": "Les achats dans cette région ne sont actuellement pas disponibles."
+        "message": "Les achats dans cette région ne sont actuellement pas disponibles."
     },
     "btnShowAll": {
-      "message": "Afficher tout"
+        "message": "Afficher tout"
     },
     "regionRU": {
-      "message": "Russie"
+        "message": "Russie"
     },
     "regionUA": {
-      "message": "Ukraine"
+        "message": "Ukraine"
     },
     "regionBR": {
-      "message": "Brésil"
+        "message": "Brésil"
     },
     "regionCN": {
-      "message": "Chine"
+        "message": "Chine"
     }
-  }
+}

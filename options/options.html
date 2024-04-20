@@ -83,7 +83,40 @@
         <label for="tab2"><span data-locale="optionGeneral"></label>
         <div class="tab">
           <div class="gog-prices-options__box">
-            Coming soon...
+            <div class="gog-prices-options__option">
+              <div class="gog-prices-options__primary">
+                <input type="checkbox" id="exchange-show" value="_exchange-show" />
+                <label data-locale="exchangeShowCheck" for="exchange-show"></label>
+              </div>
+              <div class="gog-prices-options__secondary">
+                <div>
+                  <input type="radio" id="exchange-local" name="exchange-type" value="_exchange-local" checked disabled />
+                  <label data-locale="exchangeLocalRadio" for="exchange-local"></label>
+                </div>
+              
+                <div>
+                  <input type="radio" id="exchange-custom" name="exchange-type" value="_exchange-custom" disabled />
+                  <label data-locale="exchangeCustomRadio" for="exchange-custom"></label>
+
+                  <div id="dropbtn" class="dropdown disabled">
+                    <div id="exchange-custom-btn" class="dropInputButton">
+                      <svg xmlns="http://www.w3.org/2000/svg" id="svg_down" class="svg_icon svg_icon_down" viewBox="0 -960 960 960" width="24"><path d="M480-345 240-585l56-56 184 184 184-184 56 56-240 240Z"/></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" id="svg_up" class="svg_icon svg_icon_up" viewBox="0 -960 960 960" width="24"><path d="m296-345-56-56 240-240 240 240-56 56-184-184-184 184Z"/></svg>
+                      <input id="exchange-custom-currency" class="dropInputButton_input" type="button" value="EUR">
+                    </div>
+                    <!-- <input type="text" name="exchange-custom-currency" id="exchange-custom-currency"> -->
+                    <div id="myDropdown" class="dropdown-content">
+                      <input type="text" placeholder="Search.." id="searchInput">
+                      <div id="exchange-list"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="exchange-disclamer-container">
+                <p class="exchange-disclamer" data-locale="exchangeInfo"></p>
+                <p class="exchange-disclamer" data-locale="exchangeDisclamer"></p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -93,6 +126,11 @@
           <div class="gog-prices-options__box">
             <p><span data-locale="contact"></span> <a href="mailto:gogprices@gmail.com">gogprices@gmail.com</a></p>
             <p><span data-locale="website"></span> <a href="https://joludelgar.github.io/gog-prices/">GOG Prices</a></p>
+            <p><span data-locale="translations"></span> <a href="https://crowdin.com/project/gog-prices">Crowdin - GOG Prices</a></p>
+          </div>
+          <div class="support">
+            <a class="support-img" href="https://www.paypal.com/paypalme/JLDelgado"><img src="https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png" alt="Donate with PayPal" /></a>
+            <a class="support-img" href='https://ko-fi.com/Q5Q2S99GX' target='_blank'><img height='51' style='border:0px;height:51px;' src='https://storage.ko-fi.com/cdn/kofi3.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
           </div>
         </div>
       </div>

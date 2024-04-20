@@ -1,0 +1,95 @@
+{
+    "appName": {
+        "message": "GOG Prices"
+    },
+    "appDesc": {
+        "message": "Zeigt regionale Vergleichspreise auf GOG an."
+    },
+    "loading": {
+        "message": "GOG-Preise werden geladen..."
+    },
+    "notAvailable": {
+        "message": "Nicht verfügbar"
+    },
+    "tooltipNotAvailable": {
+        "message": "Käufe aus der Region sind derzeit nicht erlaubt."
+    },
+    "btnShowAll": {
+        "message": "Alle anzeigen"
+    },
+    "comingSoon": {
+        "message": "Bald verfügbar"
+    },
+    "regionRU": {
+        "message": "Russland"
+    },
+    "regionUA": {
+        "message": "Ukraine"
+    },
+    "regionBR": {
+        "message": "Brasilien"
+    },
+    "regionCN": {
+        "message": "China"
+    },
+    "options": {
+        "message": "Einstellungen"
+    },
+    "optionCountriesList": {
+        "message": "Länderliste"
+    },
+    "optionGeneral": {
+        "message": "Einstellungen"
+    },
+    "optionInfo": {
+        "message": "Information"
+    },
+    "countryListCustom": {
+        "message": "Sie können die Länder, die angezeigt werden sollen, anpassen, indem Sie sie zu dieser Liste hinzufügen. Wenn Sie Änderungen an der Liste vornehmen, werden die Standard-Länder ersetzt. Wenn Sie zu den Standardländern zurückkehren möchten, können Sie \"Standardländer zurücksetzen\". Sie können die Ländercodes auch anzeigen, indem Sie auf \"Ländercodes anzeigen\" klicken."
+    },
+    "titleListCustom": {
+        "message": "Benutzerdefinierte Länderliste"
+    },
+    "tableCountryName": {
+        "message": "Land"
+    },
+    "tableCountryCode": {
+        "message": "Ländercode"
+    },
+    "tableCountryCodeInfo": {
+        "message": "Es ist wichtig, den Ländercode korrekt anzugeben. Der Ländercode ist für die Angabe des entsprechenden Landes und des entsprechenden Preises verantwortlich."
+    },
+    "inputCountry": {
+        "message": "Land"
+    },
+    "inputCode": {
+        "message": "Code"
+    },
+    "btnShowCountryCodes": {
+        "message": "Ländercodes anzeigen"
+    },
+    "btnResetDefault": {
+        "message": "Standardländer zurücksetzen"
+    },
+    "btnAddRow": {
+        "message": "Neue Zeile hinzufügen"
+    },
+    "contact": {
+        "message": "Für Anregungen, Probleme oder Informationen kontaktieren Sie mich bitte unter"
+    },
+    "website": {
+        "message": "Extension website:"
+    },
+    "btnSave": {
+        "message": "Änderungen speichern"
+    },
+    "modalTitle": {
+        "message": "Länder ISO-Code Alpha-2"
+    },
+    "modalDesc": {
+        "message": "Wählen Sie den Ländercode und drücken Sie Strg+C /⌘ +C zum Kopieren"
+    },
+    "saveChangesMessage": {
+        "message": "Einstellungen gespeichert. Seite neu laden, um Änderungen zu sehen."
+    }
+}

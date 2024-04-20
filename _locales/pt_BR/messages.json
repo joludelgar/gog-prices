@@ -1,35 +1,95 @@
 {
     "appName": {
-      "message": "GOG Prices"
+        "message": "GOG Prices"
     },
     "appDesc": {
-      "message": "Exibir os preços regionais no GOG."
+        "message": "Exibir os preços regionais no GOG."
     },
     "loading": {
-      "message": "Carregando preços do GOG..."
+        "message": "Carregando preços do GOG..."
     },
     "notAvailable": {
-      "message": "Indisponível"
+        "message": "Indisponível"
     },
     "tooltipNotAvailable": {
-      "message": "Compras indisponíveis nessa região."
+        "message": "Compras indisponíveis nessa região."
     },
     "btnShowAll": {
-      "message": "Mostrar todos"
+        "message": "Mostrar todos"
     },
     "comingSoon": {
-      "message": "Em breve"
+        "message": "Em breve"
     },
     "regionRU": {
-      "message": "Rússia"
+        "message": "Rússia"
     },
     "regionUA": {
-      "message": "Ucrânia"
+        "message": "Ucrânia"
     },
     "regionBR": {
-      "message": "Brasil"
+        "message": "Brasil"
     },
     "regionCN": {
-      "message": "China"
+        "message": "China"
+    },
+    "options": {
+        "message": "Configurações"
+    },
+    "optionCountriesList": {
+        "message": "Lista de Países"
+    },
+    "optionGeneral": {
+        "message": "Configurações"
+    },
+    "optionInfo": {
+        "message": "Informação"
+    },
+    "countryListCustom": {
+        "message": "Você pode personalizar os países que deseja que sejam exibidos adicionando-os a esta lista. Quando você fizer alterações na lista, os países padrão serão substituídos. Se você quiser retornar aos países padrão, você pode 'Redefinir países padrão'. Você também pode visualizar os códigos de país clicando em 'Mostrar códigos de país'."
+    },
+    "titleListCustom": {
+        "message": "Lista de países personalizados"
+    },
+    "tableCountryName": {
+        "message": "Nome do País"
+    },
+    "tableCountryCode": {
+        "message": "Código do País"
+    },
+    "tableCountryCodeInfo": {
+        "message": "É importante indicar corretamente o código do país. Este código é responsável por indicar o país e preço correspondentes."
+    },
+    "inputCountry": {
+        "message": "País"
+    },
+    "inputCode": {
+        "message": "Código"
+    },
+    "btnShowCountryCodes": {
+        "message": "Mostrar código do país"
+    },
+    "btnResetDefault": {
+        "message": "Redefinir países padrão"
+    },
+    "btnAddRow": {
+        "message": "Adicionar linha"
+    },
+    "contact": {
+        "message": "Para quaisquer sugestões, problemas ou informações, entre em contato comigo"
+    },
+    "website": {
+        "message": "Extension website:"
+    },
+    "btnSave": {
+        "message": "Salvar alterações"
+    },
+    "modalTitle": {
+        "message": "Código ISO Alpha-2 dos países"
+    },
+    "modalDesc": {
+        "message": "Selecione o código do país e Ctrl+C / ⌘+C para copiar o valor"
+    },
+    "saveChangesMessage": {
+        "message": "Opções salvas. Recarregue a página para ver as alterações."
     }
-  }
+}

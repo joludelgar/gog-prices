@@ -91,5 +91,26 @@
     },
     "saveChangesMessage": {
       "message": "Options saved. Reload the page to see changes."
+    },
+    "exchangeTooltip": {
+      "message": "Estimated price"
+    },
+    "translations": {
+      "message": "If you want to view the extension in your language or if you have seen an error in the translation, please help me at:"
+    },
+    "exchangeShowCheck": {
+      "message": "Display price converter with current exchange rate (estimated prices*):"
+    },
+    "exchangeLocalRadio": {
+      "message": "Currency of the store where you are located"
+    },
+    "exchangeCustomRadio": {
+      "message": "Custom currency:"
+    },
+    "exchangeInfo": {
+      "message": "Currency converter by <a href='https://github.com/fawazahmed0/exchange-api'>@fawazahmed0</a>. Currency date: <span id='exchangeDate'></span>."
+    },
+    "exchangeDisclamer": {
+      "message": "*Final prices may vary depending on the conversion rate of the chosen payment method."
     }
   }

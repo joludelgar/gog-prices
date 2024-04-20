@@ -1,35 +1,95 @@
 {
     "appName": {
-      "message": "GOG Prices"
+        "message": "GOG Prices"
     },
     "appDesc": {
-      "message": "显示 GOG 上的区域定价。"
+        "message": "显示 GOG 上的区域定价。"
     },
     "loading": {
-      "message": "正在加载 GOG 价格..."
+        "message": "加载 GOG 价格中……"
     },
     "notAvailable": {
-      "message": "不可用"
+        "message": "不可用"
     },
     "tooltipNotAvailable": {
-      "message": "当前不允许从该区域购买。"
+        "message": "当前不允许从该区域购买。"
     },
     "btnShowAll": {
-      "message": "显示所有"
+        "message": "显示所有"
     },
     "comingSoon": {
-      "message": "即将呈现"
+        "message": "即将呈现"
     },
     "regionRU": {
-      "message": "俄罗斯"
+        "message": "俄罗斯"
     },
     "regionUA": {
-      "message": "乌克兰"
+        "message": "乌克兰"
     },
     "regionBR": {
-      "message": "巴西"
+        "message": "巴西"
     },
     "regionCN": {
-      "message": "中国"
+        "message": "中国"
+    },
+    "options": {
+        "message": "设置"
+    },
+    "optionCountriesList": {
+        "message": "国家/地区列表"
+    },
+    "optionGeneral": {
+        "message": "设置"
+    },
+    "optionInfo": {
+        "message": "关于"
+    },
+    "countryListCustom": {
+        "message": "您可以将想要显示的国家/地区添加到本列表中。更改本列表后，默认国家/地区将被替换。如果想要使用默认国家/地区，可以“重置默认国家/地区 ”。您也可以点击 “显示国家地区代码 ”来查看国家地区代码。"
+    },
+    "titleListCustom": {
+        "message": "自定义国家/地区列表"
+    },
+    "tableCountryName": {
+        "message": "国家/地区名称"
+    },
+    "tableCountryCode": {
+        "message": "国家地区代码"
+    },
+    "tableCountryCodeInfo": {
+        "message": "正确标注国家地区代码很重要。该代码负责标明相应的国家/地区和价格。"
+    },
+    "inputCountry": {
+        "message": "国家/地区"
+    },
+    "inputCode": {
+        "message": "代码"
+    },
+    "btnShowCountryCodes": {
+        "message": "显示国家地区代码"
+    },
+    "btnResetDefault": {
+        "message": "重置默认国家/地区"
+    },
+    "btnAddRow": {
+        "message": "添加行"
+    },
+    "contact": {
+        "message": "如有任何建议、问题或信息，请通过以下方式与我联系"
+    },
+    "website": {
+        "message": "Extension website:"
+    },
+    "btnSave": {
+        "message": "保存修改"
+    },
+    "modalTitle": {
+        "message": "ISO 二位国家地区代码"
+    },
+    "modalDesc": {
+        "message": "选择国家地区代码并按下 Ctrl+C / ⌘+C 以复制值"
+    },
+    "saveChangesMessage": {
+        "message": "选项已保存。重新加载本页面以查看修改。"
     }
-  }
+}
