@@ -278,8 +278,8 @@ async function getEndpoints(id) {
                 priceBase: priceBaseFormated, 
                 priceTotal: priceTotalFormated, 
                 priceExchange: {
-                    priceBase: (priceBaseFormated * exchangeData.usd[userSettings?.exchangeShow && userSettings?.exchangeCustom ? userSettings.exchangeCustomCurrency.toLowerCase() : currentStore.toLowerCase()]).toFixed(2), 
-                    priceTotal: (priceTotalFormated * exchangeData.usd[userSettings?.exchangeShow && userSettings?.exchangeCustom ? userSettings.exchangeCustomCurrency.toLowerCase() : currentStore.toLowerCase()]).toFixed(2),
+                    priceBase: (priceBaseFormated * exchangeData?.usd[userSettings?.exchangeShow && userSettings?.exchangeCustom ? userSettings.exchangeCustomCurrency.toLowerCase() : currentStore.toLowerCase()]).toFixed(2), 
+                    priceTotal: (priceTotalFormated * exchangeData?.usd[userSettings?.exchangeShow && userSettings?.exchangeCustom ? userSettings.exchangeCustomCurrency.toLowerCase() : currentStore.toLowerCase()]).toFixed(2),
                 },
                 // priceLocal: {
                 //     symbol: currencySymbol[country.currency], 

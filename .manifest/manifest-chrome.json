@@ -3,7 +3,7 @@
     "name": "__MSG_appName__",
     "description": "__MSG_appDesc__",
     "default_locale": "en",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "action": {
         "default_icon": "assets/gog-prices-icon48.png"
     },
@@ -12,9 +12,7 @@
         "48": "assets/gog-prices-icon48.png",
         "128": "assets/gog-prices-icon128.png" 
     },
-    "host_permissions": [
-        "*://*.gog.com/*"
-    ],
+    "host_permissions": ["*://*/*"],
     "permissions": [
         "storage"
     ],
