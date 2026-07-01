@@ -148,5 +148,8 @@
     },
     "clarification3": {
       "message": "Si estás conectado desde una VPN y uno de los precios no coincide con el indicado, asegúrate de que estás conectado al mercado deseado. Si verificas que el precio es incorrecto, házmelo saber con los máximos detalles posibles: VPN usada, mercado, captura de pantalla, etc... e intentaré averiguar por qué se produce el error."
+    },
+    "unsavedWarningMessage": {
+      "message": "Advertencia: Has realizado cambios en la configuración que no se han guardado. Recuerda pulsar en GUARDAR CAMBIOS para aplicar los cambios. Para visualizar los cambios en GOG, refresca la página."
     }
   }

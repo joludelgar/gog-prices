@@ -148,5 +148,8 @@
     },
     "clarification3": {
         "message": "Se você estiver conectado a uma VPN e um dos preços não coincidir com o indicado, certifique-se de estar conectado ao mercado desejado. Se você verificar que o preço está incorreto, por favor me avise com o máximo de detalhes possível: VPN usada, mercado, captura de tela, etc... e tentarei descobrir o motivo do erro."
+    },
+    "unsavedWarningMessage": {
+        "message": "Aviso: Você fez alterações nas configurações que não foram salvas. Lembre-se de clicar em SALVAR ALTERAÇÕES para aplicar as alterações. Para ver as alterações no GOG, atualize a página."
     }
 }

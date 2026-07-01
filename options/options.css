@@ -992,3 +992,48 @@ button svg {
   color: var(--primary);
   font-weight: 700;
 }
+
+/* Warning Banner */
+.gog-prices-options__warning-banner {
+  background: rgba(255, 170, 0, 0.08);
+  border: 1px solid rgba(255, 170, 0, 0.25);
+  border-radius: 8px;
+  padding: 12px 20px;
+  margin: 20px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.3s ease;
+}
+
+.gog-prices-options__warning-banner.hidden {
+  display: none !important;
+}
+
+.warning-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.warning-banner-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.warning-banner-icon svg {
+  fill: #ffaa00;
+  width: 24px;
+  height: 24px;
+}
+
+.gog-prices-options__warning-banner span[data-locale] {
+  color: #ffcc66;
+  font-family: "Roboto", "Segoe UI", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 500;
+}

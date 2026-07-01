@@ -11,6 +11,11 @@ const defaultOptions = {
 };
 const unavailableCountries = ["RU", "BY"];
 
+let initialState = {
+	countriesCustom: [],
+	gogPricesOptions: {}
+};
+
 // Cross-browser storage wrapper (Chrome / Firefox)
 const ext = typeof browser !== "undefined" ? browser : chrome;
 
@@ -193,6 +198,10 @@ const checkValidity = () => {
 		input.removeEventListener("change", handleInputChange);
 		input.addEventListener("change", handleInputChange);
 	});
+
+	if (typeof updateWarningBannerVisibility === "function") {
+		updateWarningBannerVisibility();
+	}
 };
 
 const handleInputChange = (e) => {
@@ -423,6 +432,10 @@ function selectCustomCurrency(e) {
 	});
 	item.classList.add("selected");
 	closeExchangeDropdown();
+
+	if (typeof updateWarningBannerVisibility === "function") {
+		updateWarningBannerVisibility();
+	}
 }
 
 function closeExchangeDropdown() {
@@ -464,6 +477,43 @@ function setOptions(options) {
 /**
  * General option page functions
  */
+
+const areCustomCountriesEqual = (arr1, arr2) => {
+	if (arr1.length !== arr2.length) return false;
+	for (let i = 0; i < arr1.length; i++) {
+		if (arr1[i].name !== arr2[i].name || 
+			arr1[i].code.toUpperCase().trim() !== arr2[i].code.toUpperCase().trim() ||
+			arr1[i].status !== arr2[i].status) {
+			return false;
+		}
+	}
+	return true;
+};
+
+const areOptionsEqual = (opt1, opt2) => {
+	return opt1.exchangeShow === opt2.exchangeShow &&
+		opt1.exchangeLocal === opt2.exchangeLocal &&
+		opt1.exchangeCustom === opt2.exchangeCustom &&
+		opt1.exchangeCustomCurrency === opt2.exchangeCustomCurrency;
+};
+
+const isStateDirty = () => {
+	const currentCountries = parseTableData();
+	const currentOptions = parseOptions();
+	return !areCustomCountriesEqual(initialState.countriesCustom, currentCountries) ||
+		!areOptionsEqual(initialState.gogPricesOptions, currentOptions);
+};
+
+const updateWarningBannerVisibility = () => {
+	const warningBanner = document.getElementById("unsaved-warning");
+	if (!warningBanner) return;
+	
+	if (isStateDirty()) {
+		warningBanner.classList.remove("hidden");
+	} else {
+		warningBanner.classList.add("hidden");
+	}
+};
 
 let exchangeData, exchangeCommon;
 
@@ -514,6 +564,14 @@ const saveOptions = async (e, countriesDefault) => {
 			countriesCustom: countryJSON,
 			gogPricesOptions: optionsJSON
 		});
+
+		initialState = {
+			countriesCustom: countryJSON,
+			gogPricesOptions: optionsJSON
+		};
+		if (typeof updateWarningBannerVisibility === "function") {
+			updateWarningBannerVisibility();
+		}
 		
 		const status = document.getElementById("status");
 		if (status) {
@@ -590,6 +648,14 @@ async function restoreOptions() {
 	}
 
 	await getExchangeCurrency();
+
+	initialState = {
+		countriesCustom: parseTableData(),
+		gogPricesOptions: parseOptions()
+	};
+	if (typeof updateWarningBannerVisibility === "function") {
+		updateWarningBannerVisibility();
+	}
 }
 
 async function getExchangeCurrency() {
@@ -678,3 +744,14 @@ const searchInput = document.getElementById("searchInput");
 if (searchInput) {
 	searchInput.addEventListener("keyup", filterFunction);
 }
+
+document.addEventListener("input", () => {
+	if (typeof updateWarningBannerVisibility === "function") {
+		updateWarningBannerVisibility();
+	}
+});
+document.addEventListener("change", () => {
+	if (typeof updateWarningBannerVisibility === "function") {
+		updateWarningBannerVisibility();
+	}
+});

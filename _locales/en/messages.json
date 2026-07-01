@@ -148,5 +148,8 @@
     },
     "clarification3": {
       "message": "If you are connected from a VPN and one of the prices does not match the one indicated, make sure you are connected to the desired market. If you verify that the price is incorrect, please let me know with as much detail as possible: VPN used, market, screenshot, etc... and I will try to find out why the error occurs."
+    },
+    "unsavedWarningMessage": {
+      "message": "Warning: You have unsaved configuration changes. Remember to click SAVE CHANGES to apply the changes. To see the changes on GOG, refresh the page."
     }
   }
