@@ -1,6 +1,51 @@
 :root {
+  --gog-bg: #14171d;
+  /* Fondo oscuro principal */
+  --gog-card-bg: #1e2229;
+  /* Tarjetas y paneles */
+  --gog-text: #ffffff;
+  /* Texto brillante (blanco puro) */
+  --gog-text-muted: #abb4bf;
+  /* Texto secundario más claro */
   --primary: #9d5dd8;
+  /* Púrpura de GOG */
   --secondary: #613986;
+  /* Púrpura oscuro */
+  --success: #70ab26;
+  /* Verde de comprar */
+  --success-hover: #5e931e;
+  --danger: #b83c3c;
+  --danger-hover: #9e3232;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-color-focus: #9d5dd8;
+}
+
+/* Custom Scrollbar for premium feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--gog-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+body {
+  background-color: var(--gog-bg);
+  color: var(--gog-text);
+  margin: 0;
+  padding: 0;
+  font-family: "Saira", "Roboto", "Segoe UI", sans-serif;
+  min-height: 100vh;
 }
 
 .gog-prices-options {
@@ -10,24 +55,30 @@
   width: 80%;
   min-width: 620px;
   max-width: 1200px;
-  font-family: Arial, Helvetica, sans-serif;
   padding: 20px 0;
 }
+
 .header-title {
   font-family: "Saira", sans-serif;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 20px;
 }
+
 .header-title .logo {
   height: 100px;
   width: 100px;
+  margin: 0;
 }
+
 .logo img {
   width: 100%;
   height: 100%;
+  filter: drop-shadow(0 0 12px rgba(157, 93, 216, 0.4));
 }
+
 .header-title h1 {
   position: absolute;
   font-size: 100px;
@@ -36,51 +87,88 @@
   margin: 0;
   line-height: 100px;
   top: 15px;
+  color: #ffffff;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+  letter-spacing: -2px;
 }
+
 .title-hidden {
   color: rgba(255, 255, 255, 0);
   margin-left: 30px;
 }
-p {
-  color: black;
-  font-size: 16px;
-  margin: 4px;
-  font-weight: 600;
+
+.header-title p {
+  color: var(--gog-text-muted);
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
+
+p {
+  font-family: "Roboto", "Segoe UI", sans-serif;
+  color: #ffffff;
+  font-size: 14px;
+  margin: 4px;
+  font-weight: 400;
+}
+
 #countries {
   width: 400px;
 }
+
 .gog-prices-options__main {
   display: flex;
   flex-direction: column;
   position: relative;
   border-radius: 10px;
-  padding: 20px;
-  margin: 40px 0;
+  margin: 30px 0;
   justify-content: flex-start;
 }
+
 #lt-main-options-title {
   font-family: "Saira", sans-serif;
 }
+
 .gog-prices-options__custom-countries {
   display: flex;
   flex-direction: column;
   width: 50%;
 }
+
 .gog-prices-options__custom-countries h3 {
   margin: 16px 0;
+  font-weight: 700;
+  font-size: 18px;
 }
 
 .gog-prices-options__main-options {
   display: flex;
   flex-direction: row;
-  padding: 0 20px 40px;
+  padding: 10px 10px 30px;
 }
 
 .gog-prices-options__box {
   display: flex;
-  flex-direction: row;
-  padding: 40px 20px;
+  flex-direction: column;
+  padding: 30px 10px;
+}
+
+.gog-prices-options__box p {
+  margin-bottom: 12px;
+}
+
+.gog-prices-options__box p a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.2s, text-decoration 0.2s;
+}
+
+.gog-prices-options__box p a:hover {
+  color: var(--secondary);
+  text-decoration: underline;
 }
 
 .gog-prices-options__actions {
@@ -108,71 +196,109 @@ p {
   justify-content: space-between;
 }
 
+/* BUTTONS */
 button {
   border: none;
   margin: 0;
   padding: 0;
   width: auto;
   overflow: visible;
-
   background: transparent;
-
-  /* inherit font & color from ancestor */
   color: inherit;
   font: inherit;
-
-  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
   line-height: normal;
-
-  /* Corrects font smoothing for webkit */
   -webkit-font-smoothing: inherit;
   -moz-osx-font-smoothing: inherit;
-
-  /* Corrects inability to style clickable `input` types in iOS */
   -webkit-appearance: none;
 }
 
-/* Remove excess padding and border in Firefox 4+ */
 button::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
 
 button {
-  color: white;
-  background-color: var(--primary);
+  color: var(--primary);
+  background-color: transparent;
+  border: 1px solid rgba(157, 93, 216, 0.4);
   cursor: pointer;
-  padding: 10px 8px;
-  border-radius: 5px;
-  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 button:hover {
+  background-color: rgba(157, 93, 216, 0.08);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
+#myBtn, #default-countries {
+  background-color: var(--primary);
+  color: #ffffff;
+  border: 1px solid var(--primary);
+  box-shadow: 0 4px 12px rgba(157, 93, 216, 0.25);
+}
+
+#myBtn:hover, #default-countries:hover {
   background-color: var(--secondary);
+  border-color: var(--secondary);
+  box-shadow: 0 6px 18px rgba(157, 93, 216, 0.4);
+  color: #ffffff;
 }
 
 button svg {
-  fill: #fff;
-  width: 20px;
+  fill: currentColor;
+  width: 18px;
+  height: 18px;
+  transition: fill 0.2s;
 }
 
 .btn-icon {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 5px 8px;
+  padding: 6px 12px;
+}
+
+#save {
+  color: white;
+  background-color: var(--success);
+  border: none;
+  padding: 12px 36px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 12px rgba(112, 171, 38, 0.25);
+}
+
+#save:hover {
+  background-color: var(--success-hover);
+  box-shadow: 0 6px 18px rgba(112, 171, 38, 0.4);
 }
 
 #status {
-  color: #009879;
-  margin-top: 10px;
+  color: var(--success);
+  margin-top: 15px;
+  font-weight: 700;
+  font-size: 14px;
+  height: 20px;
 }
 
 #lt-country-list-custom {
   margin: 0;
   font-size: 14px;
   font-weight: normal;
-  margin-bottom: 8px;
+  margin-bottom: 15px;
+  color: var(--gog-text);
 }
 
 .table-actions {
@@ -180,65 +306,99 @@ button svg {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  gap: 10px;
 }
 
 /* TABLE */
-
 .hide {
   display: none;
 }
+
 .table-editable {
   width: 100%;
   position: relative;
 }
-.table-remove svg {
-  width: 24px;
-  fill: #700;
+
+.table-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
   cursor: pointer;
 }
-.table-remove:hover svg {
-  fill: #f00;
+
+.table-remove svg {
+  width: 20px;
+  height: 20px;
+  fill: #a83232;
+  transition: fill 0.2s;
 }
+
+.table-remove:hover svg {
+  fill: #ff4d4d;
+}
+
 .table {
   border-collapse: collapse;
   margin: 0 0 25px 0;
   font-size: 0.9em;
-  font-family: sans-serif;
   min-width: 400px;
   width: inherit;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  background-color: var(--gog-card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  overflow: hidden;
 }
 
 .table .thead {
-  background-color: var(--secondary);
+  background-color: #1a1d24;
   color: #ffffff;
   text-align: left;
+  border-bottom: 2px solid var(--border-color);
 }
 
-.table th,
+.table th {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 12px 15px;
+  color: var(--gog-text-muted);
+}
+
+.table .--center {
+  text-align: center;
+}
+
+.table td {
+  padding: 8px 12px;
+  vertical-align: middle;
+  font-size: 14px;
+}
+
 .table td input {
   font-size: 14px;
-  padding: 12px 15px;
+  padding: 8px 12px;
+  background-color: #14171d !important;
+  color: var(--gog-text) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 4px !important;
+  width: 90%;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.table td input {
-  border: none;
-}
-
-.table .tbody td {
-  height: 10px;
+.table td input:focus {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 2px rgba(157, 93, 216, 0.2) !important;
 }
 
 .table .tbody {
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .table .tbody:last-of-type {
-  border-bottom: 2px solid var(--primary);
-}
-
-.table .tbody:first-of-type {
-  background-color: #123321;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .table .tbody.active-row {
@@ -247,32 +407,46 @@ button svg {
 }
 
 .table-add:disabled {
-  background-color: #b9b9b9;
+  background-color: rgba(255, 255, 255, 0.02) !important;
+  border-color: rgba(255, 255, 255, 0.05) !important;
+  color: rgba(255, 255, 255, 0.2) !important;
+  cursor: not-allowed;
 }
 
 .icon-hide-warning {
-  display: none;
+  display: none !important;
 }
 
 .icon-warning {
+  display: flex;
   position: absolute;
-  right: 10px;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
 }
+
 .icon-warning svg {
-  fill: #ff8800;
-  width: 24px;
+  fill: #ffaa00;
+  width: 20px;
+  height: 20px;
 }
 
 .table td.country-actions {
   position: relative;
   padding-right: 40px;
+  text-align: center;
+  vertical-align: middle;
 }
+
 .info-icon {
   height: 16px;
   margin-left: 5px;
+  display: inline-flex;
+  align-items: center;
 }
+
 .info-icon svg {
-  fill: #fff;
+  fill: var(--gog-text-muted);
   height: 16px;
   width: 16px;
 }
@@ -283,152 +457,368 @@ button svg {
   align-items: center;
 }
 
-/* The Modal (background) */
+/* MODAL */
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  padding-top: 80px;
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(10, 12, 16, 0.8);
+  backdrop-filter: blur(4px);
 }
 
-/* Modal Content */
 .modal-content {
   display: flex;
   flex-direction: column;
-  background-color: #fefefe;
+  background-color: var(--gog-card-bg);
   margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
+  padding: 24px;
+  border: 1px solid var(--primary);
+  border-radius: 8px;
   width: 50%;
   height: 70%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
 .modal-title {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 15px;
 }
 
-/* The Close Button */
+.modal-title p:first-of-type {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+  color: #ffffff;
+}
+
+.modal-title p:last-of-type {
+  font-size: 13px;
+  font-weight: 400;
+  margin: 0;
+  color: var(--gog-text-muted);
+}
+
 .close {
-  color: #aaaaaa;
-  float: right;
+  color: var(--gog-text-muted);
   font-size: 28px;
   font-weight: bold;
+  cursor: pointer;
+  line-height: 20px;
+  transition: color 0.2s;
 }
 
 .close:hover,
 .close:focus {
-  color: #000;
+  color: #ffffff;
   text-decoration: none;
-  cursor: pointer;
-}
-
-
-/* TABS */
-
-/**
- * Tabs
- */
- .tabs {
-	display: flex;
-	flex-wrap: wrap;
-	width: 100%;
-}
-
-.tabs label {
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 1rem 2rem;
-	margin-right: 0.0625rem;
-	cursor: pointer;
-	background-color: #000;
-	color: #fff;
-	font-family: Roboto, sans-serif;
-	font-size: 1.2rem;
-	font-weight: 700;
-	transition: background-color ease 0.3s;
-}
-
-.tabs label .material-icons {
-	margin-right: 0.3rem;
-}
-
-.tabs .tab {
-	flex-grow: 1;
-	width: 100%;
-	height: 100%;
-	display: none;
-	padding: 1rem 2rem;
-	color: #000;
-	background-color: #fff;
-	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.4);
-}
-
-.tabs .tab > *:not(:last-child) {
-	margin-bottom: 0.8rem;
-}
-
-.tabs [type=radio] {
-	display: none;
-}
-
-.tabs [type=radio]:checked + label {
-	background-color: #fff;
-	color: var(--secondary);
-	border-top: 4px solid var(--primary);
-	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.4);
-}
-
-.tabs [type=radio]:checked + label + .tab {
-	display: block;
 }
 
 .modal-table {
   width: 100%;
-  overflow: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
+  flex-grow: 1;
 }
 
 .modal-table td {
-  padding: 4px 15px;
+  padding: 8px 15px;
 }
 
-@media (min-width: 768px) {
+/* TABS */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
 
-	body {
-		font-size: 1.125rem;
-	}
+.tabs>label {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 24px;
+  margin-right: 2px;
+  cursor: pointer;
+  background-color: #1a1d24;
+  color: var(--gog-text-muted);
+  font-family: "Saira", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: background-color 0.2s, color 0.2s, border-top 0.2s;
+  border-top: 4px solid transparent;
+  border-radius: 4px 4px 0 0;
+}
 
-	.tabs-container {
-		padding: 4rem 4rem;
-	}
+.tabs label .material-icons {
+  margin-right: 0.3rem;
+}
 
-	.tabs label {
-		order: 1;
-		width: auto;
-	}
+.tabs .tab {
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+  display: none;
+  padding: 24px;
+  color: var(--gog-text);
+  background-color: var(--gog-card-bg);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 0 0 6px 6px;
+  border: 1px solid var(--border-color);
+  border-top: none;
+}
 
-	.tabs .tab {
-		order: 9;
-	}
+.tabs .tab>*:not(:last-child) {
+  margin-bottom: 1.2rem;
+}
 
-	.tabs [type=radio]:checked + label {
-		border-bottom: none;
-	}
+.tabs>[type=radio] {
+  display: none;
+}
+
+.tabs>[type=radio]:checked+label {
+  background-color: var(--gog-card-bg);
+  color: var(--primary);
+  border-top: 4px solid var(--primary);
+}
+
+.tabs>[type=radio]:checked+label+.tab {
+  display: block;
+}
+
+/* Options general */
+.gog-prices-options__option {
+  width: 100%;
+  padding-bottom: 25px;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 14px !important;
+}
+
+/* Select dropbox with search */
+.gog-prices-options__secondary {
+  margin: 20px 40px;
+}
+
+.gog-prices-options__secondary>div {
+  margin-bottom: 15px;
+}
+
+.gog-prices-options__primary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gog-prices-options__primary input[type="checkbox"] {
+  accent-color: var(--primary);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.gog-prices-options__secondary input[type="radio"] {
+  accent-color: var(--primary);
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.dropInputButton {
+  display: flex;
+  align-items: center;
+  position: relative;
+  max-width: 100%;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.dropInputButton_input {
+  font-size: 13px;
+  padding: 8px 12px;
+  width: 100%;
+  outline: none;
+  background: #14171d !important;
+  color: var(--gog-text) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  padding-right: 35px;
+  cursor: pointer;
+}
+
+.dropInputButton_input:focus {
+  background: #14171d !important;
+  border-color: var(--primary) !important;
+}
+
+.svg_icon {
+  position: absolute;
+  right: 12px;
+  fill: var(--primary);
+  width: 14px;
+  height: 14px;
+}
+
+.svg_icon_down {
+  display: block;
+}
+
+.svg_icon_up {
+  display: none;
+}
+
+#searchInput {
+  box-sizing: border-box;
+  font-size: 14px;
+  padding: 8px 12px;
+  background-color: #14171d !important;
+  color: #ffffff !important;
+  border: none;
+  border-bottom: 1px solid var(--border-color) !important;
+  width: 100%;
+  outline: none;
+}
+
+#searchInput:focus {
+  border-bottom: 1px solid var(--primary) !important;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  min-width: 120px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #1a1d24;
+  min-width: 230px;
+  overflow: auto;
+  border: 1px solid var(--primary) !important;
+  border-radius: 4px;
+  z-index: 10;
+  top: calc(100% + 4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+.dropdown.disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.dropdown.disabled div input {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  color: var(--gog-text-muted) !important;
+  border-color: var(--border-color) !important;
+}
+
+#exchange-list {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.dropdown-content p {
+  font-size: 13px;
+  color: var(--gog-text);
+  padding: 8px 16px;
+  margin: 0;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.dropdown p:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.dropdown-content p.selected {
+  background-color: var(--primary) !important;
+  color: white !important;
+}
+
+.exchange-disclamer-container {
+  margin-top: 15px;
+}
+
+.exchange-disclamer {
+  font-size: 12px;
+  font-weight: normal;
+  color: var(--gog-text-muted);
+  line-height: 1.5;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.support {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.support-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background-color: #1a1d24;
+  padding: 5px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.support-img:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.support-img img {
+  width: 160px;
+  height: 40px;
+  object-fit: contain;
 }
 
 /* Media Query */
+@media (min-width: 768px) {
+  .tabs-container {
+    padding: 2rem 2rem;
+  }
+
+  .tabs label {
+    order: 1;
+    width: auto;
+  }
+
+  .tabs .tab {
+    order: 9;
+  }
+
+  .tabs [type=radio]:checked+label {
+    border-bottom: none;
+  }
+}
 
 @media only screen and (max-width: 1600px) {
   .gog-prices-options {
@@ -446,9 +836,10 @@ button svg {
   .gog-prices-options {
     width: 100%;
   }
+
   .gog-prices-options__main {
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 
@@ -459,26 +850,145 @@ button svg {
 
   .gog-prices-options__main-options {
     justify-content: center;
+    flex-direction: column;
   }
 
   .gog-prices-options__option-countries {
-    align-items: center;
+    align-items: stretch;
   }
 
   .gog-prices-options__countries-main {
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
   }
 
   .gog-prices-options__custom-countries-opt {
     width: 100%;
-    max-width: 469px;
+    max-width: none;
   }
 
   .gog-prices-options__custom-countries {
     width: 100%;
-    align-items: center;
-    justify-content: center;
-    margin-top: 40px;
+    margin-top: 30px;
   }
+}
+
+/* Confirmation Modal Specific Styles */
+.confirm-modal-content {
+  max-width: 450px;
+  height: auto;
+  min-height: 200px;
+  margin: 10% auto;
+}
+
+.confirm-modal-body {
+  margin-top: 10px;
+  margin-bottom: 24px;
+}
+
+.confirm-modal-body p {
+  color: var(--gog-text-muted);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.confirm-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.btn-secondary {
+  border: 1px solid var(--border-color) !important;
+  color: var(--gog-text-muted) !important;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  color: #ffffff !important;
+  border-color: var(--gog-text-muted) !important;
+}
+
+.btn-danger {
+  background-color: var(--danger) !important;
+  color: #ffffff !important;
+  border: 1px solid var(--danger) !important;
+  box-shadow: 0 4px 12px rgba(184, 60, 60, 0.25) !important;
+}
+
+.btn-danger:hover {
+  background-color: var(--danger-hover) !important;
+  border-color: var(--danger-hover) !important;
+  box-shadow: 0 6px 18px rgba(184, 60, 60, 0.4) !important;
+}
+
+.country-selector {
+  accent-color: var(--primary);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.country-selector:hover {
+  transform: scale(1.1);
+}
+
+.modal-search {
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.modal-search input {
+  box-sizing: border-box;
+  font-size: 14px;
+  padding: 10px 14px;
+  background-color: #14171d !important;
+  color: #ffffff !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 4px !important;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.modal-search input:focus {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 2px rgba(157, 93, 216, 0.2) !important;
+}
+
+/* Clarifications Section */
+.clarifications-container {
+  margin-bottom: 10px;
+  padding: 20px 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.clarifications-title {
+  color: var(--primary);
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 14px;
+}
+
+.clarifications-list {
+  padding-left: 20px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.clarifications-list li {
+  line-height: 1.6;
+  color: #ffffff;
+  font-family: "Roboto", "Segoe UI", sans-serif;
+  font-size: 14px;
+}
+
+.clarifications-list li::marker {
+  color: var(--primary);
+  font-weight: 700;
 }

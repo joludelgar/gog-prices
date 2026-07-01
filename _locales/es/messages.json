@@ -91,5 +91,62 @@
     },
     "saveChangesMessage": {
       "message": "Opciones guardadas. Recarga la página para ver los cambios."
+    },
+    "exchangeTooltip": {
+      "message": "Precio estimado"
+    },
+    "translations": {
+      "message": "Si quieres ver la extensión en tu idioma o si has visto algún error en la traducción, por favor ayúdame en:"
+    },
+    "exchangeShowCheck": {
+      "message": "Mostrar conversor de precios con el tipo de cambio actual (precios estimados*):"
+    },
+    "exchangeLocalRadio": {
+      "message": "Moneda de la tienda donde te encuentres (Si la moneda es USD no se mostrará)"
+    },
+    "exchangeCustomRadio": {
+      "message": "Moneda personalizada:"
+    },
+    "exchangeInfo": {
+      "message": "Conversor de precios de <a href='https://github.com/fawazahmed0/exchange-api'>@fawazahmed0</a>. Fecha del conversor: <span id='exchangeDate'></span>."
+    },
+    "exchangeDisclamer": {
+      "message": "*Los precios finales pueden variar dependiendo del tipo de conversión del metodo de pago elegido."
+    },
+    "moreCountries": {
+      "message": "Otros países"
+    },
+    "confirmResetTitle": {
+      "message": "Confirmar restablecimiento"
+    },
+    "confirmResetWarning": {
+      "message": "Advertencia: Se borrarán los países personalizados."
+    },
+    "confirmResetDesc": {
+      "message": "¿Estás seguro de que deseas restablecer los países por defecto? Se borrarán los valores de la tabla personalizada de países."
+    },
+    "btnCancel": {
+      "message": "Cancelar"
+    },
+    "btnConfirm": {
+      "message": "Confirmar"
+    },
+    "tableSelect": {
+      "message": "Seleccionar"
+    },
+    "searchPlaceholder": {
+      "message": "Buscar países..."
+    },
+    "clarificationsTitle": {
+      "message": "Aclaraciones:"
+    },
+    "clarification1": {
+      "message": "Esta extensión no usa ni recopila ningún dato del usuario."
+    },
+    "clarification2": {
+      "message": "Los precios que se muestran están directamente sacados de la API de GOG, exceptuando el precio estimado."
+    },
+    "clarification3": {
+      "message": "Si estás conectado desde una VPN y uno de los precios no coincide con el indicado, asegúrate de que estás conectado al mercado deseado. Si verificas que el precio es incorrecto, házmelo saber con los máximos detalles posibles: VPN usada, mercado, captura de pantalla, etc... e intentaré averiguar por qué se produce el error."
     }
   }

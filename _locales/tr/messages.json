@@ -1,35 +1,152 @@
 {
     "appName": {
-      "message": "GOG Prices"
+        "message": "GOG Prices"
     },
     "appDesc": {
-      "message": "Gog'daki bölgesel fiyatları gösterir."
+        "message": "Gog'daki bölgesel fiyatları gösterir."
     },
     "loading": {
-      "message": "GOG fiyatları güncelleniyor..."
+        "message": "GOG fiyatları güncelleniyor..."
     },
     "notAvailable": {
-      "message": "Kullanılabilir değil"
+        "message": "Kullanılabilir değil"
     },
     "tooltipNotAvailable": {
-      "message": "Bu bölgeden satın alımlara şu anda izin verilmiyor."
+        "message": "Bu bölgeden satın alımlara şu anda izin verilmiyor."
     },
     "btnShowAll": {
-      "message": "Tümünü göster"
+        "message": "Tümünü göster"
     },
     "comingSoon": {
-      "message": "Çok yakında"
+        "message": "Çok yakında"
     },
     "regionRU": {
-      "message": "Rusya"
+        "message": "Rusya"
     },
     "regionUA": {
-      "message": "Ukrayna"
+        "message": "Ukrayna"
     },
     "regionBR": {
-      "message": "Brezilya"
+        "message": "Brezilya"
     },
     "regionCN": {
-      "message": "Çin"
+        "message": "Çin"
+    },
+    "options": {
+        "message": "Ayarlar"
+    },
+    "optionCountriesList": {
+        "message": "Ülke listesi"
+    },
+    "optionGeneral": {
+        "message": "Ayarlar"
+    },
+    "optionInfo": {
+        "message": "Bilgi"
+    },
+    "countryListCustom": {
+        "message": "Bu listeye ekleyerek görüntülenmesini istediğiniz ülkeleri özelleştirebilirsiniz. Listede değişiklik yaptığınızda varsayılan ülkeler değiştirilecektir. Varsayılan ülkelere geri dönmek isterseniz 'Varsayılan ülkeleri sıfırla' seçeneğini kullanabilirsiniz. Ayrıca 'Ülke kodlarını göster' seçeneğine tıklayarak ülke kodlarını görüntüleyebilirsiniz."
+    },
+    "titleListCustom": {
+        "message": "Özel ülke listesi"
+    },
+    "tableCountryName": {
+        "message": "Ülke Adı"
+    },
+    "tableCountryCode": {
+        "message": "Ülke Kodu"
+    },
+    "tableCountryCodeInfo": {
+        "message": "Ülke kodunun doğru girilmesi önemlidir. Bu kod, ilgili ülkeyi ve fiyatı belirtmekle yükümlüdür."
+    },
+    "inputCountry": {
+        "message": "Ülke"
+    },
+    "inputCode": {
+        "message": "Kod"
+    },
+    "btnShowCountryCodes": {
+        "message": "Ülke Kodlarını Göster"
+    },
+    "btnResetDefault": {
+        "message": "Varsayılan ülkeleri sıfırla"
+    },
+    "btnAddRow": {
+        "message": "Satır ekle"
+    },
+    "contact": {
+        "message": "Herhangi bir öneri, sorun veya bilgi için lütfen benimle iletişime geçin:"
+    },
+    "website": {
+        "message": "Uzantı web sitesi:"
+    },
+    "btnSave": {
+        "message": "Değişiklikleri kaydet"
+    },
+    "modalTitle": {
+        "message": "Ülkelerin ISO Kodu Alpha-2"
+    },
+    "modalDesc": {
+        "message": "Ülke kodunu seçip değeri kopyalamak için Ctrl+C / ⌘+C tuşlarına basın"
+    },
+    "saveChangesMessage": {
+        "message": "Ayarlar kaydedildi. Değişiklikleri görmek için sayfayı yenileyin."
+    },
+    "exchangeTooltip": {
+        "message": "Tahmini fiyat"
+    },
+    "translations": {
+        "message": "Uzantıyı kendi dilinizde görmek istiyorsanız veya çeviride bir hata gördüyseniz, lütfen bana yardımcı olun:"
+    },
+    "exchangeShowCheck": {
+        "message": "Fiyat dönüştürücüyü güncel döviz kuru ile göster (tahmini fiyatlar*):"
+    },
+    "exchangeLocalRadio": {
+        "message": "Bulunduğunuz mağazanın para birimi (Para birimi USD ise gösterilmeyecektir)"
+    },
+    "exchangeCustomRadio": {
+        "message": "Özel para birimi:"
+    },
+    "exchangeInfo": {
+        "message": "<a href='https://github.com/fawazahmed0/exchange-api'>@fawazahmed0</a> tarafından sunulan döviz dönüştürücü. Döviz tarihi: <span id='exchangeDate'></span>."
+    },
+    "exchangeDisclamer": {
+        "message": "*Seçilen ödeme yönteminin dönüştürme oranına bağlı olarak nihai fiyatlar değişiklik gösterebilir."
+    },
+    "moreCountries": {
+        "message": "Diğer ülkeler"
+    },
+    "confirmResetTitle": {
+        "message": "Sıfırlamayı Onayla"
+    },
+    "confirmResetWarning": {
+        "message": "Uyarı: Özel ülkeler temizlenecektir."
+    },
+    "confirmResetDesc": {
+        "message": "Varsayılan ülkelere sıfırlamak istediğinizden emin misiniz? Özel ülkeler tablosunun değerleri temizlenecektir."
+    },
+    "btnCancel": {
+        "message": "İptal"
+    },
+    "btnConfirm": {
+        "message": "Onayla"
+    },
+    "tableSelect": {
+        "message": "Seç"
+    },
+    "searchPlaceholder": {
+        "message": "Ülkeleri ara..."
+    },
+    "clarificationsTitle": {
+        "message": "Açıklamalar:"
+    },
+    "clarification1": {
+        "message": "Bu uzantı herhangi bir kullanıcı verisi kullanmaz veya toplamaz."
+    },
+    "clarification2": {
+        "message": "Gösterilen fiyatlar, tahmini fiyat hariç olmak üzere doğrudan GOG API'sinden alınmıştır."
+    },
+    "clarification3": {
+        "message": "Bir VPN ile bağlıysanız ve fiyatlardan biri belirtilenle eşleşmiyorsa, istediğiniz pazara bağlı olduğunuzdan emin olun. Fiyatın yanlış olduğunu doğrularsanız, lütfen bana mümkün olduğunca çok ayrıntıyla bildirin: kullanılan VPN, pazar, ekran görüntüsü vb... ben de hatanın neden oluştuğunu bulmaya çalışacağım."
     }
-  }
+}

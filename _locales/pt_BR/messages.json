@@ -1,35 +1,152 @@
 {
     "appName": {
-      "message": "GOG Prices"
+        "message": "GOG Prices"
     },
     "appDesc": {
-      "message": "Exibir os preços regionais no GOG."
+        "message": "Exibir os preços regionais no GOG."
     },
     "loading": {
-      "message": "Carregando preços do GOG..."
+        "message": "Carregando preços do GOG..."
     },
     "notAvailable": {
-      "message": "Indisponível"
+        "message": "Indisponível"
     },
     "tooltipNotAvailable": {
-      "message": "Compras indisponíveis nessa região."
+        "message": "Compras indisponíveis nessa região."
     },
     "btnShowAll": {
-      "message": "Mostrar todos"
+        "message": "Mostrar todos"
     },
     "comingSoon": {
-      "message": "Em breve"
+        "message": "Em breve"
     },
     "regionRU": {
-      "message": "Rússia"
+        "message": "Rússia"
     },
     "regionUA": {
-      "message": "Ucrânia"
+        "message": "Ucrânia"
     },
     "regionBR": {
-      "message": "Brasil"
+        "message": "Brasil"
     },
     "regionCN": {
-      "message": "China"
+        "message": "China"
+    },
+    "options": {
+        "message": "Configurações"
+    },
+    "optionCountriesList": {
+        "message": "Lista de Países"
+    },
+    "optionGeneral": {
+        "message": "Configurações"
+    },
+    "optionInfo": {
+        "message": "Informação"
+    },
+    "countryListCustom": {
+        "message": "Você pode personalizar os países que deseja que sejam exibidos adicionando-os a esta lista. Quando você fizer alterações na lista, os países padrão serão substituídos. Se você quiser retornar aos países padrão, você pode 'Redefinir países padrão'. Você também pode visualizar os códigos de país clicando em 'Mostrar códigos de país'."
+    },
+    "titleListCustom": {
+        "message": "Lista de países personalizados"
+    },
+    "tableCountryName": {
+        "message": "Nome do País"
+    },
+    "tableCountryCode": {
+        "message": "Código do País"
+    },
+    "tableCountryCodeInfo": {
+        "message": "É importante indicar corretamente o código do país. Este código é responsável por indicar o país e preço correspondentes."
+    },
+    "inputCountry": {
+        "message": "País"
+    },
+    "inputCode": {
+        "message": "Código"
+    },
+    "btnShowCountryCodes": {
+        "message": "Mostrar código do país"
+    },
+    "btnResetDefault": {
+        "message": "Redefinir países padrão"
+    },
+    "btnAddRow": {
+        "message": "Adicionar linha"
+    },
+    "contact": {
+        "message": "Para quaisquer sugestões, problemas ou informações, entre em contato comigo"
+    },
+    "website": {
+        "message": "Extension website:"
+    },
+    "btnSave": {
+        "message": "Salvar alterações"
+    },
+    "modalTitle": {
+        "message": "Código ISO Alpha-2 dos países"
+    },
+    "modalDesc": {
+        "message": "Selecione o código do país e Ctrl+C / ⌘+C para copiar o valor"
+    },
+    "saveChangesMessage": {
+        "message": "Opções salvas. Recarregue a página para ver as alterações."
+    },
+    "exchangeTooltip": {
+        "message": "Preço estimado"
+    },
+    "translations": {
+        "message": "Se você quiser ver a extensão no seu idioma ou se encontrou algum erro na tradução, por favor me ajude em:"
+    },
+    "exchangeShowCheck": {
+        "message": "Mostrar conversor de preços com a taxa de câmbio atual (preços estimados*):"
+    },
+    "exchangeLocalRadio": {
+        "message": "Moeda da loja onde você se encontra (Se a moeda for USD ela não será exibida)"
+    },
+    "exchangeCustomRadio": {
+        "message": "Moeda personalizada:"
+    },
+    "exchangeInfo": {
+        "message": "Conversor de moedas de <a href='https://github.com/fawazahmed0/exchange-api'>@fawazahmed0</a>. Data do conversor: <span id='exchangeDate'></span>."
+    },
+    "exchangeDisclamer": {
+        "message": "*Os preços finais podem variar dependendo da taxa de conversão do método de pagamento escolhido."
+    },
+    "moreCountries": {
+        "message": "Outros países"
+    },
+    "confirmResetTitle": {
+        "message": "Confirmar Restauração"
+    },
+    "confirmResetWarning": {
+        "message": "Aviso: Os países personalizados serão limpos."
+    },
+    "confirmResetDesc": {
+        "message": "Tem certeza de que deseja restaurar os países padrão? Os valores da tabela de países personalizados serão limpos."
+    },
+    "btnCancel": {
+        "message": "Cancelar"
+    },
+    "btnConfirm": {
+        "message": "Confirmar"
+    },
+    "tableSelect": {
+        "message": "Selecionar"
+    },
+    "searchPlaceholder": {
+        "message": "Buscar países..."
+    },
+    "clarificationsTitle": {
+        "message": "Esclarecimentos:"
+    },
+    "clarification1": {
+        "message": "Esta extensão não usa nem coleta nenhum dado do usuário."
+    },
+    "clarification2": {
+        "message": "Os preços mostrados são obtidos diretamente da API do GOG, com exceção do preço estimado."
+    },
+    "clarification3": {
+        "message": "Se você estiver conectado a uma VPN e um dos preços não coincidir com o indicado, certifique-se de estar conectado ao mercado desejado. Se você verificar que o preço está incorreto, por favor me avise com o máximo de detalhes possível: VPN usada, mercado, captura de tela, etc... e tentarei descobrir o motivo do erro."
     }
-  }
+}

@@ -3,17 +3,19 @@
     "name": "__MSG_appName__",
     "description": "__MSG_appDesc__",
     "default_locale": "en",
-    "version": "0.1.1",
+    "version": "1.0",
     "action": {
         "default_icon": "assets/gog-prices-icon48.png"
     },
-    "icons": { 
+    "icons": {
         "16": "assets/gog-prices-icon16.png",
         "48": "assets/gog-prices-icon48.png",
-        "128": "assets/gog-prices-icon128.png" 
+        "128": "assets/gog-prices-icon128.png"
     },
     "host_permissions": [
-        "*://*.gog.com/*"
+        "*://*.gog.com/*",
+        "https://cdn.jsdelivr.net/",
+        "https://latest.currency-api.pages.dev/"
     ],
     "permissions": [
         "storage"
@@ -21,15 +23,26 @@
     "options_page": "options/options.html",
     "web_accessible_resources": [
         {
-          "resources": [ "options/*" ],
-          "matches": [ "<all_urls>" ]
+            "resources": [
+                "options/*"
+            ],
+            "matches": [
+                "*://*.gog.com/*"
+            ]
         }
     ],
     "content_scripts": [
         {
-            "js": ["scripts/bg.js"],
-            "css": ["styles/styles.css"],
-            "matches": ["*://*.gog.com/*"]
+            "js": [
+                "scripts/commonCurrencies.js",
+                "scripts/content.js"
+            ],
+            "css": [
+                "styles/styles.css"
+            ],
+            "matches": [
+                "*://*.gog.com/*"
+            ]
         }
     ]
 }
