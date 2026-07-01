@@ -89,6 +89,15 @@
     "modalDesc": {
       "message": "Selecciona el código del país y Ctrl+C / ⌘+C para copiar el valor"
     },
+    "languageLabel": {
+      "message": "Idioma:"
+    },
+    "languageBrowserDefault": {
+      "message": "Idioma del navegador"
+    },
+    "currencyExchangeTitle": {
+      "message": "Cambio de moneda"
+    },
     "saveChangesMessage": {
       "message": "Opciones guardadas. Recarga la página para ver los cambios."
     },

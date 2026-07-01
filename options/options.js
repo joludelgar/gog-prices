@@ -7,7 +7,8 @@ const defaultOptions = {
 	"exchangeShow": false,
 	"exchangeLocal": true,
 	"exchangeCustom": false,
-	"exchangeCustomCurrency": "EUR"
+	"exchangeCustomCurrency": "EUR",
+	"language": "default"
 };
 const unavailableCountries = ["RU", "BY"];
 
@@ -18,6 +19,35 @@ let initialState = {
 
 // Cross-browser storage wrapper (Chrome / Firefox)
 const ext = typeof browser !== "undefined" ? browser : chrome;
+
+let localeMessages = null;
+
+async function loadLocaleMessages(lang) {
+    if (!lang || lang === "default") {
+        localeMessages = null;
+        return;
+    }
+    try {
+        const url = ext.runtime.getURL(`_locales/${lang}/messages.json`);
+        const response = await fetch(url);
+        if (response.ok) {
+            localeMessages = await response.json();
+        } else {
+            console.warn(`Failed to load locale messages for ${lang}: ${response.status}`);
+            localeMessages = null;
+        }
+    } catch (e) {
+        console.error(`Error loading locale messages for ${lang}:`, e);
+        localeMessages = null;
+    }
+}
+
+function getMessage(key) {
+    if (localeMessages && localeMessages[key] && localeMessages[key].message !== undefined) {
+        return localeMessages[key].message;
+    }
+    return ext.i18n.getMessage(key);
+}
 
 const getStorage = (keys) => {
     return new Promise((resolve) => {
@@ -453,12 +483,14 @@ function parseOptions() {
 	const exchangeLocalEl = document.getElementById("exchange-local");
 	const exchangeCustomEl = document.getElementById("exchange-custom");
 	const exchangeCustomCurrencyEl = document.getElementById("exchange-custom-currency");
+	const languageSelectEl = document.getElementById("language-select");
 
 	return {
 		"exchangeShow": exchangeShowEl.checked,
 		"exchangeLocal": exchangeLocalEl.checked,
 		"exchangeCustom": exchangeCustomEl.checked,
-		"exchangeCustomCurrency": exchangeCustomCurrencyEl.value
+		"exchangeCustomCurrency": exchangeCustomCurrencyEl.value,
+		"language": languageSelectEl ? languageSelectEl.value : "default"
 	};
 }
 
@@ -467,11 +499,13 @@ function setOptions(options) {
 	const exchangeLocalEl = document.getElementById("exchange-local");
 	const exchangeCustomEl = document.getElementById("exchange-custom");
 	const exchangeCustomCurrencyEl = document.getElementById("exchange-custom-currency");
+	const languageSelectEl = document.getElementById("language-select");
 
 	if (exchangeShowEl) exchangeShowEl.checked = options.exchangeShow;
 	if (exchangeLocalEl) exchangeLocalEl.checked = options.exchangeLocal;
 	if (exchangeCustomEl) exchangeCustomEl.checked = options.exchangeCustom;
 	if (exchangeCustomCurrencyEl) exchangeCustomCurrencyEl.value = options.exchangeCustomCurrency;
+	if (languageSelectEl) languageSelectEl.value = options.language || "default";
 }
 
 /**
@@ -494,7 +528,8 @@ const areOptionsEqual = (opt1, opt2) => {
 	return opt1.exchangeShow === opt2.exchangeShow &&
 		opt1.exchangeLocal === opt2.exchangeLocal &&
 		opt1.exchangeCustom === opt2.exchangeCustom &&
-		opt1.exchangeCustomCurrency === opt2.exchangeCustomCurrency;
+		opt1.exchangeCustomCurrency === opt2.exchangeCustomCurrency &&
+		opt1.language === opt2.language;
 };
 
 const isStateDirty = () => {
@@ -518,13 +553,13 @@ const updateWarningBannerVisibility = () => {
 let exchangeData, exchangeCommon;
 
 const loadOptionsLiterals = () => {
-	document.title = "GOG Prices - " + ext.i18n.getMessage("options");
+	document.title = "GOG Prices - " + getMessage("options");
 	
 	const tableHeadCountryCode = document.getElementById("lt-table-head-country-code");
 	if (tableHeadCountryCode) {
 		tableHeadCountryCode.innerHTML = 
-		`<span class="cell-icon">${ext.i18n.getMessage("tableCountryCode")}
-			<span class="info-icon" title="${ext.i18n.getMessage("tableCountryCodeInfo")}">
+		`<span class="cell-icon">${getMessage("tableCountryCode")}
+			<span class="info-icon" title="${getMessage("tableCountryCodeInfo")}">
 				<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
 					<path d="M478-240q21 0 35.5-14.5T528-290q0-21-14.5-35.5T478-340q-21 0-35.5 14.5T428-290q0 21 14.5 35.5T478-240Zm-36-154h74q0-33 7.5-52t42.5-52q26-26 41-49.5t15-56.5q0-56-41-86t-97-30q-57 0-92.5 30T342-618l66 26q5-18 22.5-39t53.5-21q32 0 48 17.5t16 38.5q0 20-12 37.5T506-526q-44 39-54 59t-10 73Zm38 314q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/>
 				</svg>
@@ -533,21 +568,21 @@ const loadOptionsLiterals = () => {
 	}
 
 	document.querySelectorAll(".country-name").forEach((input) => {
-		input.placeholder = ext.i18n.getMessage("inputCountry") + "*";
+		input.placeholder = getMessage("inputCountry") + "*";
 	});
 	document.querySelectorAll(".country-code").forEach((input) => {
-		input.placeholder = ext.i18n.getMessage("inputCode") + "*";
+		input.placeholder = getMessage("inputCode") + "*";
 	});
 	const modalSearchInput = document.getElementById("modalSearchInput");
 	if (modalSearchInput) {
-		const placeholderMsg = ext.i18n.getMessage("searchPlaceholder");
+		const placeholderMsg = getMessage("searchPlaceholder");
 		if (placeholderMsg) {
 			modalSearchInput.placeholder = placeholderMsg;
 		}
 	}
 
 	document.querySelectorAll("[data-locale]").forEach((el) => {
-		const message = ext.i18n.getMessage(el.dataset.locale);
+		const message = getMessage(el.dataset.locale);
 		if (message) {
 			el.innerHTML = message;
 		}
@@ -572,10 +607,14 @@ const saveOptions = async (e, countriesDefault) => {
 		if (typeof updateWarningBannerVisibility === "function") {
 			updateWarningBannerVisibility();
 		}
+
+		// Dynamically reload locale messages and update UI
+		await loadLocaleMessages(optionsJSON.language);
+		loadOptionsLiterals();
 		
 		const status = document.getElementById("status");
 		if (status) {
-			status.textContent = ext.i18n.getMessage("saveChangesMessage");
+			status.textContent = getMessage("saveChangesMessage");
 			setTimeout(() => {
 				status.textContent = "";
 			}, 5000);
@@ -621,18 +660,31 @@ const initializeModalSelectors = () => {
 
 // Restores select box and checkbox state using the preferences
 async function restoreOptions() {
+	let customLang = "default";
+	let st = null;
+
+	try {
+		st = await getStorage({
+			"countriesCustom": defaultCountries,
+			"gogPricesOptions": defaultOptions
+		});
+
+		if (st.gogPricesOptions && st.gogPricesOptions.language) {
+			customLang = st.gogPricesOptions.language;
+		}
+	} catch (error) {
+		console.error("Error retrieving options from storage during restore:", error);
+	}
+
+	await loadLocaleMessages(customLang);
+
 	loadOptionsLiterals();
 	loadModal();
 	loadFormCountry();
 	loadConfirmResetModal();
 	initializeModalSelectors();
 
-	try {
-		const st = await getStorage({
-			"countriesCustom": defaultCountries,
-			"gogPricesOptions": defaultOptions
-		});
-
+	if (st) {
 		if (st.countriesCustom && st.countriesCustom.length > 0) {
 			setTableData(st.countriesCustom);
 		}
@@ -640,12 +692,10 @@ async function restoreOptions() {
 		if (st.gogPricesOptions) {
 			setOptions(st.gogPricesOptions);
 		}
-		
-		checkExchangeTypeAllow();
-		syncModalCheckboxes();
-	} catch (error) {
-		console.error("Error restoring options:", error);
 	}
+	
+	checkExchangeTypeAllow();
+	syncModalCheckboxes();
 
 	await getExchangeCurrency();
 

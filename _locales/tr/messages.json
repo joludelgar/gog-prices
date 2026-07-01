@@ -151,5 +151,14 @@
     },
     "unsavedWarningMessage": {
         "message": "Uyarı: Kaydedilmemiş yapılandırma değişiklikleri yaptınız. Değişiklikleri uygulamak için DEĞİŞİKLİKLERİ KAYDET düğmesine tıklamayı unutmayın. GOG'daki değişiklikleri görmek için sayfayı yenileyin."
+    },
+    "languageLabel": {
+        "message": "Dil:"
+    },
+    "languageBrowserDefault": {
+        "message": "Tarayıcı varsayılanı"
+    },
+    "currencyExchangeTitle": {
+        "message": "Para birimi değişimi"
     }
 }

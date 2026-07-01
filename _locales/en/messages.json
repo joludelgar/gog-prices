@@ -151,5 +151,14 @@
     },
     "unsavedWarningMessage": {
       "message": "Warning: You have unsaved configuration changes. Remember to click SAVE CHANGES to apply the changes. To see the changes on GOG, refresh the page."
+    },
+    "languageLabel": {
+      "message": "Language:"
+    },
+    "languageBrowserDefault": {
+      "message": "Browser default"
+    },
+    "currencyExchangeTitle": {
+      "message": "Currency exchange"
     }
   }

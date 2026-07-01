@@ -151,5 +151,14 @@
     },
     "unsavedWarningMessage": {
         "message": "Avertissement : vous avez effectué des modifications de configuration non enregistrées. N'oubliez pas de cliquer sur ENREGISTRER LES MODIFICATIONS pour appliquer les modifications. Pour voir les modifications sur GOG, actualisez la page."
+    },
+    "languageLabel": {
+        "message": "Langue :"
+    },
+    "languageBrowserDefault": {
+        "message": "Langue par défaut du navigateur"
+    },
+    "currencyExchangeTitle": {
+        "message": "Change de devises"
     }
 }

@@ -151,5 +151,14 @@
     },
     "unsavedWarningMessage": {
         "message": "警告：您有未保存的配置更改。请记得点击“保存修改”以应用更改。要在 GOG 上查看更改，请刷新页面。"
+    },
+    "languageLabel": {
+        "message": "语言："
+    },
+    "languageBrowserDefault": {
+        "message": "浏览器默认语言"
+    },
+    "currencyExchangeTitle": {
+        "message": "货币兑换"
     }
 }

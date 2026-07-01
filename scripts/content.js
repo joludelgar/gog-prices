@@ -1,35 +1,102 @@
-const LITERALS = {
-    notAvailable: chrome.i18n.getMessage("notAvailable"),
-    tooltipNotAvailable: chrome.i18n.getMessage("tooltipNotAvailable")
+// Cross-browser storage wrapper (Chrome / Firefox)
+const ext = typeof browser !== "undefined" ? browser : chrome;
+
+let localeMessages = null;
+
+async function loadLocaleMessages(lang) {
+    if (!lang || lang === "default") {
+        localeMessages = null;
+        return;
+    }
+    try {
+        const url = ext.runtime.getURL(`_locales/${lang}/messages.json`);
+        const response = await fetch(url);
+        if (response.ok) {
+            localeMessages = await response.json();
+        } else {
+            console.warn(`Failed to load locale messages for ${lang}: ${response.status}`);
+            localeMessages = null;
+        }
+    } catch (e) {
+        console.error(`Error loading locale messages for ${lang}:`, e);
+        localeMessages = null;
+    }
+}
+
+function getMessage(key) {
+    if (localeMessages && localeMessages[key] && localeMessages[key].message !== undefined) {
+        return localeMessages[key].message;
+    }
+    return ext.i18n.getMessage(key);
+}
+
+let LITERALS = {
+    notAvailable: "",
+    tooltipNotAvailable: ""
 };
+
+function initLiterals() {
+    LITERALS.notAvailable = getMessage("notAvailable");
+    LITERALS.tooltipNotAvailable = getMessage("tooltipNotAvailable");
+}
+
 const CURRENCY_DEFAULT = { code: "USD", symbol: "$" };
 
 let countries = [
     {
-        name: chrome.i18n.getMessage("regionBR"),
+        name: "",
+        localeKey: "regionBR",
         code: "BR",
         status: "ok",
         currency: "BRL"
     },
     {
-        name: chrome.i18n.getMessage("regionUA"),
+        name: "",
+        localeKey: "regionUA",
         code: "UA",
         status: "ok",
         currency: "UAH"
     },
     {
-        name: chrome.i18n.getMessage("regionRU"),
+        name: "",
+        localeKey: "regionRU",
         code: "RU",
         status: "ko",
         currency: "RUB"
     },
     {
-        name: chrome.i18n.getMessage("regionCN"),
+        name: "",
+        localeKey: "regionCN",
         code: "CN",
         status: "ok",
         currency: "CNY"
     }
 ];
+
+function translateDefaultCountries() {
+    countries.forEach(country => {
+        if (country.localeKey) {
+            country.name = getMessage(country.localeKey);
+        }
+    });
+}
+
+function translateContainer() {
+    const loadingTextEl = document.querySelector("#gog-prices_loading p");
+    if (loadingTextEl) {
+        loadingTextEl.textContent = getMessage("loading");
+    }
+
+    const optionsBtn = document.getElementById("gog-prices_btn-options");
+    if (optionsBtn) {
+        optionsBtn.title = getMessage("options");
+    }
+
+    const showMoreBtn = document.getElementById("gog-prices_btn-show-more");
+    if (showMoreBtn) {
+        showMoreBtn.textContent = getMessage("btnShowAll");
+    }
+}
 
 const statusPriority = {
     "ok": 1,
@@ -39,9 +106,6 @@ const statusPriority = {
 let prices = [];
 let userSettings, currentStore, currentSymbolStore, exchangeData, showLocalPrice;
 
-// Cross-browser storage wrapper (Chrome / Firefox)
-const ext = typeof browser !== "undefined" ? browser : chrome;
-
 const getStorage = (keys) => {
     return new Promise((resolve) => {
         ext.storage.sync.get(keys, resolve);
@@ -49,17 +113,16 @@ const getStorage = (keys) => {
 };
 
 // Initialize container immediately if possible, and on page show
-addContainer();
+init();
 
 window.onpageshow = function () {
     init();
 };
 
 async function init() {
-    const htmlContainer = document.getElementById("gog-prices_container");
-
     await getOptionsSaved();
 
+    const htmlContainer = document.getElementById("gog-prices_container");
     if (!htmlContainer) {
         addContainer();
     }
@@ -71,16 +134,32 @@ async function getOptionsSaved() {
     try {
         const result = await getStorage(["countriesCustom", "gogPricesOptions"]);
         if (result) {
-            if (result.countriesCustom && result.countriesCustom.length > 0) {
-                countries = result.countriesCustom;
-            }
             if (result.gogPricesOptions) {
                 userSettings = result.gogPricesOptions;
             }
+
+            // Load custom locale messages
+            const lang = userSettings?.language || "default";
+            await loadLocaleMessages(lang);
+
+            if (result.countriesCustom && result.countriesCustom.length > 0) {
+                countries = result.countriesCustom;
+            } else {
+                translateDefaultCountries();
+            }
+        } else {
+            await loadLocaleMessages("default");
+            translateDefaultCountries();
         }
     } catch (error) {
         console.error("Error retrieving settings from storage:", error);
+        await loadLocaleMessages("default");
+        translateDefaultCountries();
     }
+
+    // Initialize LITERALS
+    initLiterals();
+    translateContainer();
 }
 
 async function getProductId() {
@@ -145,6 +224,8 @@ function addContainer() {
                 }
             });
         }
+
+        translateContainer();
     }
 }
 
@@ -157,13 +238,13 @@ function productComponent() {
       <div class="gog-prices-container">
         <div class="gog-prices-loading-container" id="gog-prices_loading">
             <div>
-                <p>${ext.i18n.getMessage("loading")}</p>
+                <p>${getMessage("loading")}</p>
             </div>
             ${loadingHtml}
         </div>
         <div>
             <div id="gog-prices_setting" class="hide">
-                <button title="${ext.i18n.getMessage("options")}" id="gog-prices_btn-options" class="review__was-helpful-button gog-prices-options gog-prices-settings-button">
+                <button title="${getMessage("options")}" id="gog-prices_btn-options" class="review__was-helpful-button gog-prices-options gog-prices-settings-button">
                     <img src="https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/settings/wght200/24px.svg" alt="Settings" />
                 </button>
             </div>
@@ -174,7 +255,7 @@ function productComponent() {
         </div>
       </div>
       <div id="gog-prices_show-more" class="gog-prices-show-more hide">
-        <button id="gog-prices_btn-show-more" class="review__was-helpful-button gog-prices-settings-button">${ext.i18n.getMessage("btnShowAll")}</button>
+        <button id="gog-prices_btn-show-more" class="review__was-helpful-button gog-prices-settings-button">${getMessage("btnShowAll")}</button>
       </div>
     </div>
     `;
@@ -195,7 +276,7 @@ function setListCurrency() {
         <div class="gog-prices-currency-header ${showLocalPrice && exchangeData ? "--has-exchange" : ""}">
             <div class="gog-prices-currency-cell-empty"></div>
             <p class="gog-prices-currency-cell">${CURRENCY_DEFAULT.code}</p>
-            ${showLocalPrice && exchangeData ? `<p title="${ext.i18n.getMessage("exchangeTooltip")}" class="gog-prices-currency-cell --second">${store}<span class="--tooltip">?</span></p>` : ""}
+            ${showLocalPrice && exchangeData ? `<p title="${getMessage("exchangeTooltip")}" class="gog-prices-currency-cell --second">${store}<span class="--tooltip">?</span></p>` : ""}
         </div>
     `;
 }
@@ -245,7 +326,7 @@ function addCard() {
                 <div class="gog-prices-more-badge-container">
                     <div class="gog-prices-more-badge">+${remainingCount}</div>
                     <div class="gog-prices-hover-modal">
-                        <div class="gog-prices-hover-modal-header">${ext.i18n.getMessage("moreCountries")}</div>
+                        <div class="gog-prices-hover-modal-header">${getMessage("moreCountries")}</div>
                         <div class="gog-prices-hover-modal-content">
                             ${remainingCountries.map(sPrice => `
                                 <div class="gog-prices-hover-modal-item">
@@ -362,9 +443,9 @@ async function fetchPriceForCountry(productId, country) {
     } catch (error) {
         console.error(`Error fetching price for ${country.name} (${country.code}):`, error);
 
-        let priceTotal = ext.i18n.getMessage("notAvailable");
+        let priceTotal = getMessage("notAvailable");
         if (error.message === "400") {
-            priceTotal = `${ext.i18n.getMessage("comingSoon")} / ${ext.i18n.getMessage("notAvailable")}`;
+            priceTotal = `${getMessage("comingSoon")} / ${getMessage("notAvailable")}`;
         }
 
         return {

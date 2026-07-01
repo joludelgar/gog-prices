@@ -117,6 +117,9 @@
       <div class="tab">
         <div class="gog-prices-options__box">
           <div class="gog-prices-options__option">
+            <div class="gog-prices-options__primary" style="margin-bottom: 15px;">
+              <label class="gog-prices-options__label" data-locale="currencyExchangeTitle"></label>
+            </div>
             <div class="gog-prices-options__primary">
               <input type="checkbox" id="exchange-show" value="_exchange-show" />
               <label data-locale="exchangeShowCheck" for="exchange-show"></label>
@@ -154,6 +157,28 @@
             <div class="exchange-disclamer-container">
               <p class="exchange-disclamer" data-locale="exchangeInfo"></p>
               <p class="exchange-disclamer" data-locale="exchangeDisclamer"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gog-prices-options__box">
+          <div class="gog-prices-options__option" style="border-bottom: none; padding-bottom: 0;">
+            <div class="gog-prices-options__primary">
+              <label class="gog-prices-options__label" data-locale="languageLabel" for="language-select"></label>
+            </div>
+            <div class="gog-prices-options__secondary" style="margin: 15px 0 0 0;">
+              <select id="language-select" class="gog-prices-options__select">
+                <option value="default" data-locale="languageBrowserDefault">Browser Default</option>
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="de">Deutsch</option>
+                <option value="fr">Français</option>
+                <option value="pt_BR">Português (Brasil)</option>
+                <option value="pt_PT">Português (Portugal)</option>
+                <option value="ru">Русский</option>
+                <option value="tr">Türkçe</option>
+                <option value="zh">中文</option>
+              </select>
             </div>
           </div>
         </div>

@@ -151,5 +151,14 @@
     },
     "unsavedWarningMessage": {
         "message": "Warnung: Sie haben ungespeicherte Konfigurationsänderungen vorgenommen. Denken Sie daran, auf ÄNDERUNGEN SPEICHERN zu klicken, um die Änderungen anzuwenden. Um die Änderungen auf GOG zu sehen, aktualisieren Sie die Seite."
+    },
+    "languageLabel": {
+        "message": "Sprache:"
+    },
+    "languageBrowserDefault": {
+        "message": "Standard-Browser-Sprache"
+    },
+    "currencyExchangeTitle": {
+        "message": "Währungswechsel"
     }
 }
