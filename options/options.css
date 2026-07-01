@@ -798,7 +798,7 @@ button svg {
 
 .support-img img {
   width: 160px;
-  height: 40px;
+  /* height: 40px; */
   object-fit: contain;
 }
 

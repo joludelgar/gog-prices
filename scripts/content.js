@@ -112,6 +112,9 @@ const getStorage = (keys) => {
     });
 };
 
+let isLoading = false;
+let isLoaded = false;
+
 // Initialize container immediately if possible, and on page show
 init();
 
@@ -120,14 +123,28 @@ window.onpageshow = function () {
 };
 
 async function init() {
-    await getOptionsSaved();
-
-    const htmlContainer = document.getElementById("gog-prices_container");
-    if (!htmlContainer) {
-        addContainer();
+    if (isLoading || isLoaded) {
+        return;
     }
+    isLoading = true;
 
-    await getProductId();
+    try {
+        await getOptionsSaved();
+
+        const htmlContainer = document.getElementById("gog-prices_container");
+        if (!htmlContainer) {
+            addContainer();
+        }
+
+        const success = await getProductId();
+        if (success) {
+            isLoaded = true;
+        }
+    } catch (error) {
+        console.error("Error during initialization:", error);
+    } finally {
+        isLoading = false;
+    }
 }
 
 async function getOptionsSaved() {
@@ -202,6 +219,7 @@ async function getProductId() {
     setListCurrency();
     addCard();
     addLoading(false);
+    return true;
 }
 
 function addContainer() {
