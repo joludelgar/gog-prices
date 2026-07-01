@@ -3,14 +3,14 @@
     "name": "__MSG_appName__",
     "description": "__MSG_appDesc__",
     "default_locale": "en",
-    "version": "1.0",
+    "version": "1.1",
     "browser_action": {
         "default_icon": "assets/gog-prices-icon48.png"
     },
-    "icons": { 
+    "icons": {
         "16": "assets/gog-prices-icon16.png",
         "48": "assets/gog-prices-icon48.png",
-        "128": "assets/gog-prices-icon128.png" 
+        "128": "assets/gog-prices-icon128.png"
     },
     "permissions": [
         "*://*.gog.com/*",
@@ -27,14 +27,21 @@
     ],
     "content_scripts": [
         {
-            "js": ["scripts/commonCurrencies.js", "scripts/content.js"],
-            "css": ["styles/styles.css"],
-            "matches": ["*://*.gog.com/*"]
+            "js": [
+                "scripts/commonCurrencies.js",
+                "scripts/content.js"
+            ],
+            "css": [
+                "styles/styles.css"
+            ],
+            "matches": [
+                "*://*.gog.com/*"
+            ]
         }
     ],
     "browser_specific_settings": {
         "gecko": {
-          "id": "gogprices@joludelgar.com"
+            "id": "gogprices@joludelgar.com"
         }
     }
 }
