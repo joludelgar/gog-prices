@@ -112,5 +112,41 @@
     },
     "exchangeDisclamer": {
       "message": "*Final prices may vary depending on the conversion rate of the chosen payment method."
+    },
+    "moreCountries": {
+      "message": "More countries"
+    },
+    "confirmResetTitle": {
+      "message": "Confirm Reset"
+    },
+    "confirmResetWarning": {
+      "message": "Warning: Custom countries will be cleared."
+    },
+    "confirmResetDesc": {
+      "message": "Are you sure you want to reset to default countries? The values of the custom countries table will be cleared."
+    },
+    "btnCancel": {
+      "message": "Cancel"
+    },
+    "btnConfirm": {
+      "message": "Confirm"
+    },
+    "tableSelect": {
+      "message": "Select"
+    },
+    "searchPlaceholder": {
+      "message": "Search countries..."
+    },
+    "clarificationsTitle": {
+      "message": "Clarifications:"
+    },
+    "clarification1": {
+      "message": "This extension does not use or collect any user data."
+    },
+    "clarification2": {
+      "message": "The prices shown are directly retrieved from the GOG API, except for the estimated price."
+    },
+    "clarification3": {
+      "message": "If you are connected from a VPN and one of the prices does not match the one indicated, make sure you are connected to the desired market. If you verify that the price is incorrect, please let me know with as much detail as possible: VPN used, market, screenshot, etc... and I will try to find out why the error occurs."
     }
   }

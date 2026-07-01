@@ -28,5 +28,41 @@
     },
     "regionCN": {
         "message": "Chine"
+    },
+    "moreCountries": {
+        "message": "Autres pays"
+    },
+    "confirmResetTitle": {
+        "message": "Confirmer la réinitialisation"
+    },
+    "confirmResetWarning": {
+        "message": "Avertissement : Les pays personnalisés seront effacés."
+    },
+    "confirmResetDesc": {
+        "message": "Voulez-vous vraiment réinitialiser les pays par défaut ? Les valeurs du tableau des pays personnalisés seront effacées."
+    },
+    "btnCancel": {
+        "message": "Annuler"
+    },
+    "btnConfirm": {
+        "message": "Confirmer"
+    },
+    "tableSelect": {
+        "message": "Sélectionner"
+    },
+    "searchPlaceholder": {
+        "message": "Rechercher des pays..."
+    },
+    "clarificationsTitle": {
+        "message": "Clarifications :"
+    },
+    "clarification1": {
+        "message": "Cette extension n'utilise ni ne collecte aucune donnée utilisateur."
+    },
+    "clarification2": {
+        "message": "Les prix affichés sont directement tirés de l'API de GOG, à l'exception du prix estimé."
+    },
+    "clarification3": {
+        "message": "Si vous êtes connecté via un VPN et que l'un des prix ne correspond pas à celui indiqué, assurez-vous d'être connecté au marché souhaité. Si vous constatez que le prix est incorrect, merci de me le faire savoir avec le plus de détails possible : VPN utilisé, marché, capture d'écran, etc... et j'essaierai de comprendre pourquoi l'erreur se produit."
     }
 }

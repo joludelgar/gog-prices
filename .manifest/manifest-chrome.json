@@ -3,7 +3,7 @@
     "name": "__MSG_appName__",
     "description": "__MSG_appDesc__",
     "default_locale": "en",
-    "version": "0.1.4",
+    "version": "1.0",
     "action": {
         "default_icon": "assets/gog-prices-icon48.png"
     },
@@ -12,7 +12,11 @@
         "48": "assets/gog-prices-icon48.png",
         "128": "assets/gog-prices-icon128.png" 
     },
-    "host_permissions": ["*://*/*"],
+    "host_permissions": [
+        "*://*.gog.com/*",
+        "https://cdn.jsdelivr.net/",
+        "https://latest.currency-api.pages.dev/"
+    ],
     "permissions": [
         "storage"
     ],
@@ -20,12 +24,12 @@
     "web_accessible_resources": [
         {
           "resources": [ "options/*" ],
-          "matches": [ "<all_urls>" ]
+          "matches": [ "*://*.gog.com/*" ]
         }
     ],
     "content_scripts": [
         {
-            "js": ["scripts/bg.js"],
+            "js": ["scripts/commonCurrencies.js", "scripts/content.js"],
             "css": ["styles/styles.css"],
             "matches": ["*://*.gog.com/*"]
         }

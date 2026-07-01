@@ -91,5 +91,41 @@
     },
     "saveChangesMessage": {
         "message": "选项已保存。重新加载本页面以查看修改。"
+    },
+    "moreCountries": {
+        "message": "其他国家"
+    },
+    "confirmResetTitle": {
+        "message": "确认重置"
+    },
+    "confirmResetWarning": {
+        "message": "警告：自定义国家列表将被清除。"
+    },
+    "confirmResetDesc": {
+        "message": "您确定要重置为默认国家吗？自定义国家表中的值将被清除。"
+    },
+    "btnCancel": {
+        "message": "取消"
+    },
+    "btnConfirm": {
+        "message": "确认"
+    },
+    "tableSelect": {
+        "message": "选择"
+    },
+    "searchPlaceholder": {
+        "message": "搜索国家..."
+    },
+    "clarificationsTitle": {
+        "message": "说明："
+    },
+    "clarification1": {
+        "message": "此扩展不使用或收集任何用户数据。"
+    },
+    "clarification2": {
+        "message": "除预估价格外，显示的售价均直接来自 GOG API。"
+    },
+    "clarification3": {
+        "message": "如果您使用 VPN 连接，且其中一个价格与所示价格不符，请确保您已连接到所需的目标市场。如果您确认价格不正确，请向我提供尽可能详尽的信息（所用 VPN、市场、屏幕截图等），我会尝试找出导致此错误的原因。"
     }
 }

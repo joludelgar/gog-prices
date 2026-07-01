@@ -31,5 +31,41 @@
     },
     "regionCN": {
         "message": "Çin"
+    },
+    "moreCountries": {
+        "message": "Diğer ülkeler"
+    },
+    "confirmResetTitle": {
+        "message": "Sıfırlamayı Onayla"
+    },
+    "confirmResetWarning": {
+        "message": "Uyarı: Özel ülkeler temizlenecektir."
+    },
+    "confirmResetDesc": {
+        "message": "Varsayılan ülkelere sıfırlamak istediğinizden emin misiniz? Özel ülkeler tablosunun değerleri temizlenecektir."
+    },
+    "btnCancel": {
+        "message": "İptal"
+    },
+    "btnConfirm": {
+        "message": "Onayla"
+    },
+    "tableSelect": {
+        "message": "Seç"
+    },
+    "searchPlaceholder": {
+        "message": "Ülkeleri ara..."
+    },
+    "clarificationsTitle": {
+        "message": "Açıklamalar:"
+    },
+    "clarification1": {
+        "message": "Bu uzantı herhangi bir kullanıcı verisi kullanmaz veya toplamaz."
+    },
+    "clarification2": {
+        "message": "Gösterilen fiyatlar, tahmini fiyat hariç olmak üzere doğrudan GOG API'sinden alınmıştır."
+    },
+    "clarification3": {
+        "message": "Bir VPN ile bağlıysanız ve fiyatlardan biri belirtilenle eşleşmiyorsa, istediğiniz pazara bağlı olduğunuzdan emin olun. Fiyatın yanlış olduğunu doğrularsanız, lütfen bana mümkün olduğunca çok ayrıntıyla bildirin: kullanılan VPN, pazar, ekran görüntüsü vb... ben de hatanın neden oluştuğunu bulmaya çalışacağım."
     }
 }

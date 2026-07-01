@@ -4,188 +4,435 @@
 
 const defaultCountries = [];
 const defaultOptions = {
-	"exchangeShow": true,
+	"exchangeShow": false,
 	"exchangeLocal": true,
 	"exchangeCustom": false,
 	"exchangeCustomCurrency": "EUR"
 };
 const unavailableCountries = ["RU", "BY"];
 
-const setDefaultCountries = () => {
-	// document.getElementById('countries').value = defaultCountries;
-	saveOptions(undefined, true);
+// Cross-browser storage wrapper (Chrome / Firefox)
+const ext = typeof browser !== "undefined" ? browser : chrome;
+
+const getStorage = (keys) => {
+    return new Promise((resolve) => {
+        ext.storage.sync.get(keys, resolve);
+    });
+};
+
+const setStorage = (data) => {
+    return new Promise((resolve) => {
+        ext.storage.sync.set(data, resolve);
+    });
+};
+
+const syncModalCheckboxes = () => {
+	const currentData = parseTableData();
+	const activeCodes = new Set(currentData.map(c => c.code.toUpperCase().trim()));
+
+	const checkboxes = document.querySelectorAll("#modalTable .country-selector");
+	checkboxes.forEach(cb => {
+		const code = cb.dataset.code.toUpperCase().trim();
+		cb.checked = activeCodes.has(code);
+	});
+};
+
+const addCustomCountryRow = (name, code) => {
+	const templateRow = document.querySelector("tr.tbody.hide");
+	if (!templateRow) return;
+
+	// Check if already exists in editable table
+	const existingRows = templateRow.parentNode.querySelectorAll("tr.tbody:not(.hide)");
+	let exists = false;
+	existingRows.forEach(row => {
+		const codeInput = row.querySelector(".country-code");
+		if (codeInput && codeInput.value.toUpperCase().trim() === code.toUpperCase().trim()) {
+			exists = true;
+		}
+	});
+	if (exists) return;
+
+	// If there's only one row and it is completely empty, remove it (it's the initial placeholder)
+	const visibleRows = templateRow.parentNode.querySelectorAll("tr.tbody:not(.hide)");
+	if (visibleRows.length === 1) {
+		const nameInput = visibleRows[0].querySelector(".country-name");
+		const codeInput = visibleRows[0].querySelector(".country-code");
+		if (nameInput && codeInput && nameInput.value.trim() === "" && codeInput.value.trim() === "") {
+			visibleRows[0].remove();
+		}
+	}
+
+	const clone = templateRow.cloneNode(true);
+	clone.classList.remove("hide");
+	clone.querySelector(".country-name").value = name;
+	clone.querySelector(".country-code").value = code;
+
+	const warningIcon = clone.querySelector(".icon-warning");
+	if (warningIcon) {
+		if (unavailableCountries.includes(code.toUpperCase().trim())) {
+			warningIcon.classList.remove("icon-hide-warning");
+		} else {
+			warningIcon.classList.add("icon-hide-warning");
+		}
+	}
+
+	templateRow.parentNode.appendChild(clone);
+	checkValidity();
+};
+
+const removeCustomCountryRow = (code) => {
+	const templateRow = document.querySelector("tr.tbody.hide");
+	if (!templateRow) return;
+
+	const rows = templateRow.parentNode.querySelectorAll("tr.tbody:not(.hide)");
+	rows.forEach(row => {
+		const codeInput = row.querySelector(".country-code");
+		if (codeInput && codeInput.value.toUpperCase().trim() === code.toUpperCase().trim()) {
+			row.remove();
+		}
+	});
+
+	// If all rows are deleted, add one empty row back so the user has an input field
+	const remainingRows = templateRow.parentNode.querySelectorAll("tr.tbody:not(.hide)");
+	if (remainingRows.length === 0) {
+		const clone = templateRow.cloneNode(true);
+		clone.classList.remove("hide");
+		templateRow.parentNode.appendChild(clone);
+	}
+
+	checkValidity();
+};
+
+const clearTableData = () => {
+	const templateRow = document.querySelector("tr.tbody.hide");
+	if (!templateRow) return;
+	const parent = templateRow.parentNode;
+	const rows = parent.querySelectorAll("tr.tbody:not(.hide)");
+	rows.forEach((row) => row.remove());
+
+	// Clone template to create one initial empty row
+	const clone = templateRow.cloneNode(true);
+	clone.classList.remove("hide");
+	parent.appendChild(clone);
+	checkValidity();
+	syncModalCheckboxes();
+};
+
+const setDefaultCountries = async () => {
+	await saveOptions(undefined, true);
+	clearTableData();
 };
 
 const loadFormCountry = () => {
-	var $TABLE = $("#table");
-	$(".table-add").on("click", function () {
-		var $clone = $TABLE.find("tr.hide").clone(true).removeClass("hide");
-		$TABLE.find("table").append($clone);
-		checkValidity();
-	});
+	const addRowBtn = document.querySelector(".table-add");
+	if (addRowBtn) {
+		addRowBtn.addEventListener("click", () => {
+			const templateRow = document.querySelector("tr.tbody.hide");
+			if (templateRow) {
+				const clone = templateRow.cloneNode(true);
+				clone.classList.remove("hide");
+				templateRow.parentNode.appendChild(clone);
+				checkValidity();
+			}
+		});
+	}
 
-	$(".table-remove").on("click", function () {
-		$(this).parents("tr").detach();
-		checkValidity();
-	});
+	// Event delegation for removing rows and keyup validation
+	const contentTable = document.getElementById("contentTable");
+	if (contentTable) {
+		contentTable.addEventListener("click", (event) => {
+			const removeBtn = event.target.closest(".table-remove");
+			if (removeBtn) {
+				const row = removeBtn.closest("tr");
+				if (row) {
+					row.remove();
+					checkValidity();
+					syncModalCheckboxes();
+				}
+			}
+		});
 
-	$(".country-code").on("blur", function (event) {
-		if (unavailableCountries.includes($(this)[0].value.toUpperCase())) {
-			$(this)
-				.parents("td")
-				.next()
-				.find(".icon-warning")
-				.removeClass("icon-hide-warning");
-		} else {
-			$(this)
-				.parents("td")
-				.next()
-				.find(".icon-warning")
-				.addClass("icon-hide-warning");
-		}
-	});
+		// Listen for blur event on country code input to toggle warning icon
+		contentTable.addEventListener("blur", (event) => {
+			if (event.target.classList.contains("country-code")) {
+				const codeInput = event.target;
+				const code = codeInput.value.toUpperCase().trim();
+				const row = codeInput.closest("tr");
+				const warningIcon = row.querySelector(".icon-warning");
+				
+				if (warningIcon) {
+					if (unavailableCountries.includes(code)) {
+						warningIcon.classList.remove("icon-hide-warning");
+					} else {
+						warningIcon.classList.add("icon-hide-warning");
+					}
+				}
+			}
+		}, true); // Use capture phase because blur does not bubble
+
+		// Listen for input events to synchronize checkboxes in modal
+		contentTable.addEventListener("input", (event) => {
+			if (event.target.classList.contains("country-code") || event.target.classList.contains("country-name")) {
+				syncModalCheckboxes();
+			}
+		});
+	}
 
 	checkValidity();
 };
 
 const checkValidity = () => {
-	var inputs = document.querySelectorAll(".tbody:not(.hide) .input");
+	const inputs = document.querySelectorAll(".tbody:not(.hide) .input");
 	validation();
 
 	inputs.forEach((input) => {
+		// Remove existing listener to prevent duplicates
+		input.removeEventListener("keyup", validation);
 		input.addEventListener("keyup", validation);
-		input.addEventListener("change", (e) => {
-			const isValid = e.target.reportValidity();
-			e.target.setAttribute("aria-invalid", !isValid);
-		});
+		
+		input.removeEventListener("change", handleInputChange);
+		input.addEventListener("change", handleInputChange);
 	});
 };
 
-const validation = (e) => {
-	var validation = [];
+const handleInputChange = (e) => {
+	const isValid = e.target.reportValidity();
+	e.target.setAttribute("aria-invalid", !isValid);
+};
+
+const validation = () => {
+	const validationResults = [];
 	document.querySelectorAll(".tbody:not(.hide) .input").forEach((input) => {
-		validation.push(input.checkValidity());
+		validationResults.push(input.checkValidity());
 	});
-	document.querySelector(".table-add").disabled = !validation.every(
-		(v) => v === true
-	);
+	
+	const addRowBtn = document.querySelector(".table-add");
+	if (addRowBtn) {
+		addRowBtn.disabled = !validationResults.every((v) => v === true);
+	}
+};
+
+const filterModalCountries = () => {
+	const input = document.getElementById("modalSearchInput");
+	if (!input) return;
+	const filter = input.value.toUpperCase();
+	const modalTable = document.getElementById("modalTable");
+	if (!modalTable) return;
+	const rows = modalTable.querySelectorAll("tr.tbody");
+
+	rows.forEach(row => {
+		const nameCell = row.cells[0];
+		const codeCell = row.cells[1];
+		if (nameCell && codeCell) {
+			const nameText = nameCell.textContent || nameCell.innerText;
+			const codeText = codeCell.textContent || codeCell.innerText;
+			if (nameText.toUpperCase().indexOf(filter) > -1 || codeText.toUpperCase().indexOf(filter) > -1) {
+				row.style.display = "";
+			} else {
+				row.style.display = "none";
+			}
+		}
+	});
 };
 
 const loadModal = () => {
-	// Get the modal
-	var modal = document.getElementById("myModal");
+	const modal = document.getElementById("myModal");
+	const btn = document.getElementById("myBtn");
+	const span = document.getElementsByClassName("close")[0];
+	const modalSearchInput = document.getElementById("modalSearchInput");
 
-	// Get the button that opens the modal
-	var btn = document.getElementById("myBtn");
+	if (modalSearchInput) {
+		modalSearchInput.addEventListener("input", filterModalCountries);
+	}
 
-	// Get the <span> element that closes the modal
-	var span = document.getElementsByClassName("close")[0];
+	if (btn && modal) {
+		btn.onclick = function () {
+			modal.style.display = "block";
+			if (modalSearchInput) {
+				modalSearchInput.value = "";
+				filterModalCountries();
+			}
+		};
+	}
 
-	// When the user clicks the button, open the modal
-	btn.onclick = function () {
-		modal.style.display = "block";
-	};
+	if (span && modal) {
+		span.onclick = function () {
+			modal.style.display = "none";
+		};
+	}
 
-	// When the user clicks on <span> (x), close the modal
-	span.onclick = function () {
-		modal.style.display = "none";
-	};
-
-	// When the user clicks anywhere outside of the modal, close it
-	window.onclick = function (event) {
+	window.addEventListener("click", function (event) {
 		if (event.target == modal) {
 			modal.style.display = "none";
 		}
+	});
+};
+
+const loadConfirmResetModal = () => {
+	const modal = document.getElementById("confirmResetModal");
+	const btn = document.getElementById("default-countries");
+	const closeSpan = document.getElementById("closeConfirmReset");
+	const btnCancel = document.getElementById("btnCancelReset");
+	const btnConfirm = document.getElementById("btnConfirmReset");
+
+	if (btn && modal) {
+		btn.addEventListener("click", (e) => {
+			e.preventDefault();
+			modal.style.display = "block";
+		});
+	}
+
+	const closeModal = () => {
+		if (modal) modal.style.display = "none";
 	};
+
+	if (closeSpan) {
+		closeSpan.addEventListener("click", closeModal);
+	}
+
+	if (btnCancel) {
+		btnCancel.addEventListener("click", closeModal);
+	}
+
+	if (btnConfirm) {
+		btnConfirm.addEventListener("click", async () => {
+			closeModal();
+			await setDefaultCountries();
+		});
+	}
+
+	window.addEventListener("click", (event) => {
+		if (event.target == modal) {
+			closeModal();
+		}
+	});
 };
 
 const parseTableData = () => {
-	let oTable = document.getElementById("contentTable");
-	let data = [...oTable.rows]
-		.filter(
-			(r) => r.classList.contains("tbody") && !r.classList.contains("hide")
-		)
-		.map((t) =>
-			[...t.children]
-				.map((u) => [...u.children].map((i) => i.value).toString())
-				.filter((u, i) => i < 2)
-		);
+	const templateRow = document.querySelector("tr.tbody.hide");
+	if (!templateRow) return [];
+	const rows = templateRow.parentNode.querySelectorAll("tr.tbody:not(.hide)");
+	const data = [];
 
-	return data
-		.filter((c) => c[0].length > 1 && c[1].length > 1)
-		.map((country) => {
-			return {
-				name: country[0].trim(),
-				code: country[1].toUpperCase(),
-				status: unavailableCountries.includes(country[1].toUpperCase())
-					? "ko"
-					: "ok",
-			};
-		});
+	rows.forEach((row) => {
+		const nameInput = row.querySelector(".country-name");
+		const codeInput = row.querySelector(".country-code");
+		
+		if (nameInput && codeInput) {
+			const name = nameInput.value.trim();
+			const code = codeInput.value.toUpperCase().trim();
+			if (name.length > 1 && code.length > 1) {
+				data.push({
+					name: name,
+					code: code,
+					status: unavailableCountries.includes(code) ? "ko" : "ok",
+				});
+			}
+		}
+	});
+
+	return data;
 };
 
 const setTableData = (data) => {
-	var $TABLE = $("#table");
-	data.map((country) => {
-		var $clone = $TABLE.find("tr.hide").clone(true).removeClass("hide");
-		$clone[0].children[0].children[0].value = country.name;
-		$clone[0].children[1].children[0].value = country.code;
-		if (country.status === "ko") {
-			$clone[0].children[2].children[0].classList.remove("icon-hide-warning");
+	const templateRow = document.querySelector("tr.tbody.hide");
+
+	if (!templateRow) return;
+
+	data.forEach((country) => {
+		const clone = templateRow.cloneNode(true);
+		clone.classList.remove("hide");
+		
+		const nameInput = clone.querySelector(".country-name");
+		const codeInput = clone.querySelector(".country-code");
+		const warningIcon = clone.querySelector(".icon-warning");
+
+		if (nameInput) nameInput.value = country.name;
+		if (codeInput) codeInput.value = country.code;
+		
+		if (country.status === "ko" && warningIcon) {
+			warningIcon.classList.remove("icon-hide-warning");
 		}
-		$TABLE.find("table").append($clone);
+		
+		templateRow.parentNode.appendChild(clone);
 	});
-	document.getElementById("firstRowRemove").click();
+
+	const firstRowRemoveBtn = document.getElementById("firstRowRemove");
+	if (firstRowRemoveBtn) {
+		firstRowRemoveBtn.click();
+	}
 };
 
 /**
  * Miscellaneous options
  */
 
-// Exchange options
-
 function checkExchangeTypeAllow() {
-	var enableRadio = document.getElementById("exchange-show").checked;
-	document.getElementById("exchange-local").disabled = !enableRadio;
-	document.getElementById("exchange-custom").disabled = !enableRadio;
-	enableRadio && document.getElementById("exchange-custom").checked ? document.getElementById("dropbtn").classList.remove("disabled") : document.getElementById("dropbtn").classList.add("disabled");
+	const enableRadio = document.getElementById("exchange-show").checked;
+	const localRadio = document.getElementById("exchange-local");
+	const customRadio = document.getElementById("exchange-custom");
+	const dropBtn = document.getElementById("dropbtn");
+
+	if (localRadio) localRadio.disabled = !enableRadio;
+	if (customRadio) customRadio.disabled = !enableRadio;
+
+	if (dropBtn) {
+		if (enableRadio && customRadio && customRadio.checked) {
+			dropBtn.classList.remove("disabled");
+		} else {
+			dropBtn.classList.add("disabled");
+		}
+	}
 }
 
 function showDropdown() {
-	document.getElementById("myDropdown").classList.toggle("show");
-	document.getElementById("svg_down").classList.toggle("hide");
-	document.getElementById("svg_up").classList.toggle("show");
+	const dropdown = document.getElementById("myDropdown");
+	const svgDown = document.getElementById("svg_down");
+	const svgUp = document.getElementById("svg_up");
+
+	if (dropdown) dropdown.classList.toggle("show");
+	if (svgDown) svgDown.classList.toggle("hide");
+	if (svgUp) svgUp.classList.toggle("show");
 }
 
 function filterFunction() {
 	const input = document.getElementById("searchInput");
 	const filter = input.value.toUpperCase();
 	const div = document.getElementById("myDropdown");
-	const a = div.getElementsByTagName("p");
-	for (let i = 0; i < a.length; i++) {
-		txtValue = a[i].textContent || a[i].innerText;
+	const pElements = div.getElementsByTagName("p");
+	
+	for (let i = 0; i < pElements.length; i++) {
+		const txtValue = pElements[i].textContent || pElements[i].innerText;
 		if (txtValue.toUpperCase().indexOf(filter) > -1) {
-			a[i].style.display = "";
+			pElements[i].style.display = "";
 		} else {
-			a[i].style.display = "none";
+			pElements[i].style.display = "none";
 		}
 	}
 }
 
 function selectCustomCurrency(e) {
+	const item = e.target.closest("p");
+	if (!item) return;
+
 	const btnValue = document.getElementById("exchange-custom-currency");
-	btnValue.value = e.target.dataset.value;
+	if (btnValue) btnValue.value = item.dataset.value;
+
 	document.querySelectorAll("#exchange-list p").forEach(el => {
 		el.classList.remove("selected");
 	});
-	e.target.classList.add("selected");
-	closeExhangeDropdown();
+	item.classList.add("selected");
+	closeExchangeDropdown();
 }
 
-function closeExhangeDropdown() {
-	document.getElementById("myDropdown").classList.remove("show");
-	document.getElementById("svg_down").classList.remove("hide");
-	document.getElementById("svg_up").classList.remove("show");
+function closeExchangeDropdown() {
+	const dropdown = document.getElementById("myDropdown");
+	const svgDown = document.getElementById("svg_down");
+	const svgUp = document.getElementById("svg_up");
+
+	if (dropdown) dropdown.classList.remove("show");
+	if (svgDown) svgDown.classList.remove("hide");
+	if (svgUp) svgUp.classList.remove("show");
 }
 
 function parseOptions() {
@@ -199,7 +446,7 @@ function parseOptions() {
 		"exchangeLocal": exchangeLocalEl.checked,
 		"exchangeCustom": exchangeCustomEl.checked,
 		"exchangeCustomCurrency": exchangeCustomCurrencyEl.value
-	}
+	};
 }
 
 function setOptions(options) {
@@ -208,159 +455,226 @@ function setOptions(options) {
 	const exchangeCustomEl = document.getElementById("exchange-custom");
 	const exchangeCustomCurrencyEl = document.getElementById("exchange-custom-currency");
 
-	exchangeShowEl.checked = options.exchangeShow;
-	exchangeLocalEl.checked = options.exchangeLocal;
-	exchangeCustomEl.checked = options.exchangeCustom;
-	exchangeCustomCurrencyEl.value = options.exchangeCustomCurrency;
+	if (exchangeShowEl) exchangeShowEl.checked = options.exchangeShow;
+	if (exchangeLocalEl) exchangeLocalEl.checked = options.exchangeLocal;
+	if (exchangeCustomEl) exchangeCustomEl.checked = options.exchangeCustom;
+	if (exchangeCustomCurrencyEl) exchangeCustomCurrencyEl.value = options.exchangeCustomCurrency;
 }
 
 /**
  * General option page functions
  */
 
-var exchangeData, exchangeCommon;
+let exchangeData, exchangeCommon;
 
 const loadOptionsLiterals = () => {
-	document.title = "GOG Prices - " + chrome.i18n.getMessage("options");
-	document.getElementById("lt-table-head-country-code").innerHTML = 
-	`<span class="cell-icon">${chrome.i18n.getMessage("tableCountryCode")}
-		<span class="info-icon" title="${chrome.i18n.getMessage("tableCountryCodeInfo")}">
-			<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
-				<path d="M478-240q21 0 35.5-14.5T528-290q0-21-14.5-35.5T478-340q-21 0-35.5 14.5T428-290q0 21 14.5 35.5T478-240Zm-36-154h74q0-33 7.5-52t42.5-52q26-26 41-49.5t15-56.5q0-56-41-86t-97-30q-57 0-92.5 30T342-618l66 26q5-18 22.5-39t53.5-21q32 0 48 17.5t16 38.5q0 20-12 37.5T506-526q-44 39-54 59t-10 73Zm38 314q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/>
-			</svg>
-		</span>
-	 </span>`;
+	document.title = "GOG Prices - " + ext.i18n.getMessage("options");
+	
+	const tableHeadCountryCode = document.getElementById("lt-table-head-country-code");
+	if (tableHeadCountryCode) {
+		tableHeadCountryCode.innerHTML = 
+		`<span class="cell-icon">${ext.i18n.getMessage("tableCountryCode")}
+			<span class="info-icon" title="${ext.i18n.getMessage("tableCountryCodeInfo")}">
+				<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+					<path d="M478-240q21 0 35.5-14.5T528-290q0-21-14.5-35.5T478-340q-21 0-35.5 14.5T428-290q0 21 14.5 35.5T478-240Zm-36-154h74q0-33 7.5-52t42.5-52q26-26 41-49.5t15-56.5q0-56-41-86t-97-30q-57 0-92.5 30T342-618l66 26q5-18 22.5-39t53.5-21q32 0 48 17.5t16 38.5q0 20-12 37.5T506-526q-44 39-54 59t-10 73Zm38 314q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/>
+				</svg>
+			</span>
+		 </span>`;
+	}
+
 	document.querySelectorAll(".country-name").forEach((input) => {
-		input.placeholder = chrome.i18n.getMessage("inputCountry") + "*";
+		input.placeholder = ext.i18n.getMessage("inputCountry") + "*";
 	});
 	document.querySelectorAll(".country-code").forEach((input) => {
-		input.placeholder = chrome.i18n.getMessage("inputCode") + "*";
+		input.placeholder = ext.i18n.getMessage("inputCode") + "*";
 	});
+	const modalSearchInput = document.getElementById("modalSearchInput");
+	if (modalSearchInput) {
+		const placeholderMsg = ext.i18n.getMessage("searchPlaceholder");
+		if (placeholderMsg) {
+			modalSearchInput.placeholder = placeholderMsg;
+		}
+	}
+
 	document.querySelectorAll("[data-locale]").forEach((el) => {
-		el.innerHTML = chrome.i18n.getMessage(el.dataset.locale);
+		const message = ext.i18n.getMessage(el.dataset.locale);
+		if (message) {
+			el.innerHTML = message;
+		}
 	});
 };
 
-// Saves options to chrome.storage
-const saveOptions = (e, countriesDefault) => {
-	// const countries = document.getElementById('countries').value;
+// Saves options to storage
+const saveOptions = async (e, countriesDefault) => {
 	const countryJSON = countriesDefault ? [] : parseTableData();
 	const optionsJSON = parseOptions();
 
-	chrome.storage.sync.set({ 
-		countriesCustom: countryJSON,
-		gogPricesOptions: optionsJSON
-	 }, () => {
-		// Update status to let user know options were saved.
+	try {
+		await setStorage({
+			countriesCustom: countryJSON,
+			gogPricesOptions: optionsJSON
+		});
+		
 		const status = document.getElementById("status");
-		status.textContent = chrome.i18n.getMessage("saveChangesMessage");
-		setTimeout(() => {
-			status.textContent = "";
-		}, 5000);
+		if (status) {
+			status.textContent = ext.i18n.getMessage("saveChangesMessage");
+			setTimeout(() => {
+				status.textContent = "";
+			}, 5000);
+		}
+	} catch (error) {
+		console.error("Error saving options:", error);
+	}
+};
+
+const initializeModalSelectors = () => {
+	const modalTable = document.getElementById("modalTable");
+	if (!modalTable) return;
+
+	const rows = modalTable.querySelectorAll("tr.tbody");
+	rows.forEach(row => {
+		const nameCell = row.cells[0];
+		const codeCell = row.cells[1];
+		if (nameCell && codeCell) {
+			const name = nameCell.textContent.trim();
+			const code = codeCell.textContent.trim().toUpperCase();
+
+			const newCell = document.createElement("td");
+			newCell.style.textAlign = "center";
+			newCell.innerHTML = `<input type="checkbox" class="country-selector" data-code="${code}" data-name="${name}">`;
+			row.appendChild(newCell);
+		}
+	});
+
+	// Handle changes on checkboxes
+	modalTable.addEventListener("change", (event) => {
+		if (event.target.classList.contains("country-selector")) {
+			const cb = event.target;
+			const code = cb.dataset.code;
+			const name = cb.dataset.name;
+			if (cb.checked) {
+				addCustomCountryRow(name, code);
+			} else {
+				removeCustomCountryRow(code);
+			}
+		}
 	});
 };
 
 // Restores select box and checkbox state using the preferences
-// stored in chrome.storage.
 async function restoreOptions() {
 	loadOptionsLiterals();
 	loadModal();
 	loadFormCountry();
+	loadConfirmResetModal();
+	initializeModalSelectors();
 
-	await chrome.storage.sync.get(
-		{ "countriesCustom": defaultCountries,
-		"gogPricesOptions": defaultOptions },
-		(st) => {
-			// document.getElementById('countries').value = JSON.stringify(items.countriesCustom);
-			if (st.countriesCustom.length > 0) {
-				setTableData(st.countriesCustom);
-			}
+	try {
+		const st = await getStorage({
+			"countriesCustom": defaultCountries,
+			"gogPricesOptions": defaultOptions
+		});
 
-			setOptions(st.gogPricesOptions);
-			checkExchangeTypeAllow();
+		if (st.countriesCustom && st.countriesCustom.length > 0) {
+			setTableData(st.countriesCustom);
 		}
-	);
+
+		if (st.gogPricesOptions) {
+			setOptions(st.gogPricesOptions);
+		}
+		
+		checkExchangeTypeAllow();
+		syncModalCheckboxes();
+	} catch (error) {
+		console.error("Error restoring options:", error);
+	}
 
 	await getExchangeCurrency();
 }
 
 async function getExchangeCurrency() {
-	var commonCurrencies =
-		"https://raw.githubusercontent.com/fawazahmed0/exchange-api/main/other/Common-Currency.json";
-	var exchangeApi = [
+	const exchangeApi = [
 		"https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.min.json",
 		"https://latest.currency-api.pages.dev/v1/currencies/usd.min.json",
 		"https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json",
 		"https://latest.currency-api.pages.dev/v1/currencies/usd.json",
 	];
-	for (let index = 0; index < exchangeApi.length; index++) {
-		if (
-			!exchangeData ||
-			new Date(exchangeData?.date).setHours(0, 0, 0, 0) !=
-			new Date().setHours(0, 0, 0, 0)
-		) {
-			await fetch(exchangeApi[index])
-				.then((r) => {
-					if (r.ok) {
-						return r.text();
-					}
-					throw new Error(r.status);
-				})
-				.then((result) => {
-					exchangeData = JSON.parse(result);
-					const exchangeDate = document.getElementById('exchangeDate');
-					exchangeDate.innerHTML = exchangeData.date;
-				})
-				.catch((error) => {
-					console.log(error);
-				});
+
+	for (const url of exchangeApi) {
+		try {
+			const response = await fetch(url);
+			if (!response.ok) {
+				throw new Error(`${response.status}`);
+			}
+			exchangeData = await response.json();
+			
+			const exchangeDateEl = document.getElementById('exchangeDate');
+			if (exchangeDateEl && exchangeData.date) {
+				exchangeDateEl.innerHTML = exchangeData.date;
+			}
+			break; // Stop on first success
+		} catch (error) {
+			console.warn(`Failed to fetch exchange rates from ${url}:`, error);
 		}
 	}
-	await fetch(commonCurrencies)
-		.then((r) => {
-			if (r.ok) {
-				return r.text();
-			}
-			throw new Error(r.status);
-		})
-		.then((result) => {
-			exchangeCommon = JSON.parse(result);
-			const exchangeList = document.getElementById('exchange-list');
-			Object.values(exchangeCommon).map((price) => {
-				exchangeList.innerHTML += `<p class="${document.getElementById("exchange-custom-currency").value == price.code.toUpperCase().trim() ? "selected" : "" }" data-value="${price.code.toUpperCase().trim()}">${price.code.toUpperCase().trim() + " (" + price.name + ")"}</p>`
-			})
-			document.querySelectorAll("#exchange-list p").forEach(el => {
-				el.addEventListener("click", (e) => selectCustomCurrency(e));
+
+	// Resolve currency list locally via commonCurrencies.js
+	if (typeof getCommonCurrencies === "function") {
+		exchangeCommon = getCommonCurrencies();
+		const exchangeList = document.getElementById('exchange-list');
+		const currentSelection = document.getElementById("exchange-custom-currency")?.value || "";
+		
+		if (exchangeList) {
+			let exchangeListHtml = "";
+			Object.values(exchangeCommon).forEach((price) => {
+				const code = price.code.toUpperCase().trim();
+				const isSelected = currentSelection === code;
+				exchangeListHtml += `<p class="${isSelected ? "selected" : ""}" data-value="${code}">${code} (${price.name})</p>`;
 			});
-		})
-		.catch((error) => {
-			console.log(error);
-		});
+			exchangeList.innerHTML = exchangeListHtml;
+			
+			// Event delegation for selecting custom currency
+			exchangeList.addEventListener("click", (e) => selectCustomCurrency(e));
+		}
+	}
 }
 
 document.addEventListener("DOMContentLoaded", restoreOptions);
-document.getElementById("save").addEventListener("click", saveOptions);
-document
-	.getElementById("default-countries")
-	.addEventListener("click", setDefaultCountries);
 
-document.addEventListener("click", closeExhangeDropdown);
-document
-	.getElementById("dropbtn")
-	.addEventListener("click", (e) => e.stopPropagation());
+const saveBtn = document.getElementById("save");
+if (saveBtn) {
+	saveBtn.addEventListener("click", saveOptions);
+}
 
-document
-	.getElementById("exchange-show")
-	.addEventListener("change", checkExchangeTypeAllow);
-document
-	.getElementById("exchange-local")
-	.addEventListener("change", checkExchangeTypeAllow);
-document
-	.getElementById("exchange-custom")
-	.addEventListener("change", checkExchangeTypeAllow);
-document
-	.getElementById("exchange-custom-btn")
-	.addEventListener("click", showDropdown);
-document
-	.getElementById("searchInput")
-	.addEventListener("keyup", filterFunction);
+
+document.addEventListener("click", closeExchangeDropdown);
+
+const dropBtn = document.getElementById("dropbtn");
+if (dropBtn) {
+	dropBtn.addEventListener("click", (e) => e.stopPropagation());
+}
+
+const exchangeShowCheck = document.getElementById("exchange-show");
+if (exchangeShowCheck) {
+	exchangeShowCheck.addEventListener("change", checkExchangeTypeAllow);
+}
+
+const exchangeLocalRadio = document.getElementById("exchange-local");
+if (exchangeLocalRadio) {
+	exchangeLocalRadio.addEventListener("change", checkExchangeTypeAllow);
+}
+
+const exchangeCustomRadio = document.getElementById("exchange-custom");
+if (exchangeCustomRadio) {
+	exchangeCustomRadio.addEventListener("change", checkExchangeTypeAllow);
+}
+
+const exchangeCustomBtn = document.getElementById("exchange-custom-btn");
+if (exchangeCustomBtn) {
+	exchangeCustomBtn.addEventListener("click", showDropdown);
+}
+
+const searchInput = document.getElementById("searchInput");
+if (searchInput) {
+	searchInput.addEventListener("keyup", filterFunction);
+}

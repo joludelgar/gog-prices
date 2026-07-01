@@ -91,5 +91,41 @@
     },
     "saveChangesMessage": {
         "message": "Einstellungen gespeichert. Seite neu laden, um Änderungen zu sehen."
+    },
+    "moreCountries": {
+        "message": "Weitere Länder"
+    },
+    "confirmResetTitle": {
+        "message": "Zurücksetzen bestätigen"
+    },
+    "confirmResetWarning": {
+        "message": "Warnung: Benutzerdefinierte Länder werden gelöscht."
+    },
+    "confirmResetDesc": {
+        "message": "Möchten Sie wirklich auf die Standardländer zurücksetzen? Die Werte der benutzerdefinierten Ländertabelle werden gelöscht."
+    },
+    "btnCancel": {
+        "message": "Abbrechen"
+    },
+    "btnConfirm": {
+        "message": "Bestätigen"
+    },
+    "tableSelect": {
+        "message": "Auswählen"
+    },
+    "searchPlaceholder": {
+        "message": "Länder suchen..."
+    },
+    "clarificationsTitle": {
+        "message": "Klarstellungen:"
+    },
+    "clarification1": {
+        "message": "Diese Erweiterung verwendet oder sammelt keine Benutzerdaten."
+    },
+    "clarification2": {
+        "message": "Die angezeigten Preise stammen direkt aus der GOG-API, mit Ausnahme des geschätzten Preises."
+    },
+    "clarification3": {
+        "message": "Wenn du über ein VPN verbunden bist und einer der Preise nicht mit dem angegebenen übereinstimmt, stelle sicher, dass du mit dem gewünschten Markt verbunden bist. Wenn du feststellst, dass der Preis falsch ist, lass es mich bitte mit so vielen Details wie möglich wissen: verwendetes VPN, Markt, Screenshot usw... und ich werde versuchen herauszufinden, warum der Fehler auftritt."
     }
 }
