@@ -17,6 +17,9 @@
     "btnShowAll": {
         "message": "Afficher tout"
     },
+    "comingSoon": {
+        "message": "Bientôt disponible"
+    },
     "regionRU": {
         "message": "Russie"
     },
@@ -28,6 +31,87 @@
     },
     "regionCN": {
         "message": "Chine"
+    },
+    "options": {
+        "message": "Configuration"
+    },
+    "optionCountriesList": {
+        "message": "Liste des pays"
+    },
+    "optionGeneral": {
+        "message": "Configuration"
+    },
+    "optionInfo": {
+        "message": "Informations"
+    },
+    "countryListCustom": {
+        "message": "Vous pouvez personnaliser les pays que vous souhaitez afficher en les ajoutant à cette liste. Lorsque vous modifiez la liste, les pays par défaut seront remplacés. Si vous souhaitez revenir aux pays par défaut, vous pouvez cliquer sur 'Réinitialiser les pays par défaut'. Vous pouvez également consulter les codes de pays en cliquant sur 'Afficher les codes de pays'."
+    },
+    "titleListCustom": {
+        "message": "Liste de pays personnalisée"
+    },
+    "tableCountryName": {
+        "message": "Nom du pays"
+    },
+    "tableCountryCode": {
+        "message": "Code du pays"
+    },
+    "tableCountryCodeInfo": {
+        "message": "Il est important d'indiquer correctement le code du pays. Ce code permet d'indiquer le pays correspondant et le prix."
+    },
+    "inputCountry": {
+        "message": "Pays"
+    },
+    "inputCode": {
+        "message": "Code"
+    },
+    "btnShowCountryCodes": {
+        "message": "Afficher les codes de pays"
+    },
+    "btnResetDefault": {
+        "message": "Réinitialiser les pays par défaut"
+    },
+    "btnAddRow": {
+        "message": "Ajouter une ligne"
+    },
+    "contact": {
+        "message": "Pour toute suggestion, problème ou information, veuillez me contacter via"
+    },
+    "website": {
+        "message": "Site web de l'extension :"
+    },
+    "btnSave": {
+        "message": "Enregistrer les modifications"
+    },
+    "modalTitle": {
+        "message": "Codes ISO des pays Alpha-2"
+    },
+    "modalDesc": {
+        "message": "Sélectionnez le code du pays et Ctrl+C / ⌘+C pour copier la valeur"
+    },
+    "saveChangesMessage": {
+        "message": "Paramètres enregistrés. Rechargez la page pour voir les modifications."
+    },
+    "exchangeTooltip": {
+        "message": "Prix estimé"
+    },
+    "translations": {
+        "message": "Si vous souhaitez voir l'extension dans votre langue ou si vous avez constaté une erreur dans la traduction, merci de m'aider sur :"
+    },
+    "exchangeShowCheck": {
+        "message": "Afficher le convertisseur de prix avec le taux de change actuel (prix estimés*) :"
+    },
+    "exchangeLocalRadio": {
+        "message": "Devise de la boutique où vous vous trouvez (Si la devise est l'USD, elle ne sera pas affichée)"
+    },
+    "exchangeCustomRadio": {
+        "message": "Devise personnalisée :"
+    },
+    "exchangeInfo": {
+        "message": "Convertisseur de devises par <a href='https://github.com/fawazahmed0/exchange-api'>@fawazahmed0</a>. Date des devises : <span id='exchangeDate'></span>."
+    },
+    "exchangeDisclamer": {
+        "message": "*Les prix finaux peuvent varier en fonction du taux de conversion du mode de paiement choisi."
     },
     "moreCountries": {
         "message": "Autres pays"

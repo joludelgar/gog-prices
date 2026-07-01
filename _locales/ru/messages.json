@@ -35,11 +35,83 @@
     "options": {
         "message": "Настройки"
     },
+    "optionCountriesList": {
+        "message": "Список стран"
+    },
     "optionGeneral": {
         "message": "Настройки"
     },
     "optionInfo": {
         "message": "Информация"
+    },
+    "countryListCustom": {
+        "message": "Вы можете настроить список отображаемых стран, добавив их в этот список. При изменении списка страны по умолчанию будут заменены. Если вы хотите вернуться к списку стран по умолчанию, вы можете нажать «Сбросить страны по умолчанию». Вы также можете просмотреть коды стран, нажав «Показать коды стран»."
+    },
+    "titleListCustom": {
+        "message": "Пользовательский список стран"
+    },
+    "tableCountryName": {
+        "message": "Название страны"
+    },
+    "tableCountryCode": {
+        "message": "Код страны"
+    },
+    "tableCountryCodeInfo": {
+        "message": "Важно правильно указать код страны. Этот код отвечает за указание соответствующей страны и цены."
+    },
+    "inputCountry": {
+        "message": "Страна"
+    },
+    "inputCode": {
+        "message": "Код"
+    },
+    "btnShowCountryCodes": {
+        "message": "Показать коды стран"
+    },
+    "btnResetDefault": {
+        "message": "Сбросить страны по умолчанию"
+    },
+    "btnAddRow": {
+        "message": "Добавить строку"
+    },
+    "contact": {
+        "message": "Для любых предложений, проблем или информации, пожалуйста, свяжитесь со мной по адресу"
+    },
+    "website": {
+        "message": "Сайт расширения:"
+    },
+    "btnSave": {
+        "message": "Сохранить изменения"
+    },
+    "modalTitle": {
+        "message": "ISO-коды стран Альфа-2"
+    },
+    "modalDesc": {
+        "message": "Выберите код страны и нажмите Ctrl+C / ⌘+C, чтобы скопировать значение"
+    },
+    "saveChangesMessage": {
+        "message": "Настройки сохранены. Перезагрузите страницу для применения изменений."
+    },
+    "exchangeTooltip": {
+        "message": "Оценочная цена"
+    },
+    "translations": {
+        "message": "Если вы хотите увидеть расширение на вашем языке или нашли ошибку в переводе, пожалуйста, помогите мне на:"
+    },
+    "exchangeShowCheck": {
+        "message": "Показывать конвертер цен с текущим курсом обмена (оценочные цены*):"
+    },
+    "exchangeLocalRadio": {
+        "message": "Валюта магазина, в котором вы находитесь (Если валюта USD, она не будет отображаться)"
+    },
+    "exchangeCustomRadio": {
+        "message": "Пользовательская валюта:"
+    },
+    "exchangeInfo": {
+        "message": "Конвертер валют от <a href='https://github.com/fawazahmed0/exchange-api'>@fawazahmed0</a>. Дата курса: <span id='exchangeDate'></span>."
+    },
+    "exchangeDisclamer": {
+        "message": "*Конечные цены могут отличаться в зависимости от курса конвертации выбранного способа оплаты."
     },
     "moreCountries": {
         "message": "Другие страны"

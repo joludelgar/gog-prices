@@ -92,6 +92,27 @@
     "saveChangesMessage": {
         "message": "Einstellungen gespeichert. Seite neu laden, um Änderungen zu sehen."
     },
+    "exchangeTooltip": {
+        "message": "Geschätzter Preis"
+    },
+    "translations": {
+        "message": "Wenn du die Erweiterung in deiner Sprache sehen möchtest oder einen Fehler in der Übersetzung gefunden hast, helfe mir bitte unter:"
+    },
+    "exchangeShowCheck": {
+        "message": "Währungsumrechner mit aktuellem Wechselkurs anzeigen (geschätzte Preise*):"
+    },
+    "exchangeLocalRadio": {
+        "message": "Währung des Shops, in dem du dich befindest (Wenn die Währung USD ist, wird sie nicht angezeigt)"
+    },
+    "exchangeCustomRadio": {
+        "message": "Benutzerdefinierte Währung:"
+    },
+    "exchangeInfo": {
+        "message": "Währungsumrechner von <a href='https://github.com/fawazahmed0/exchange-api'>@fawazahmed0</a>. Datum des Umrechners: <span id='exchangeDate'></span>."
+    },
+    "exchangeDisclamer": {
+        "message": "*Die Endpreise können je nach Umrechnungskurs der gewählten Zahlungsmethode variieren."
+    },
     "moreCountries": {
         "message": "Weitere Länder"
     },

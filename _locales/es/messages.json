@@ -102,7 +102,7 @@
       "message": "Mostrar conversor de precios con el tipo de cambio actual (precios estimados*):"
     },
     "exchangeLocalRadio": {
-      "message": "Moneda de la tienda donde te encuentres"
+      "message": "Moneda de la tienda donde te encuentres (Si la moneda es USD no se mostrará)"
     },
     "exchangeCustomRadio": {
       "message": "Moneda personalizada:"

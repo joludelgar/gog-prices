@@ -92,6 +92,27 @@
     "saveChangesMessage": {
         "message": "选项已保存。重新加载本页面以查看修改。"
     },
+    "exchangeTooltip": {
+        "message": "预估价格"
+    },
+    "translations": {
+        "message": "如果您希望看到该扩展的您所用语言版本，或者发现了翻译错误，请在此处协助我："
+    },
+    "exchangeShowCheck": {
+        "message": "显示当前汇率的价格转换器（估计价格*）："
+    },
+    "exchangeLocalRadio": {
+        "message": "您所在商店的货币（如果货币为美元，则不显示）"
+    },
+    "exchangeCustomRadio": {
+        "message": "自定义货币："
+    },
+    "exchangeInfo": {
+        "message": "货币转换器由 <a href='https://github.com/fawazahmed0/exchange-api'>@fawazahmed0</a> 提供。汇率日期：<span id='exchangeDate'></span>。"
+    },
+    "exchangeDisclamer": {
+        "message": "*最终价格可能会根据所选支付方式的折算率而有所不同。"
+    },
     "moreCountries": {
         "message": "其他国家"
     },

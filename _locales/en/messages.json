@@ -102,7 +102,7 @@
       "message": "Display price converter with current exchange rate (estimated prices*):"
     },
     "exchangeLocalRadio": {
-      "message": "Currency of the store where you are located"
+      "message": "Currency of the store where you are located (If the currency is USD, it will not be displayed)"
     },
     "exchangeCustomRadio": {
       "message": "Custom currency:"

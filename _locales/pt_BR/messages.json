@@ -92,6 +92,27 @@
     "saveChangesMessage": {
         "message": "Opções salvas. Recarregue a página para ver as alterações."
     },
+    "exchangeTooltip": {
+        "message": "Preço estimado"
+    },
+    "translations": {
+        "message": "Se você quiser ver a extensão no seu idioma ou se encontrou algum erro na tradução, por favor me ajude em:"
+    },
+    "exchangeShowCheck": {
+        "message": "Mostrar conversor de preços com a taxa de câmbio atual (preços estimados*):"
+    },
+    "exchangeLocalRadio": {
+        "message": "Moeda da loja onde você se encontra (Se a moeda for USD ela não será exibida)"
+    },
+    "exchangeCustomRadio": {
+        "message": "Moeda personalizada:"
+    },
+    "exchangeInfo": {
+        "message": "Conversor de moedas de <a href='https://github.com/fawazahmed0/exchange-api'>@fawazahmed0</a>. Data do conversor: <span id='exchangeDate'></span>."
+    },
+    "exchangeDisclamer": {
+        "message": "*Os preços finais podem variar dependendo da taxa de conversão do método de pagamento escolhido."
+    },
     "moreCountries": {
         "message": "Outros países"
     },
