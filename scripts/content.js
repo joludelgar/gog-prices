@@ -223,10 +223,25 @@ async function getProductId() {
 }
 
 function addContainer() {
-    const htmlProductElement = document.querySelector(".product-actions");
-    if (htmlProductElement && !document.getElementById("gog-prices_container")) {
-        htmlProductElement.parentElement.parentNode.insertBefore(productComponent(), htmlProductElement.parentElement.nextSibling);
+    if (document.getElementById("gog-prices_container")) {
+        return;
+    }
 
+    const bundleHero = document.querySelector(".bundle-hero");
+    let inserted = false;
+
+    if (bundleHero) {
+        bundleHero.parentNode.insertBefore(productComponent(), bundleHero.nextSibling);
+        inserted = true;
+    } else {
+        const htmlProductElement = document.querySelector(".product-actions");
+        if (htmlProductElement) {
+            htmlProductElement.parentElement.parentNode.insertBefore(productComponent(), htmlProductElement.parentElement.nextSibling);
+            inserted = true;
+        }
+    }
+
+    if (inserted) {
         const showMoreBtn = document.getElementById("gog-prices_btn-show-more");
         if (showMoreBtn) {
             showMoreBtn.addEventListener("click", showMore);
