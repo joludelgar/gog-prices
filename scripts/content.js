@@ -340,7 +340,7 @@ function addCard() {
             </div>
         `;
 
-        if (totalCount > 3) {
+        if (totalCount > 2) {
             const firstSame = price.samePrices[0];
             countriesHtml += `
                 <div class="gog-prices-country --extra">
