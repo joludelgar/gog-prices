@@ -222,6 +222,22 @@ async function getProductId() {
     return true;
 }
 
+function getTheme() {
+    if (document.documentElement.hasAttribute("data-theme")) {
+        return document.documentElement.matches('[data-theme^="light"]') ? "light" : "dark";
+    }
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? "light" : "dark";
+}
+
+function updateTheme() {
+    const theme = getTheme();
+    const body = document.querySelector(".gog-prices-body");
+    if (body) {
+        body.classList.remove("--theme-light", "--theme-dark");
+        body.classList.add(`--theme-${theme}`);
+    }
+}
+
 function addContainer() {
     if (document.getElementById("gog-prices_container")) {
         return;
@@ -258,6 +274,29 @@ function addContainer() {
             });
         }
 
+        // Watch for page theme changes
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.attributeName === "data-theme") {
+                    updateTheme();
+                }
+            });
+        });
+        observer.observe(document.documentElement, { attributes: true });
+
+        // Watch for system/browser theme changes
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: light)');
+        const mediaQueryListener = () => {
+            if (!document.documentElement.hasAttribute("data-theme")) {
+                updateTheme();
+            }
+        };
+        if (mediaQuery.addEventListener) {
+            mediaQuery.addEventListener('change', mediaQueryListener);
+        } else if (mediaQuery.addListener) {
+            mediaQuery.addListener(mediaQueryListener);
+        }
+
         translateContainer();
     }
 }
@@ -265,9 +304,10 @@ function addContainer() {
 function productComponent() {
     const card = document.createElement("div");
     const loadingHtml = `<div class="gog-prices-loading"><div></div><div></div><div></div></div>`;
+    const theme = getTheme();
 
     card.innerHTML = `
-    <div class="gog-prices-body">
+    <div class="gog-prices-body --theme-${theme}">
       <div class="gog-prices-container">
         <div class="gog-prices-loading-container" id="gog-prices_loading">
             <div>
