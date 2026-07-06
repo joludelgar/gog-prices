@@ -1,0 +1,164 @@
+{
+  "appName": {
+    "message": "GOG Prices"
+  },
+  "appDesc": {
+    "message": "GOGの地域価格を表示します。"
+  },
+  "loading": {
+    "message": "GOG価格を読み込んでいます..."
+  },
+  "notAvailable": {
+    "message": "利用不可"
+  },
+  "tooltipNotAvailable": {
+    "message": "この地域からの購入は現在許可されていません。"
+  },
+  "btnShowAll": {
+    "message": "すべて表示"
+  },
+  "comingSoon": {
+    "message": "近日公開"
+  },
+  "regionRU": {
+    "message": "ロシア"
+  },
+  "regionUA": {
+    "message": "ウクライナ"
+  },
+  "regionBR": {
+    "message": "ブラジル"
+  },
+  "regionCN": {
+    "message": "中国"
+  },
+  "options": {
+    "message": "設定"
+  },
+  "optionCountriesList": {
+    "message": "国リスト"
+  },
+  "optionGeneral": {
+    "message": "設定"
+  },
+  "optionInfo": {
+    "message": "情報"
+  },
+  "countryListCustom": {
+    "message": "このリストに国を追加して、表示したい国をカスタマイズできます。リストを変更すると、デフォルトの国が置き換えられます。デフォルトの国に戻したい場合は、「デフォルトの国をリセット」をクリックします。「国コードを表示」をクリックして国コードを確認することもできます。"
+  },
+  "titleListCustom": {
+    "message": "カスタム国リスト"
+  },
+  "tableCountryName": {
+    "message": "国名"
+  },
+  "tableCountryCode": {
+    "message": "国コード"
+  },
+  "tableCountryCodeInfo": {
+    "message": "国コードを正しく指定することが重要です。このコードは、対応する国と価格を示す役割を持っています。"
+  },
+  "inputCountry": {
+    "message": "国"
+  },
+  "inputCode": {
+    "message": "コード"
+  },
+  "btnShowCountryCodes": {
+    "message": "国コードを表示"
+  },
+  "btnResetDefault": {
+    "message": "デフォルトの国をリセット"
+  },
+  "btnAddRow": {
+    "message": "行を追加"
+  },
+  "contact": {
+    "message": "ご提案、不具合、情報については、以下までご連絡ください："
+  },
+  "website": {
+    "message": "拡張機能のウェブサイト："
+  },
+  "btnSave": {
+    "message": "変更を保存"
+  },
+  "modalTitle": {
+    "message": "国のISOコード（Alpha-2）"
+  },
+  "modalDesc": {
+    "message": "国コードを選択し、Ctrl+C / ⌘+Cで値をコピーしてください"
+  },
+  "saveChangesMessage": {
+    "message": "設定が保存されました。変更を適用するにはページを再読み込みしてください。"
+  },
+  "exchangeTooltip": {
+    "message": "予想価格"
+  },
+  "translations": {
+    "message": "拡張機能をご自身の言語で表示したい場合、または翻訳に誤りを見つけた場合は、以下でご協力をお願いします："
+  },
+  "exchangeShowCheck": {
+    "message": "現在の為替レートによる価格コンバーターを表示する（予想価格*）："
+  },
+  "exchangeLocalRadio": {
+    "message": "現在所在するストアの通貨（通貨がUSDの場合は表示されません）"
+  },
+  "exchangeCustomRadio": {
+    "message": "カスタム通貨："
+  },
+  "exchangeInfo": {
+    "message": "通貨コンバーター提供：<a href='https://github.com/fawazahmed0/exchange-api'>@fawazahmed0</a>。取得日：<span id='exchangeDate'></span>。"
+  },
+  "exchangeDisclamer": {
+    "message": "*最終価格は、選択した支払い方法の換算レートによって異なる場合があります。"
+  },
+  "moreCountries": {
+    "message": "その他の国"
+  },
+  "confirmResetTitle": {
+    "message": "リセットの確認"
+  },
+  "confirmResetWarning": {
+    "message": "警告：カスタム国が消去されます。"
+  },
+  "confirmResetDesc": {
+    "message": "本当にデフォルトの国にリセットしますか？カスタム国のテーブルの値が消去されます。"
+  },
+  "btnCancel": {
+    "message": "キャンセル"
+  },
+  "btnConfirm": {
+    "message": "確認"
+  },
+  "tableSelect": {
+    "message": "選択"
+  },
+  "searchPlaceholder": {
+    "message": "国を検索..."
+  },
+  "clarificationsTitle": {
+    "message": "説明："
+  },
+  "clarification1": {
+    "message": "この拡張機能は、ユーザーデータを一切使用または収集しません。"
+  },
+  "clarification2": {
+    "message": "表示されている価格は、予想価格を除き、GOGのAPIから直接取得されています。"
+  },
+  "clarification3": {
+    "message": "VPNに接続しており、表示されている価格と実際の価格が一致しない場合は、目的の市場に接続されているか確認してください。価格が正しくないことを確認した場合は、使用したVPN、市場、スクリーンショットなど、できるだけ詳細な情報を添えてお知らせください。原因を調査いたします。"
+  },
+  "unsavedWarningMessage": {
+    "message": "警告：保存されていない設定の変更があります。「変更を保存」をクリックして変更を適用してください。GOGでの変更を確認するには、ページを更新してください。"
+  },
+  "languageLabel": {
+    "message": "言語："
+  },
+  "languageBrowserDefault": {
+    "message": "ブラウザのデフォルト"
+  },
+  "currencyExchangeTitle": {
+    "message": "通貨換算"
+  }
+}
